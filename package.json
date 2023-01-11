@@ -1,0 +1,61 @@
+{
+  "name": "data-grid-ultra",
+  "version": "1.0.0",
+  "description": "A react data table implementation using @mui.",
+  "author": "xantos008",
+  "main": "src/index.ts",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/xantos008/data-grid-ultra/issues"
+  },
+  "homepage": "https://github.com/xantos008/data-grid-ultra",
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "react",
+    "react-component",
+    "material-ui",
+    "mui",
+    "react-table",
+    "table",
+    "datatable",
+    "data-table",
+    "datagrid",
+    "data-grid"
+  ],
+  "scripts": {
+    "typescript": "tsc -p tsconfig.json",
+    "build": "yarn build:legacy && yarn build:modern && yarn build:node && yarn build:stable && yarn build:types && yarn build:copy-files ",
+    "build:legacy": "node ../../../scripts/build.mjs legacy",
+    "build:modern": "node ../../../scripts/build.mjs modern",
+    "build:node": "node ../../../scripts/build.mjs node",
+    "build:stable": "node ../../../scripts/build.mjs stable",
+    "build:copy-files": "node ../../../scripts/copyFiles.mjs",
+    "build:types": "node ../../../scripts/buildTypes.mjs",
+    "prebuild": "rimraf build tsconfig.build.tsbuildinfo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xantos008/data-grid-ultra.git"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.20.7",
+    "@mui/utils": "^5.11.2",
+    "@types/format-util": "^1.0.2",
+    "clsx": "^1.2.1",
+    "exceljs": "^4.3.0",
+    "prop-types": "^15.8.1",
+    "reselect": "^4.1.7"
+  },
+  "peerDependencies": {
+    "@mui/material": "^5.4.1",
+    "@mui/system": "^5.4.1",
+    "react": "^17.0.2 || ^18.0.0",
+    "react-dom": "^17.0.2 || ^18.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
