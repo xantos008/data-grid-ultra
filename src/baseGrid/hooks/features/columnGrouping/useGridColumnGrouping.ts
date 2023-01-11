@@ -21,7 +21,7 @@ export function hasGroupPath(
   return (<GridStateColDef>lookupElement).groupPath !== undefined;
 }
 
-type UnwrappedGroupingModel = { [key in GridColDef['field']]: GridColumnGroup['groupId'][] };
+type UnwrappedGroupingModel = { [key: string]: GridColumnGroup['groupId'][] };
 
 // This is the recurrence function that help writing `unwrapGroupingColumnModel()`
 const recurrentUnwrapGroupingColumnModel = (
