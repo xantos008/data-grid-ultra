@@ -245,7 +245,7 @@ TreeDataExpandIcon | elementType | GridKeyboardArrowRight | Icon displayed on th
 
 The `ref` is forwarded to the root element.
 
-#CSS
+## CSS
 Rule name | Global class          | Description |
 :-------  |:----------------------| :---------- |
 actionsCell | .MuiDataGrid-actionsCell | Styles applied to the root element of the cell with type="actions".
