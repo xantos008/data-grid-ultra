@@ -7,7 +7,7 @@ import {
   GridRowTreeCreationValue,
   useGridRegisterPipeProcessor,
 } from '../../../mediumGrid/internals';
-import { GridApiPremium } from '../../../models/gridApiPremium';
+import { GridApiUltra } from '../../../models/gridApiUltra';
 import {
   getAvailableAggregationFunctions,
   addFooterRows,
@@ -18,18 +18,18 @@ import {
   wrapColumnWithAggregationValue,
   unwrapColumnFromAggregation,
 } from './wrapColumnWithAggregation';
-import { DataGridPremiumProcessedProps } from '../../../models/dataGridPremiumProps';
+import { DataGridUltraProcessedProps } from '../../../models/dataGridUltraProps';
 import { GridAggregationColumnMenuItem } from '../../../components/GridAggregationColumnMenuItem';
 import { gridAggregationModelSelector } from './gridAggregationSelectors';
-import { GridInitialStatePremium } from '../../../models/gridStatePremium';
+import { GridInitialStateUltra } from '../../../models/gridStateUltra';
 import { GridAggregationRules } from './gridAggregationInterfaces';
 
 const Divider = () => <MuiDivider onClick={(event) => event.stopPropagation()} />;
 
 export const useGridAggregationPreProcessors = (
-  apiRef: React.MutableRefObject<GridApiPremium>,
+  apiRef: React.MutableRefObject<GridApiUltra>,
   props: Pick<
-    DataGridPremiumProcessedProps,
+    DataGridUltraProcessedProps,
     'aggregationFunctions' | 'disableAggregation' | 'getAggregationPosition'
   >,
 ) => {
@@ -166,7 +166,7 @@ export const useGridAggregationPreProcessors = (
   );
 
   const stateRestorePreProcessing = React.useCallback<GridPipeProcessor<'restoreState'>>(
-    (params, context: GridRestoreStatePreProcessingContext<GridInitialStatePremium>) => {
+    (params, context: GridRestoreStatePreProcessingContext<GridInitialStateUltra>) => {
       if (props.disableAggregation) {
         return params;
       }

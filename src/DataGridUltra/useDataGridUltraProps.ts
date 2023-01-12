@@ -7,16 +7,16 @@ import {
   GridSlotsComponent,
 } from '../mediumGrid';
 import {
-  DataGridPremiumProps,
-  DataGridPremiumProcessedProps,
-  DataGridPremiumPropsWithDefaultValue,
-} from '../models/dataGridPremiumProps';
+  DataGridUltraProps,
+  DataGridUltraProcessedProps,
+  DataGridUltraPropsWithDefaultValue,
+} from '../models/dataGridUltraProps';
 import { GRID_AGGREGATION_FUNCTIONS } from '../hooks/features/aggregation';
 
 /**
- * The default values of `DataGridPremiumPropsWithDefaultValue` to inject in the props of DataGridPremium.
+ * The default values of `DataGridUltraPropsWithDefaultValue` to inject in the props of DataGridUltra.
  */
-export const DATA_GRID_PREMIUM_PROPS_DEFAULT_VALUES: DataGridPremiumPropsWithDefaultValue = {
+export const DATA_GRID_PREMIUM_PROPS_DEFAULT_VALUES: DataGridUltraPropsWithDefaultValue = {
   ...DATA_GRID_PRO_PROPS_DEFAULT_VALUES,
   disableAggregation: false,
   disableRowGrouping: false,
@@ -26,7 +26,7 @@ export const DATA_GRID_PREMIUM_PROPS_DEFAULT_VALUES: DataGridPremiumPropsWithDef
   getAggregationPosition: (groupNode) => (groupNode == null ? 'footer' : 'inline'),
 };
 
-export const useDataGridPremiumProps = (inProps: DataGridPremiumProps) => {
+export const useDataGridUltraProps = (inProps: DataGridUltraProps) => {
   const themedProps = useThemeProps({ props: inProps, name: 'MuiDataGrid' });
 
   const localeText = React.useMemo(
@@ -52,7 +52,7 @@ export const useDataGridPremiumProps = (inProps: DataGridPremiumProps) => {
     return mergedComponents;
   }, [themedProps.components]);
 
-  return React.useMemo<DataGridPremiumProcessedProps>(
+  return React.useMemo<DataGridUltraProcessedProps>(
     () => ({
       ...DATA_GRID_PREMIUM_PROPS_DEFAULT_VALUES,
       ...themedProps,
@@ -60,7 +60,7 @@ export const useDataGridPremiumProps = (inProps: DataGridPremiumProps) => {
         themedProps.disableAggregation || !themedProps.experimentalFeatures?.aggregation,
       localeText,
       components,
-      signature: 'DataGridPremium',
+      signature: 'DataGridUltra',
     }),
     [themedProps, localeText, components],
   );

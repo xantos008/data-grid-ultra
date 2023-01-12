@@ -21,7 +21,7 @@ import {
   buildRowTree,
   BuildRowTreeGroupingCriteria,
 } from '../../../mediumGrid/internals';
-import { DataGridPremiumProcessedProps } from '../../../models/dataGridPremiumProps';
+import { DataGridUltraProcessedProps } from '../../../models/dataGridUltraProps';
 import {
   gridRowGroupingModelSelector,
   gridRowGroupingSanitizedModelSelector,
@@ -38,14 +38,14 @@ import {
   setStrategyAvailability,
   getGroupingRules,
 } from './gridRowGroupingUtils';
-import { GridApiPremium } from '../../../models/gridApiPremium';
+import { GridApiUltra } from '../../../models/gridApiUltra';
 import { GridGroupingValueGetterParams } from '../../../models/gridGroupingValueGetterParams';
 import { GridGroupingRule } from './gridRowGroupingInterfaces';
 
 export const useGridRowGroupingPreProcessors = (
-  apiRef: React.MutableRefObject<GridApiPremium>,
+  apiRef: React.MutableRefObject<GridApiUltra>,
   props: Pick<
-    DataGridPremiumProcessedProps,
+    DataGridUltraProcessedProps,
     | 'disableRowGrouping'
     | 'groupingColDef'
     | 'rowGroupingColumnMode'

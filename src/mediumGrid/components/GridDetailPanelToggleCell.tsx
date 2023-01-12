@@ -60,7 +60,7 @@ GridDetailPanelToggleCell.propTypes = {
   // ----------------------------------------------------------------------
   /**
    * GridApi that let you manipulate the grid.
-   * @deprecated Use the `apiRef` returned by `useGridApiContext` or `useGridApiRef` (only available in `@mui/x-data-grid-pro`)
+   * @deprecated Use the `apiRef` returned by `useGridApiContext` or `useGridApiRef`
    */
   api: PropTypes.any.isRequired,
   /**

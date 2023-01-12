@@ -1,4 +1,4 @@
 import { useGridRootProps as useCommunityGridRootProps } from '../../mediumGrid';
-import { DataGridPremiumProcessedProps } from '../../models/dataGridPremiumProps';
+import { DataGridUltraProcessedProps } from '../../models/dataGridUltraProps';
 
-export const useGridRootProps = useCommunityGridRootProps as () => DataGridPremiumProcessedProps;
+export const useGridRootProps = useCommunityGridRootProps as () => DataGridUltraProcessedProps;

@@ -69,7 +69,6 @@ const filterModelMissingItemIdWarning = buildWarning(
 
 const filterModelMissingItemOperatorWarning = buildWarning([
   'One of your filtering item have no `operatorValue` provided.',
-  'This property will become required on `@mui/x-data-grid@6.X`.',
 ]);
 
 export const sanitizeFilterModel = (

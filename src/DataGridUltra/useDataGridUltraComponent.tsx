@@ -64,9 +64,9 @@ import {
   useGridLazyLoader,
   useGridLazyLoaderPreProcessors,
 } from '../mediumGrid/internals';
-import { GridApiPremium } from '../models/gridApiPremium';
-import { DataGridPremiumProcessedProps } from '../models/dataGridPremiumProps';
-// Premium-only features
+import { GridApiUltra } from '../models/gridApiUltra';
+import { DataGridUltraProcessedProps } from '../models/dataGridUltraProps';
+// Ultra-only features
 import {
   useGridAggregation,
   aggregationStateInitializer,
@@ -79,9 +79,9 @@ import {
 import { useGridRowGroupingPreProcessors } from '../hooks/features/rowGrouping/useGridRowGroupingPreProcessors';
 import { useGridExcelExport } from '../hooks/features/export/useGridExcelExport';
 
-export const useDataGridPremiumComponent = (
-  inputApiRef: React.MutableRefObject<GridApiPremium> | undefined,
-  props: DataGridPremiumProcessedProps,
+export const useDataGridUltraComponent = (
+  inputApiRef: React.MutableRefObject<GridApiUltra> | undefined,
+  props: DataGridUltraProcessedProps,
 ) => {
   const apiRef = useGridInitialization(inputApiRef, props);
 

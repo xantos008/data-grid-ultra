@@ -6,8 +6,8 @@ import {
   GridEvents,
 } from '../../mediumGrid';
 import { GridRowGroupingModel } from '../features/rowGrouping';
-import { GridInitialStatePremium } from '../../models/gridStatePremium';
-import { DataGridPremiumProps } from '../../models/dataGridPremiumProps';
+import { GridInitialStateUltra } from '../../models/gridStateUltra';
+import { DataGridUltraProps } from '../../models/dataGridUltraProps';
 
 const updateColumnVisibilityModel = (
   columnVisibilityModel: GridColumnVisibilityModel | undefined,
@@ -38,7 +38,7 @@ const updateColumnVisibilityModel = (
 export const useKeepGroupedColumnsHidden = (
   props: {
     apiRef: React.MutableRefObject<GridApi>;
-  } & Pick<DataGridPremiumProps, 'initialState' | 'rowGroupingModel'>,
+  } & Pick<DataGridUltraProps, 'initialState' | 'rowGroupingModel'>,
 ) => {
   const initialProps = React.useRef(props);
   const rowGroupingModel = React.useRef(
@@ -57,7 +57,7 @@ export const useKeepGroupedColumnsHidden = (
     });
   }, [props.apiRef]);
 
-  return React.useMemo<GridInitialStatePremium>(() => {
+  return React.useMemo<GridInitialStateUltra>(() => {
     const invariantInitialState = initialProps.current.initialState;
     const columnVisibilityModel = updateColumnVisibilityModel(
       invariantInitialState?.columns?.columnVisibilityModel,

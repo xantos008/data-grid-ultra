@@ -1,4 +1,4 @@
-// Only export the variable and types that should be publicly exposed and re-exported from `@mui/x-data-grid-pro`
+// Only export the variable and types that should be publicly exposed and re-exported from `../medium`
 export * from './columnMenu';
 export * from './columns';
 export * from './columnGrouping';

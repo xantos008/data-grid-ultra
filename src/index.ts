@@ -13,15 +13,15 @@ export * from './baseGrid/colDef';
 export * from './baseGrid/utils';
 export * from './mediumGrid/utils';
 
-export * from './DataGridPremium';
+export * from './DataGridUltra';
 export * from './hooks';
 export * from './models';
 export * from './components';
 
 export type {
-  DataGridPremiumProps,
-  GridExperimentalPremiumFeatures,
-} from './models/dataGridPremiumProps';
+  DataGridUltraProps,
+  GridExperimentalUltraFeatures,
+} from './models/dataGridUltraProps';
 
 export { useGridApiContext, useGridApiRef, useGridRootProps } from './typeOverloads/reexports';
 export type { GridApiRef, GridApi, GridInitialState, GridState } from './typeOverloads/reexports';

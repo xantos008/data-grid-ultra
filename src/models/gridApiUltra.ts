@@ -6,7 +6,7 @@ import {
   GridDetailPanelApi,
   GridRowPinningApi,
 } from '../mediumGrid';
-import { GridInitialStatePremium, GridStatePremium } from './gridStatePremium';
+import { GridInitialStateUltra, GridStateUltra } from './gridStateUltra';
 import type { GridRowGroupingApi, GridExcelExportApi, GridAggregationApi } from '../hooks';
 
 type GridStateApiUntyped = {
@@ -14,13 +14,13 @@ type GridStateApiUntyped = {
 };
 
 /**
- * The api of `DataGridPremium`.
+ * The api of `DataGridUltra`.
  * TODO: Do not redefine manually the pro features
  */
-export interface GridApiPremium
+export interface GridApiUltra
   extends Omit<GridApiCommon, keyof GridStateApiUntyped>,
-    GridStateApi<GridStatePremium>,
-    GridStatePersistenceApi<GridInitialStatePremium>,
+    GridStateApi<GridStateUltra>,
+    GridStatePersistenceApi<GridInitialStateUltra>,
     GridColumnPinningApi,
     GridDetailPanelApi,
     GridRowGroupingApi,

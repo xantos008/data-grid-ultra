@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { GridColDef, GridRowId } from '../../../mediumGrid';
-import { GridApiPremium } from '../../../models/gridApiPremium';
+import { GridApiUltra } from '../../../models/gridApiUltra';
 import {
   GridAggregationCellMeta,
   GridAggregationHeaderMeta,
@@ -29,7 +29,7 @@ interface GridColDefWithAggregationWrappers extends GridColDef {
 }
 
 type ColumnPropertyWrapper<P extends WrappableColumnProperty> = (params: {
-  apiRef: React.MutableRefObject<GridApiPremium>;
+  apiRef: React.MutableRefObject<GridApiUltra>;
   value: GridColDef[P];
   colDef: GridColDef;
   aggregationRule: GridAggregationRule;
@@ -180,7 +180,7 @@ export const wrapColumnWithAggregationValue = ({
   aggregationRule,
 }: {
   column: GridColDef;
-  apiRef: React.MutableRefObject<GridApiPremium>;
+  apiRef: React.MutableRefObject<GridApiUltra>;
   aggregationRule: GridAggregationRule;
 }): GridColDef => {
   const getCellAggregationResult = (

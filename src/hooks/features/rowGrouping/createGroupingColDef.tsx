@@ -8,7 +8,7 @@ import {
   GridGroupingColDefOverride,
 } from '../../../mediumGrid';
 import { GridColumnRawLookup } from '../../../mediumGrid/internals';
-import { GridApiPremium } from '../../../models/gridApiPremium';
+import { GridApiUltra } from '../../../models/gridApiUltra';
 import { GridGroupingColumnFooterCell } from '../../../components/GridGroupingColumnFooterCell';
 import { GridGroupingCriteriaCell } from '../../../components/GridGroupingCriteriaCell';
 import { GridGroupingColumnLeafCell } from '../../../components/GridGroupingColumnLeafCell';
@@ -250,7 +250,7 @@ export const createGroupingColDefForOneGroupingCriteria = ({
 };
 
 interface CreateGroupingColDefSeveralCriteriaParams {
-  apiRef: React.MutableRefObject<GridApiPremium>;
+  apiRef: React.MutableRefObject<GridApiUltra>;
   columnsLookup: GridColumnRawLookup;
 
   /**

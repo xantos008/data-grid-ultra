@@ -7,7 +7,7 @@ import {
   defaultGetRowsToExport,
   GridPipeProcessor,
 } from '../../../baseGrid/internals';
-import { GridApiPremium } from '../../../models/gridApiPremium';
+import { GridApiUltra } from '../../../models/gridApiUltra';
 import {
   GridExcelExportApi,
   GridExportExtension,
@@ -23,7 +23,7 @@ import { GridExcelExportMenuItem } from '../../../components';
  * @requires useGridSelection (state)
  * @requires useGridParamsApi (method)
  */
-export const useGridExcelExport = (apiRef: React.MutableRefObject<GridApiPremium>): void => {
+export const useGridExcelExport = (apiRef: React.MutableRefObject<GridApiUltra>): void => {
   const logger = useGridLogger(apiRef, 'useGridExcelExport');
 
   const getDataAsExcel = React.useCallback<GridExcelExportApi['getDataAsExcel']>(

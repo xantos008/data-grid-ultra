@@ -5,7 +5,7 @@ import { SxProps } from '@mui/system';
 import Box from '@mui/material/Box';
 import { unstable_composeClasses as composeClasses } from '@mui/material';
 import { useGridRootProps } from '../hooks/utils/useGridRootProps';
-import { DataGridPremiumProcessedProps } from '../models/dataGridPremiumProps';
+import { DataGridUltraProcessedProps } from '../models/dataGridUltraProps';
 
 const GridFooterCellRoot = styled(Box, {
   name: 'MuiDataGrid',
@@ -21,7 +21,7 @@ interface GridFooterCellProps extends GridRenderCellParams {
 }
 
 interface OwnerState {
-  classes: DataGridPremiumProcessedProps['classes'];
+  classes: DataGridUltraProcessedProps['classes'];
 }
 
 const useUtilityClasses = (ownerState: OwnerState) => {

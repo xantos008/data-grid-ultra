@@ -28,7 +28,7 @@ export interface GridPipeProcessingLookup {
     value: GridRestoreStatePreProcessingValue;
     context: GridRestoreStatePreProcessingContext<GridInitialStateCommunity>;
   };
-  rowHeight: { value: Record<string, number>; context: GridRowEntry };
+  rowHeight: { value: Record<string, number | 'auto'>; context: GridRowEntry };
   scrollToIndexes: {
     value: Partial<GridScrollParams>;
     context: Partial<GridCellIndexCoordinates>;

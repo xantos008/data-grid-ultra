@@ -1,7 +1,7 @@
 import { createSelector } from '../../../mediumGrid/internals';
-import { GridStatePremium } from '../../../models/gridStatePremium';
+import { GridStateUltra } from '../../../models/gridStateUltra';
 
-export const gridAggregationStateSelector = (state: GridStatePremium) => state.aggregation;
+export const gridAggregationStateSelector = (state: GridStateUltra) => state.aggregation;
 
 /**
  * Get the aggregation model, containing the aggregation function of each column.

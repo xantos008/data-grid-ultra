@@ -3,8 +3,8 @@ import {
   GridApiCommon,
   useGridApiContext as useCommunityGridApiContext,
 } from '../../mediumGrid';
-import { GridApiPremium } from '../../models/gridApiPremium';
+import { GridApiUltra } from '../../models/gridApiUltra';
 
 export const useGridApiContext = useCommunityGridApiContext as <
-  GridApi extends GridApiCommon = GridApiPremium,
+  GridApi extends GridApiCommon = GridApiUltra,
 >() => React.MutableRefObject<GridApi>;

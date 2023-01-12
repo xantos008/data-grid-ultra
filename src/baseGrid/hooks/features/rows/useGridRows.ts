@@ -165,7 +165,7 @@ export const useGridRows = (
         throw new Error(
           [
             "You can't update several rows at once in `apiRef.current.updateRows` on the DataGrid.",
-            'You need to upgrade to DataGridPro or DataGridPremium component to unlock this feature.',
+            'You need to upgrade to DataGridPro or DataGridUltra component to unlock this feature.',
           ].join('\n'),
         );
       }
@@ -348,7 +348,7 @@ export const useGridRows = (
         throw new Error(
           [
             "You can't replace rows using `apiRef.current.unstable_replaceRows` on the DataGrid.",
-            'You need to upgrade to DataGridPro or DataGridPremium component to unlock this feature.',
+            'You need to upgrade to DataGridPro or DataGridUltra component to unlock this feature.',
           ].join('\n'),
         );
       }

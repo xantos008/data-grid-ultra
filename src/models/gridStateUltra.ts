@@ -10,17 +10,17 @@ import type {
 } from '../hooks';
 
 /**
- * The state of `DataGridPremium`.
+ * The state of `DataGridUltra`.
  */
-export interface GridStatePremium extends GridStatePro {
+export interface GridStateUltra extends GridStatePro {
   rowGrouping: GridRowGroupingState;
   aggregation: GridAggregationState;
 }
 
 /**
- * The initial state of `DataGridPremium`.
+ * The initial state of `DataGridUltra`.
  */
-export interface GridInitialStatePremium extends GridInitialStatePro {
+export interface GridInitialStateUltra extends GridInitialStatePro {
   rowGrouping?: GridRowGroupingInitialState;
   aggregation?: GridAggregationInitialState;
 }

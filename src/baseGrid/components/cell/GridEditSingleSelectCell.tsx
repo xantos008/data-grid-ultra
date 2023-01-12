@@ -14,12 +14,14 @@ import { ValueOptions } from '../../models/colDef/gridColDef';
 import { getValueFromValueOptions } from '../panel/filterPanel/filterPanelUtils';
 import { useGridApiContext } from '../../hooks/utils/useGridApiContext';
 
+type ConvertToObjectFromValueOptions = { value: any, label: string}
+
 const renderSingleSelectOptions = (option: ValueOptions, OptionComponent: React.ElementType) => {
   const isOptionTypeObject = typeof option === 'object';
 
-  const key = isOptionTypeObject ? option.value : option;
-  const value = isOptionTypeObject ? option.value : option;
-  const content = isOptionTypeObject ? option.label : option;
+  const key = isOptionTypeObject ? (option as ConvertToObjectFromValueOptions).value : option;
+  const value = isOptionTypeObject ? (option as ConvertToObjectFromValueOptions).value : option;
+  const content = isOptionTypeObject ? (option as ConvertToObjectFromValueOptions).label : option;
 
   return (
     <OptionComponent key={key} value={value}>
@@ -200,7 +202,6 @@ GridEditSingleSelectCell.propTypes = {
   // ----------------------------------------------------------------------
   /**
    * GridApi that let you manipulate the grid.
-   * @deprecated Use the `apiRef` returned by `useGridApiContext` or `useGridApiRef` (only available in `@mui/x-data-grid-pro`)
    */
   api: PropTypes.any.isRequired,
   /**

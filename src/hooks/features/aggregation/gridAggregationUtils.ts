@@ -13,9 +13,9 @@ import {
   GridAggregationRule,
   GridAggregationRules,
 } from './gridAggregationInterfaces';
-import { GridStatePremium } from '../../../models/gridStatePremium';
-import { DataGridPremiumProcessedProps } from '../../../models/dataGridPremiumProps';
-import { GridApiPremium } from '../../../models/gridApiPremium';
+import { GridStateUltra } from '../../../models/gridStateUltra';
+import { DataGridUltraProcessedProps } from '../../../models/dataGridUltraProps';
+import { GridApiUltra } from '../../../models/gridApiUltra';
 
 export const GRID_AGGREGATION_ROOT_FOOTER_ROW_ID = 'auto-generated-group-footer-root';
 
@@ -72,7 +72,7 @@ export const getAvailableAggregationFunctions = ({
 
 export const mergeStateWithAggregationModel =
   (aggregationModel: GridAggregationModel) =>
-  (state: GridStatePremium): GridStatePremium => ({
+  (state: GridStateUltra): GridStateUltra => ({
     ...state,
     aggregation: { ...state.aggregation, model: aggregationModel },
   });
@@ -118,8 +118,8 @@ export const addFooterRows = ({
 }: {
   groupingParams: GridRowTreeCreationValue;
   aggregationRules: GridAggregationRules;
-  getAggregationPosition: DataGridPremiumProcessedProps['getAggregationPosition'];
-  apiRef: React.MutableRefObject<GridApiPremium>;
+  getAggregationPosition: DataGridUltraProcessedProps['getAggregationPosition'];
+  apiRef: React.MutableRefObject<GridApiUltra>;
 }) => {
   if (Object.keys(aggregationRules).length === 0) {
     return groupingParams;
@@ -227,7 +227,7 @@ export const getAggregationFunctionLabel = ({
   apiRef,
   aggregationRule,
 }: {
-  apiRef: React.MutableRefObject<GridApiPremium>;
+  apiRef: React.MutableRefObject<GridApiUltra>;
   aggregationRule: GridAggregationRule;
 }): string => {
   if (aggregationRule.aggregationFunction.label != null) {

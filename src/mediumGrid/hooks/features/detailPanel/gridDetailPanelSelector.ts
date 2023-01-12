@@ -15,7 +15,7 @@ export const gridDetailPanelRawHeightCacheSelector = (state: GridStatePro) =>
 export const gridDetailPanelExpandedRowsHeightCacheSelector = createSelector(
   gridDetailPanelRawHeightCacheSelector,
   (heightCache) =>
-    Object.entries(heightCache).reduce<Record<GridRowId, number>>((acc, [id, { height }]) => {
+    Object.entries(heightCache).reduce<Record<GridRowId, number | 'auto'>>((acc, [id, { height }]) => {
       acc[id] = height || 0;
       return acc;
     }, {}),

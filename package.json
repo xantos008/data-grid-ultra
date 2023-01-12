@@ -3,7 +3,16 @@
   "version": "1.0.0",
   "description": "A react data table implementation using @mui.",
   "author": "xantos008",
-  "main": "src/index.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "jsnext:main": "dist/index.es.js",
+  "engines": {
+    "node": ">=8",
+    "npm": ">=5"
+  },
   "license": "Unlicense",
   "bugs": {
     "url": "https://github.com/xantos008/data-grid-ultra/issues"
@@ -26,15 +35,11 @@
     "data-grid"
   ],
   "scripts": {
-    "typescript": "tsc -p tsconfig.json",
-    "build": "yarn build:legacy && yarn build:modern && yarn build:node && yarn build:stable && yarn build:types && yarn build:copy-files ",
-    "build:legacy": "node ../../../scripts/build.mjs legacy",
-    "build:modern": "node ../../../scripts/build.mjs modern",
-    "build:node": "node ../../../scripts/build.mjs node",
-    "build:stable": "node ../../../scripts/build.mjs stable",
-    "build:copy-files": "node ../../../scripts/copyFiles.mjs",
-    "build:types": "node ../../../scripts/buildTypes.mjs",
-    "prebuild": "rimraf build tsconfig.build.tsbuildinfo"
+    "compile": "tsc",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && rollup -c --bundleConfigAsCjs && npm run postbuild",
+    "postbuild": "cp package.json dist && cp README.md dist && cp LICENSE dist",
+    "publish": "npm publish dist"
   },
   "repository": {
     "type": "git",
@@ -44,6 +49,7 @@
     "@babel/runtime": "^7.20.7",
     "@mui/utils": "^5.11.2",
     "@types/format-util": "^1.0.2",
+    "@types/node": "^18.11.18",
     "clsx": "^1.2.1",
     "exceljs": "^4.3.0",
     "prop-types": "^15.8.1",
@@ -55,7 +61,15 @@
     "react": "^17.0.2 || ^18.0.0",
     "react-dom": "^17.0.2 || ^18.0.0"
   },
-  "engines": {
-    "node": ">=14.0.0"
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.19.6",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-url": "^8.0.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-typescript2": "^0.34.1",
+    "tslib": "^2.4.1",
+    "typescript": "^4.9.4"
   }
 }

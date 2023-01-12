@@ -14,16 +14,16 @@ import {
   DataGridProVirtualScroller,
   DataGridProColumnHeaders,
 } from '../mediumGrid/internals';
-import { useDataGridPremiumComponent } from './useDataGridPremiumComponent';
-import { DataGridPremiumProps } from '../models/dataGridPremiumProps';
-import { useDataGridPremiumProps } from './useDataGridPremiumProps';
+import { useDataGridUltraComponent } from './useDataGridUltraComponent';
+import { DataGridUltraProps } from '../models/dataGridUltraProps';
+import { useDataGridUltraProps } from './useDataGridUltraProps';
 
-const DataGridPremiumRaw = React.forwardRef(function DataGridPremium<R extends GridValidRowModel>(
-  inProps: DataGridPremiumProps<R>,
+const DataGridUltraRaw = React.forwardRef(function DataGridUltra<R extends GridValidRowModel>(
+  inProps: DataGridUltraProps<R>,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useDataGridPremiumProps(inProps);
-  const apiRef = useDataGridPremiumComponent(props.apiRef, props);
+  const props = useDataGridUltraProps(inProps);
+  const apiRef = useDataGridUltraComponent(props.apiRef, props);
 
   return (
     <GridContextProvider apiRef={apiRef} props={props}>
@@ -41,16 +41,16 @@ const DataGridPremiumRaw = React.forwardRef(function DataGridPremium<R extends G
   );
 });
 
-interface DataGridPremiumComponent {
+interface DataGridUltraComponent {
   <R extends GridValidRowModel = any>(
-    props: DataGridPremiumProps<R> & React.RefAttributes<HTMLDivElement>,
+    props: DataGridUltraProps<R> & React.RefAttributes<HTMLDivElement>,
   ): JSX.Element;
   propTypes?: any;
 }
 
-export const DataGridPremium = React.memo(DataGridPremiumRaw) as DataGridPremiumComponent;
+export const DataGridUltra = React.memo(DataGridUltraRaw) as DataGridUltraComponent;
 
-DataGridPremiumRaw.propTypes = {
+DataGridUltraRaw.propTypes = {
   // ----------------------------- Warning --------------------------------
   // | These PropTypes are generated from the TypeScript type definitions |
   // | To update them edit the TypeScript types and run "yarn proptypes"  |
@@ -418,7 +418,7 @@ DataGridPremiumRaw.propTypes = {
    */
   hideFooterSelectedRowCount: PropTypes.bool,
   /**
-   * The initial state of the DataGridPremium.
+   * The initial state of the DataGridUltra.
    * The data in it will be set in the state on initialization but will not be controlled.
    * If one of the data in `initialState` is also being controlled, then the control state wins.
    */

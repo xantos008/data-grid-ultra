@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { GridApiCommon, useGridApiRef as useCommunityGridApiRef } from '../../mediumGrid';
-import { GridApiPremium } from '../../models/gridApiPremium';
+import { GridApiUltra } from '../../models/gridApiUltra';
 
 export const useGridApiRef = useCommunityGridApiRef as <
-  Api extends GridApiCommon = GridApiPremium,
+  Api extends GridApiCommon = GridApiUltra,
 >() => React.MutableRefObject<Api>;

@@ -9,7 +9,7 @@ export interface GridSortCellParams<V = any> {
   rowNode: GridRowTreeNodeConfig;
 
   /**
-   * @deprecated Use the `apiRef` returned by `useGridApiContext` or `useGridApiRef` (only available in `@mui/x-data-grid-pro`)
+   * @deprecated Use the `apiRef` returned by `useGridApiContext` or `useGridApiRef`
    */
   api: any;
 }

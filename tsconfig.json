@@ -3,7 +3,7 @@
     "outDir": "build",
     "module": "esnext",
     "target": "ES6",
-    "lib": ["es5", "es6", "dom", "es2015", "es2016", "es2015.Promise", "es2017"],
+    "lib": ["es5", "es6", "dom", "es2015", "es2016", "es2015.Promise", "es2017", "es2021"],
     "sourceMap": true,
     "allowJs": false,
     "jsx": "react",
@@ -12,7 +12,7 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": false,
@@ -23,5 +23,5 @@
     "./src",
     "./node_modules/@mui/material/themeCssVarsAugmentation"
   ],
-  "exclude": ["node_modules", "build", "dist", "example", "rollup.config.js", "**/node_modules/!(@mui)/**", "**/build/**/*"]
+  "exclude": ["node_modules", "build", "dist", "example", "rollup.config.js"]
 }
