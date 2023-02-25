@@ -1,19 +1,20 @@
-import { GridKeyValue, GridValidRowModel } from '../mediumGrid';
+import { GridKeyValue, GridValidRowModel } from '../medium';
 import type {
   GridControlledStateEventLookupPro,
   GridApiCachesPro,
-} from '../mediumGrid/typeOverloads';
+} from '../medium/typeOverloads';
 import type { GridGroupingValueGetterParams } from '../models';
 import type {
   GridRowGroupingModel,
   GridAggregationModel,
   GridAggregationCellMeta,
   GridAggregationHeaderMeta,
+  GridCellSelectionModel,
 } from '../hooks';
 import { GridRowGroupingInternalCache } from '../hooks/features/rowGrouping/gridRowGroupingInterfaces';
 import { GridAggregationInternalCache } from '../hooks/features/aggregation/gridAggregationInterfaces';
 
-export interface GridControlledStateEventLookupUltra {
+export interface GridControlledStateEventLookupPremium {
   /**
    * Fired when the aggregation model changes.
    */
@@ -22,10 +23,18 @@ export interface GridControlledStateEventLookupUltra {
    * Fired when the row grouping model changes.
    */
   rowGroupingModelChange: { params: GridRowGroupingModel };
+  /**
+   * Fired when the selection state of one or multiple cells change.
+   */
+  cellSelectionChange: { params: GridCellSelectionModel };
+  /**
+   * Fired when the state of the Excel export task changes
+   */
+  excelExportStateChange: { params: 'pending' | 'finished' };
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export interface GridColDefUltra<R extends GridValidRowModel = any, V = any, F = V> {
+export interface GridColDefPremium<R extends GridValidRowModel = any, V = any, F = V> {
   /**
    * If `true`, the cells of the column can be aggregated based.
    * @default true
@@ -42,39 +51,39 @@ export interface GridColDefUltra<R extends GridValidRowModel = any, V = any, F =
    * @returns {GridKeyValue | null | undefined} The cell key.
    */
   groupingValueGetter?: (
-    params: GridGroupingValueGetterParams<V, R>,
+    params: GridGroupingValueGetterParams<R, V>,
   ) => GridKeyValue | null | undefined;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export interface GridRenderCellParamsUltra<V = any, R extends GridValidRowModel = any, F = V> {
+export interface GridRenderCellParamsPremium<R extends GridValidRowModel = any, V = any, F = V> {
   aggregation?: GridAggregationCellMeta;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export interface GridColumnHeaderParamsUltra<V = any, R extends GridValidRowModel = any, F = V> {
+export interface GridColumnHeaderParamsPremium<R extends GridValidRowModel = any, V = any, F = V> {
   aggregation?: GridAggregationHeaderMeta;
 }
 
-export interface GridApiCachesUltra extends GridApiCachesPro {
+export interface GridApiCachesPremium extends GridApiCachesPro {
   rowGrouping: GridRowGroupingInternalCache;
   aggregation: GridAggregationInternalCache;
 }
 
-declare module '../mediumGrid' {
-  interface GridColDef<R, V, F> extends GridColDefUltra<R, V, F> {}
-
+declare module '../medium' {
   interface GridControlledStateEventLookup
     extends GridControlledStateEventLookupPro,
-      GridControlledStateEventLookupUltra {}
+      GridControlledStateEventLookupPremium {}
 
-  interface GridRenderCellParams<V, R, F> extends GridRenderCellParamsUltra<V, R, F> {}
+  interface GridRenderCellParams<R, V, F> extends GridRenderCellParamsPremium<R, V, F> {}
 
-  interface GridColumnHeaderParams<V, R, F> extends GridColumnHeaderParamsUltra<V, R, F> {}
+  interface GridColumnHeaderParams<R, V, F> extends GridColumnHeaderParamsPremium<R, V, F> {}
 
-  interface GridApiCaches extends GridApiCachesUltra {}
+  interface GridApiCaches extends GridApiCachesPremium {}
 }
 
-declare module '../mediumGrid/internals' {
-  interface GridApiCaches extends GridApiCachesUltra {}
+declare module '../medium/internals' {
+  interface GridApiCaches extends GridApiCachesPremium {}
+
+  interface GridBaseColDef<R, V, F> extends GridColDefPremium<R, V, F> {}
 }

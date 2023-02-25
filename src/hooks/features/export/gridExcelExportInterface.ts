@@ -5,7 +5,7 @@ import {
   GridExportExtension as GridExportExtensionCommunity,
   GridToolbarExportProps as GridToolbarExportPropsCommunity,
   GridExportDisplayOptions,
-} from '../../../mediumGrid';
+} from '../../../medium';
 
 export type GridExportFormat = GridExportFormatCommunity | 'excel';
 export type GridExportExtension = GridExportExtensionCommunity | 'xlsx';
@@ -24,18 +24,27 @@ export interface ColumnsStylesInterface {
  */
 export interface GridExcelExportOptions extends GridFileExportOptions {
   /**
+   * Function to return the Worker instance to be called.
+   * @returns {() => Worker} A Worker instance.
+   */
+  worker?: () => Worker;
+  /**
    * Name given to the worksheet containing the columns valueOptions.
    * valueOptions are added to this worksheet if they are provided as an array.
    */
   valueOptionsSheetName?: string;
   /**
    * Method called before adding the rows to the workbook.
+   * Not supported when `worker` is set.
+   * To use with web workers, use the option in `setupExcelExportWebWorker`.
    * @param {GridExceljsProcessInput} processInput object containing the workbook and the worksheet.
    * @returns {Promise<void>} A promise which resolves after processing the input.
    * */
   exceljsPreProcess?: (processInput: GridExceljsProcessInput) => Promise<void>;
   /**
    * Method called after adding the rows to the workbook.
+   * Not supported when `worker` is set.
+   * To use with web workers, use the option in `setupExcelExportWebWorker`.
    * @param {GridExceljsProcessInput} processInput object containing the workbook and the worksheet.
    * @returns {Promise<void>} A promise which resolves after processing the input.
    * */

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import MenuItem from '@mui/material/MenuItem';
-import { GridExportMenuItemProps } from '../mediumGrid';
+import { GridExportMenuItemProps } from '../medium';
 import { useGridApiContext } from '../hooks/utils/useGridApiContext';
 import { GridExcelExportOptions } from '../hooks/features/export';
 
 export type GridExcelExportMenuItemProps = GridExportMenuItemProps<GridExcelExportOptions>;
 
-const GridExcelExportMenuItem = (props: GridExcelExportMenuItemProps) => {
+function GridExcelExportMenuItem(props: GridExcelExportMenuItemProps) {
   const apiRef = useGridApiContext();
   const { hideMenu, options, ...other } = props;
 
@@ -22,7 +22,7 @@ const GridExcelExportMenuItem = (props: GridExcelExportMenuItemProps) => {
       {apiRef.current.getLocaleText('toolbarExportExcel')}
     </MenuItem>
   );
-};
+}
 
 GridExcelExportMenuItem.propTypes = {
   // ----------------------------- Warning --------------------------------
@@ -42,6 +42,7 @@ GridExcelExportMenuItem.propTypes = {
     includeColumnGroupsHeaders: PropTypes.bool,
     includeHeaders: PropTypes.bool,
     valueOptionsSheetName: PropTypes.string,
+    worker: PropTypes.func,
   }),
 } as any;
 

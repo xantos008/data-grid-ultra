@@ -1,4 +1,4 @@
-import { GridColDef, GridValidRowModel } from '../../../baseGrid';
+import { GridColDef, GridValidRowModel } from '../../../minimal';
 
 export type GridRowGroupingModel = string[];
 

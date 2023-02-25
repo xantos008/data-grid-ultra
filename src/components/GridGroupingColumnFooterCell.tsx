@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { GridRenderCellParams } from '../mediumGrid';
+import { GridRenderCellParams } from '../medium';
 import { useGridRootProps } from '../hooks/utils/useGridRootProps';
 import { GridFooterCell } from './GridFooterCell';
 
-const GridGroupingColumnFooterCell = (props: GridRenderCellParams) => {
+function GridGroupingColumnFooterCell(props: GridRenderCellParams) {
   const { rowNode } = props;
 
   const rootProps = useGridRootProps();
@@ -18,6 +18,6 @@ const GridGroupingColumnFooterCell = (props: GridRenderCellParams) => {
   }
 
   return <GridFooterCell sx={{ ml: marginLeft }} {...props} />;
-};
+}
 
 export { GridGroupingColumnFooterCell };

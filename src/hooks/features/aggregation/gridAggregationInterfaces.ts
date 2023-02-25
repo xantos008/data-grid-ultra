@@ -3,7 +3,7 @@ import {
   GridRowId,
   GridRowModel,
   GridColDef,
-} from '../../../mediumGrid';
+} from '../../../medium';
 
 export interface GridAggregationState {
   model: GridAggregationModel;
@@ -73,6 +73,7 @@ export interface GridAggregationFunction<V = any, AV = V, FAV = AV> {
   /**
    * Function that allows to transform the value of the cell passed to the aggregation function applier.
    * Useful for aggregating data from multiple row fields.
+   * @demo https://mui.com/x/react-data-grid/aggregation/#aggregating-data-from-multiple-row-fields
    * @param {GridAggregationGetCellValueParams} params The params of the current cell
    * @returns {V} The value of the cell that will be passed to the aggregation `apply` function
    */
@@ -90,7 +91,7 @@ export type GridAggregationModel = {
 };
 
 export type GridAggregationLookup = {
-  [rowId in GridRowId]: {
+  [rowId: GridRowId]: {
     [field: string]: {
       position: GridAggregationPosition;
       value: any;

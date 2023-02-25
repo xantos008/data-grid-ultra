@@ -1,8 +1,8 @@
-import { gridColumnLookupSelector } from '../../../mediumGrid';
-import { createSelector } from '../../../mediumGrid/internals';
-import { GridStateUltra } from '../../../models/gridStateUltra';
+import { gridColumnLookupSelector } from '../../../medium';
+import { createSelector } from '../../../medium/internals';
+import { GridStatePremium } from '../../../models/gridStatePremium';
 
-export const gridRowGroupingStateSelector = (state: GridStateUltra) => state.rowGrouping;
+const gridRowGroupingStateSelector = (state: GridStatePremium) => state.rowGrouping;
 
 export const gridRowGroupingModelSelector = createSelector(
   gridRowGroupingStateSelector,

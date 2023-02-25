@@ -3,11 +3,10 @@ import {
   GridApi,
   GridColumnVisibilityModel,
   gridColumnVisibilityModelSelector,
-  GridEvents,
-} from '../../mediumGrid';
+} from '../../medium';
 import { GridRowGroupingModel } from '../features/rowGrouping';
-import { GridInitialStateUltra } from '../../models/gridStateUltra';
-import { DataGridUltraProps } from '../../models/dataGridUltraProps';
+import { GridInitialStatePremium } from '../../models/gridStatePremium';
+import { DataGridPremiumProps } from '../../models/dataGridPremiumProps';
 
 const updateColumnVisibilityModel = (
   columnVisibilityModel: GridColumnVisibilityModel | undefined,
@@ -38,7 +37,7 @@ const updateColumnVisibilityModel = (
 export const useKeepGroupedColumnsHidden = (
   props: {
     apiRef: React.MutableRefObject<GridApi>;
-  } & Pick<DataGridUltraProps, 'initialState' | 'rowGroupingModel'>,
+  } & Pick<DataGridPremiumProps, 'initialState' | 'rowGroupingModel'>,
 ) => {
   const initialProps = React.useRef(props);
   const rowGroupingModel = React.useRef(
@@ -46,7 +45,7 @@ export const useKeepGroupedColumnsHidden = (
   );
 
   React.useEffect(() => {
-    props.apiRef.current.subscribeEvent(GridEvents.rowGroupingModelChange, (newModel) => {
+    props.apiRef.current.subscribeEvent('rowGroupingModelChange', (newModel) => {
       const columnVisibilityModel = updateColumnVisibilityModel(
         gridColumnVisibilityModelSelector(props.apiRef),
         newModel,
@@ -57,7 +56,7 @@ export const useKeepGroupedColumnsHidden = (
     });
   }, [props.apiRef]);
 
-  return React.useMemo<GridInitialStateUltra>(() => {
+  return React.useMemo<GridInitialStatePremium>(() => {
     const invariantInitialState = initialProps.current.initialState;
     const columnVisibilityModel = updateColumnVisibilityModel(
       invariantInitialState?.columns?.columnVisibilityModel,

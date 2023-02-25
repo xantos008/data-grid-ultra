@@ -1,3 +1,3 @@
-import '../mediumGrid/typeOverloads';
+import '../medium/typeOverloads';
 
 export * from './modules';

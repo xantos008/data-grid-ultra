@@ -1,13 +1,11 @@
 import * as React from 'react';
-import MuiDivider from '@mui/material/Divider';
-import { gridColumnLookupSelector } from '../../../mediumGrid';
+import { gridColumnLookupSelector } from '../../../medium';
 import {
   GridPipeProcessor,
   GridRestoreStatePreProcessingContext,
-  GridRowTreeCreationValue,
   useGridRegisterPipeProcessor,
-} from '../../../mediumGrid/internals';
-import { GridApiUltra } from '../../../models/gridApiUltra';
+} from '../../../medium/internals';
+import { GridPrivateApiPremium } from '../../../models/gridApiPremium';
 import {
   getAvailableAggregationFunctions,
   addFooterRows,
@@ -18,19 +16,16 @@ import {
   wrapColumnWithAggregationValue,
   unwrapColumnFromAggregation,
 } from './wrapColumnWithAggregation';
-import { DataGridUltraProcessedProps } from '../../../models/dataGridUltraProps';
-import { GridAggregationColumnMenuItem } from '../../../components/GridAggregationColumnMenuItem';
+import { DataGridPremiumProcessedProps } from '../../../models/dataGridPremiumProps';
 import { gridAggregationModelSelector } from './gridAggregationSelectors';
-import { GridInitialStateUltra } from '../../../models/gridStateUltra';
+import { GridInitialStatePremium } from '../../../models/gridStatePremium';
 import { GridAggregationRules } from './gridAggregationInterfaces';
 
-const Divider = () => <MuiDivider onClick={(event) => event.stopPropagation()} />;
-
 export const useGridAggregationPreProcessors = (
-  apiRef: React.MutableRefObject<GridApiUltra>,
+  apiRef: React.MutableRefObject<GridPrivateApiPremium>,
   props: Pick<
-    DataGridUltraProcessedProps,
-    'aggregationFunctions' | 'disableAggregation' | 'getAggregationPosition'
+    DataGridPremiumProcessedProps,
+    'aggregationFunctions' | 'disableAggregation' | 'getAggregationPosition' | 'slotProps' | 'slots'
   >,
 ) => {
   // apiRef.current.caches.aggregation.rulesOnLastColumnHydration is not used because by the time
@@ -47,7 +42,7 @@ export const useGridAggregationPreProcessors = (
             aggregationFunctions: props.aggregationFunctions,
           });
 
-      columnsState.all.forEach((field) => {
+      columnsState.orderedFields.forEach((field) => {
         const shouldHaveAggregationValue = !!aggregationRules[field];
         const haveAggregationColumnValue = !!rulesOnLastColumnHydration.current[field];
 
@@ -78,69 +73,56 @@ export const useGridAggregationPreProcessors = (
   );
 
   const addGroupFooterRows = React.useCallback<GridPipeProcessor<'hydrateRows'>>(
-    (groupingParams) => {
-      let newGroupingParams: GridRowTreeCreationValue;
-      let rulesOnLastRowHydration: GridAggregationRules;
-
-      if (props.disableAggregation) {
-        newGroupingParams = groupingParams;
-        rulesOnLastRowHydration = {};
-      } else {
-        const aggregationRules = getAggregationRules({
-          columnsLookup: gridColumnLookupSelector(apiRef),
-          aggregationModel: gridAggregationModelSelector(apiRef),
-          aggregationFunctions: props.aggregationFunctions,
-        });
-
-        rulesOnLastRowHydration = aggregationRules;
-
-        // If no column have an aggregation rule
-        // Then don't create the footer rows
-        if (Object.values(aggregationRules).length === 0) {
-          newGroupingParams = groupingParams;
-        } else {
-          newGroupingParams = addFooterRows({
-            groupingParams,
-            aggregationRules,
-            getAggregationPosition: props.getAggregationPosition,
-            apiRef,
+    (value) => {
+      const aggregationRules = props.disableAggregation
+        ? {}
+        : getAggregationRules({
+            columnsLookup: gridColumnLookupSelector(apiRef),
+            aggregationModel: gridAggregationModelSelector(apiRef),
+            aggregationFunctions: props.aggregationFunctions,
           });
-        }
+
+      const hasAggregationRule = Object.keys(aggregationRules).length > 0;
+
+      // If we did not have any aggregation footer before, and we still don't have any,
+      // Then we can skip this step
+      if (
+        Object.keys(apiRef.current.caches.aggregation.rulesOnLastRowHydration).length === 0 &&
+        !hasAggregationRule
+      ) {
+        return value;
       }
 
-      apiRef.current.unstable_caches.aggregation.rulesOnLastRowHydration = rulesOnLastRowHydration;
+      apiRef.current.caches.aggregation.rulesOnLastRowHydration = aggregationRules;
 
-      return newGroupingParams;
+      return addFooterRows({
+        apiRef,
+        groupingParams: value,
+        getAggregationPosition: props.getAggregationPosition,
+        hasAggregationRule,
+      });
     },
     [apiRef, props.disableAggregation, props.getAggregationPosition, props.aggregationFunctions],
   );
 
   const addColumnMenuButtons = React.useCallback<GridPipeProcessor<'columnMenu'>>(
-    (initialValue, column) => {
+    (columnMenuItems, colDef) => {
       if (props.disableAggregation) {
-        return initialValue;
+        return columnMenuItems;
       }
 
       const availableAggregationFunctions = getAvailableAggregationFunctions({
         aggregationFunctions: props.aggregationFunctions,
-        column,
+        colDef,
       });
 
       if (availableAggregationFunctions.length === 0) {
-        return initialValue;
+        return columnMenuItems;
       }
 
-      return [
-        ...initialValue,
-        <Divider />,
-        <GridAggregationColumnMenuItem
-          column={column}
-          label={apiRef.current.getLocaleText('aggregationMenuItemHeader')}
-          availableAggregationFunctions={availableAggregationFunctions}
-        />,
-      ];
+      return [...columnMenuItems, 'ColumnMenuAggregationItem'];
     },
-    [apiRef, props.aggregationFunctions, props.disableAggregation],
+    [props.aggregationFunctions, props.disableAggregation],
   );
 
   const stateExportPreProcessing = React.useCallback<GridPipeProcessor<'exportState'>>(
@@ -166,7 +148,7 @@ export const useGridAggregationPreProcessors = (
   );
 
   const stateRestorePreProcessing = React.useCallback<GridPipeProcessor<'restoreState'>>(
-    (params, context: GridRestoreStatePreProcessingContext<GridInitialStateUltra>) => {
+    (params, context: GridRestoreStatePreProcessingContext<GridInitialStatePremium>) => {
       if (props.disableAggregation) {
         return params;
       }

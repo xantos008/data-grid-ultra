@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { getDataGridUtilityClass, GridRenderCellParams } from '../baseGrid';
+import { getDataGridUtilityClass, GridRenderCellParams } from '../minimal';
 import { styled, Theme } from '@mui/material/styles';
 import { SxProps } from '@mui/system';
 import Box from '@mui/material/Box';
-import { unstable_composeClasses as composeClasses } from '@mui/material';
+import { unstable_composeClasses as composeClasses } from '@mui/utils';
 import { useGridRootProps } from '../hooks/utils/useGridRootProps';
-import { DataGridUltraProcessedProps } from '../models/dataGridUltraProps';
+import { DataGridPremiumProcessedProps } from '../models/dataGridPremiumProps';
 
 const GridFooterCellRoot = styled(Box, {
   name: 'MuiDataGrid',
@@ -13,16 +13,14 @@ const GridFooterCellRoot = styled(Box, {
   overridesResolver: (_, styles) => styles.footerCell,
 })<{ ownerState: OwnerState }>(({ theme }) => ({
   fontWeight: theme.typography.fontWeightMedium,
-  color: theme.palette.primary.dark,
+  color: ((theme as any).vars || theme).palette.primary.dark,
 }));
 
 interface GridFooterCellProps extends GridRenderCellParams {
   sx?: SxProps<Theme>;
 }
 
-interface OwnerState {
-  classes: DataGridUltraProcessedProps['classes'];
-}
+type OwnerState = DataGridPremiumProcessedProps;
 
 const useUtilityClasses = (ownerState: OwnerState) => {
   const { classes } = ownerState;
@@ -34,14 +32,13 @@ const useUtilityClasses = (ownerState: OwnerState) => {
   return composeClasses(slots, getDataGridUtilityClass, classes);
 };
 
-const GridFooterCell = (props: GridFooterCellProps) => {
+function GridFooterCell(props: GridFooterCellProps) {
   const {
     formattedValue,
     colDef,
     cellMode,
     row,
     api,
-    getValue,
     id,
     value,
     rowNode,
@@ -54,7 +51,7 @@ const GridFooterCell = (props: GridFooterCellProps) => {
   } = props;
   const rootProps = useGridRootProps();
 
-  const ownerState = { classes: rootProps.classes };
+  const ownerState = rootProps;
   const classes = useUtilityClasses(ownerState);
 
   return (
@@ -62,6 +59,6 @@ const GridFooterCell = (props: GridFooterCellProps) => {
       {formattedValue}
     </GridFooterCellRoot>
   );
-};
+}
 
 export { GridFooterCell };

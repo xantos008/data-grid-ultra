@@ -1,9 +1,9 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { GridRenderCellParams } from '../mediumGrid';
+import { GridRenderCellParams } from '../medium';
 import { useGridRootProps } from '../hooks/utils/useGridRootProps';
 
-const GridGroupingColumnLeafCell = (props: GridRenderCellParams) => {
+function GridGroupingColumnLeafCell(props: GridRenderCellParams) {
   const { rowNode } = props;
 
   const rootProps = useGridRootProps();
@@ -11,6 +11,6 @@ const GridGroupingColumnLeafCell = (props: GridRenderCellParams) => {
   const marginLeft = rootProps.rowGroupingColumnMode === 'multiple' ? 1 : rowNode.depth * 2;
 
   return <Box sx={{ ml: marginLeft }}>{props.formattedValue ?? props.value}</Box>;
-};
+}
 
 export { GridGroupingColumnLeafCell };

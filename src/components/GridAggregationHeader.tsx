@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { unstable_composeClasses as composeClasses } from '@mui/material';
+import { unstable_composeClasses as composeClasses } from '@mui/utils';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import {
@@ -8,17 +8,14 @@ import {
   GridColDef,
   GridColumnHeaderParams,
   GridColumnHeaderTitle,
-  gridDensityHeaderHeightSelector,
-  useGridSelector,
-} from '../baseGrid';
+} from '../minimal';
 import { getAggregationFunctionLabel } from '../hooks/features/aggregation/gridAggregationUtils';
 import { useGridApiContext } from '../hooks/utils/useGridApiContext';
 import { useGridRootProps } from '../hooks/utils/useGridRootProps';
-import { DataGridUltraProcessedProps } from '../models/dataGridUltraProps';
+import { DataGridPremiumProcessedProps } from '../models/dataGridPremiumProps';
 
-interface OwnerState {
-  classes: DataGridUltraProcessedProps['classes'];
-  headerHeight: number;
+interface OwnerState extends DataGridPremiumProcessedProps {
+  classes: DataGridPremiumProcessedProps['classes'];
   colDef: GridColDef;
 }
 
@@ -47,7 +44,7 @@ const GridAggregationFunctionLabel = styled('div', {
     lineHeight: theme.typography.caption.fontSize,
     marginTop: `calc(-2px - ${theme.typography.caption.fontSize})`,
     fontWeight: theme.typography.fontWeightMedium,
-    color: theme.palette.primary.dark,
+    color: ((theme as any).vars || theme).palette.primary.dark,
     textTransform: 'uppercase',
   };
 });
@@ -68,14 +65,13 @@ const useUtilityClasses = (ownerState: OwnerState) => {
   return composeClasses(slots, getDataGridUtilityClass, classes);
 };
 
-const GridAggregationHeader = (props: GridColumnHeaderParams) => {
+function GridAggregationHeader(props: GridColumnHeaderParams) {
   const { colDef, aggregation } = props;
 
   const apiRef = useGridApiContext();
   const rootProps = useGridRootProps();
-  const headerHeight = useGridSelector(apiRef, gridDensityHeaderHeightSelector);
 
-  const ownerState = { classes: rootProps.classes, headerHeight, colDef };
+  const ownerState = { ...rootProps, classes: rootProps.classes, colDef };
   const classes = useUtilityClasses(ownerState);
 
   if (!aggregation) {
@@ -99,6 +95,6 @@ const GridAggregationHeader = (props: GridColumnHeaderParams) => {
       </GridAggregationFunctionLabel>
     </GridAggregationHeaderRoot>
   );
-};
+}
 
 export { GridAggregationHeader };

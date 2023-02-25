@@ -1,9 +1,9 @@
-import { GridClassKey } from '../baseGrid';
+import { GridClassKey } from '../minimal';
 
-export interface DataGridUltraComponentNameToClassKey {
+export interface DataGridPremiumComponentNameToClassKey {
   MuiDataGrid: GridClassKey;
 }
 
 declare module '@mui/material/styles/overrides' {
-  interface ComponentNameToClassKey extends DataGridUltraComponentNameToClassKey {}
+  interface ComponentNameToClassKey extends DataGridPremiumComponentNameToClassKey {}
 }

@@ -3,10 +3,10 @@ import {
   gridColumnLookupSelector,
   useGridApiEventHandler,
   useGridApiMethod,
-} from '../../../mediumGrid';
-import { GridStateInitializer } from '../../../mediumGrid/internals';
-import { DataGridUltraProcessedProps } from '../../../models/dataGridUltraProps';
-import { GridApiUltra } from '../../../models/gridApiUltra';
+} from '../../../medium';
+import { GridStateInitializer } from '../../../medium/internals';
+import { DataGridPremiumProcessedProps } from '../../../models/dataGridPremiumProps';
+import { GridPrivateApiPremium } from '../../../models/gridApiPremium';
 import { gridAggregationModelSelector } from './gridAggregationSelectors';
 import { GridAggregationApi } from './gridAggregationInterfaces';
 import {
@@ -17,10 +17,10 @@ import {
 import { createAggregationLookup } from './createAggregationLookup';
 
 export const aggregationStateInitializer: GridStateInitializer<
-  Pick<DataGridUltraProcessedProps, 'aggregationModel' | 'initialState'>,
-  GridApiUltra
+  Pick<DataGridPremiumProcessedProps, 'aggregationModel' | 'initialState'>,
+  GridPrivateApiPremium
 > = (state, props, apiRef) => {
-  apiRef.current.unstable_caches.aggregation = {
+  apiRef.current.caches.aggregation = {
     rulesOnLastColumnHydration: {},
     rulesOnLastRowHydration: {},
   };
@@ -34,9 +34,9 @@ export const aggregationStateInitializer: GridStateInitializer<
 };
 
 export const useGridAggregation = (
-  apiRef: React.MutableRefObject<GridApiUltra>,
+  apiRef: React.MutableRefObject<GridPrivateApiPremium>,
   props: Pick<
-    DataGridUltraProcessedProps,
+    DataGridPremiumProcessedProps,
     | 'onAggregationModelChange'
     | 'initialState'
     | 'aggregationModel'
@@ -47,7 +47,7 @@ export const useGridAggregation = (
     | 'rowGroupingColumnMode'
   >,
 ) => {
-  apiRef.current.unstable_registerControlState({
+  apiRef.current.registerControlState({
     stateId: 'aggregation',
     propModel: props.aggregationModel,
     propOnChange: props.onAggregationModelChange,
@@ -92,14 +92,14 @@ export const useGridAggregation = (
     setAggregationModel,
   };
 
-  useGridApiMethod(apiRef, aggregationApi, 'GridAggregationApi');
+  useGridApiMethod(apiRef, aggregationApi, 'public');
 
   /**
    * EVENTS
    */
   const checkAggregationRulesDiff = React.useCallback(() => {
     const { rulesOnLastRowHydration, rulesOnLastColumnHydration } =
-      apiRef.current.unstable_caches.aggregation;
+      apiRef.current.caches.aggregation;
 
     const aggregationRules = props.disableAggregation
       ? {}
@@ -111,14 +111,14 @@ export const useGridAggregation = (
 
     // Re-apply the row hydration to add / remove the aggregation footers
     if (!areAggregationRulesEqual(rulesOnLastRowHydration, aggregationRules)) {
-      apiRef.current.unstable_requestPipeProcessorsApplication('hydrateRows');
+      apiRef.current.requestPipeProcessorsApplication('hydrateRows');
       applyAggregation();
     }
 
     // Re-apply the column hydration to wrap / unwrap the aggregated columns
     if (!areAggregationRulesEqual(rulesOnLastColumnHydration, aggregationRules)) {
-      apiRef.current.unstable_caches.aggregation.rulesOnLastColumnHydration = aggregationRules;
-      apiRef.current.unstable_requestPipeProcessorsApplication('hydrateColumns');
+      apiRef.current.caches.aggregation.rulesOnLastColumnHydration = aggregationRules;
+      apiRef.current.requestPipeProcessorsApplication('hydrateColumns');
     }
   }, [apiRef, applyAggregation, props.aggregationFunctions, props.disableAggregation]);
 

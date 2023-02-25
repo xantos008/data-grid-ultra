@@ -1,6 +1,5 @@
-import * as React from 'react';
-import type { GridApiUltra } from '../models/gridApiUltra';
-import { GridInitialStateUltra, GridStateUltra } from '../models/gridStateUltra';
+import type { GridApiPremium } from '../models/gridApiPremium';
+import { GridInitialStatePremium, GridStatePremium } from '../models/gridStatePremium';
 
 export { useGridApiContext } from '../hooks/utils/useGridApiContext';
 export { useGridApiRef } from '../hooks/utils/useGridApiRef';
@@ -9,19 +8,14 @@ export { useGridRootProps } from '../hooks/utils/useGridRootProps';
 /**
  * The full grid API.
  */
-export type GridApi = GridApiUltra;
+export type GridApi = GridApiPremium;
 
 /**
- * @deprecated Use `React.MutableRefObject<GridApi>` instead
+ * The state of `DataGridPremium`.
  */
-export type GridApiRef = React.MutableRefObject<GridApiUltra>;
+export type GridState = GridStatePremium;
 
 /**
- * The state of `DataGridUltra`.
+ * The initial state of `DataGridPremium`.
  */
-export type GridState = GridStateUltra;
-
-/**
- * The initial state of `DataGridUltra`.
- */
-export type GridInitialState = GridInitialStateUltra;
+export type GridInitialState = GridInitialStatePremium;
