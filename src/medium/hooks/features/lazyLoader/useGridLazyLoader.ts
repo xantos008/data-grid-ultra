@@ -10,8 +10,8 @@ import {
   GridRowEntry,
   GridDimensions,
   GridFeatureMode,
-} from '../../../../minimal';
-import { useGridVisibleRows, getRenderableIndexes } from '../../../../minimal/internals';
+} from '@mui/x-data-grid';
+import { useGridVisibleRows, getRenderableIndexes } from '@mui/x-data-grid/internals';
 import { GridPrivateApiPro } from '../../../models/gridApiPro';
 import {
   DataGridProProcessedProps,

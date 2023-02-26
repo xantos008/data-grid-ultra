@@ -3,7 +3,7 @@ import {
   GridRowIdToModelLookup,
   GridRowsProp,
   GridValidRowModel,
-} from '../../../../minimal';
+} from '@mui/x-data-grid';
 
 export interface GridPinnedRowsProp<R extends GridValidRowModel = GridValidRowModel> {
   top?: GridRowsProp<R>;

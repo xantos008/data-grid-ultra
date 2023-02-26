@@ -8,7 +8,7 @@ import {
   getDataGridUtilityClass,
   GridRenderCellParams,
   GridGroupNode,
-} from '../../minimal';
+} from '@mui/x-data-grid';
 import { useGridRootProps } from '../hooks/utils/useGridRootProps';
 import { useGridApiContext } from '../hooks/utils/useGridApiContext';
 import { DataGridProProcessedProps } from '../models/dataGridProProps';

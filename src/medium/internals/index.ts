@@ -1,4 +1,4 @@
-export * from '../../minimal/internals';
+export * from '@mui/x-data-grid/internals';
 
 export { DataGridProVirtualScroller } from '../components/DataGridProVirtualScroller';
 export { DataGridProColumnHeaders } from '../components/DataGridProColumnHeaders';

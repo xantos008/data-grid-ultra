@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
-import { GridPipeProcessor, useGridRegisterPipeProcessor } from '../../../../minimal/internals';
+import { GridPipeProcessor, useGridRegisterPipeProcessor } from '@mui/x-data-grid/internals';
 import { DataGridProProcessedProps } from '../../../models/dataGridProProps';
 import { gridPinnedColumnsSelector } from './gridColumnPinningSelector';
 import { columnPinningStateInitializer } from './useGridColumnPinning';

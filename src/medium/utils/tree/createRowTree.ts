@@ -1,5 +1,5 @@
-import { GridRowId, GridTreeNode, GRID_ROOT_GROUP_ID } from '../../../minimal';
-import { buildRootGroup, GridRowTreeCreationValue } from '../../../minimal/internals';
+import { GridRowId, GridTreeNode, GRID_ROOT_GROUP_ID } from '@mui/x-data-grid';
+import { buildRootGroup, GridRowTreeCreationValue } from '@mui/x-data-grid/internals';
 import { RowTreeBuilderNode, GridTreePathDuplicateHandler } from './models';
 import { insertDataRowInTree } from './insertDataRowInTree';
 import { DataGridProProps } from '../../models/dataGridProProps';

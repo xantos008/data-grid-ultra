@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { unstable_composeClasses as composeClasses } from '@mui/utils';
-import { getDataGridUtilityClass, GridColDef } from '../../../../minimal';
-import { GridPipeProcessor, useGridRegisterPipeProcessor } from '../../../../minimal/internals';
+import { getDataGridUtilityClass, GridColDef } from '@mui/x-data-grid';
+import { GridPipeProcessor, useGridRegisterPipeProcessor } from '@mui/x-data-grid/internals';
 import { DataGridProProcessedProps } from '../../../models/dataGridProProps';
 import { GRID_REORDER_COL_DEF } from './gridRowReorderColDef';
 import { GridPrivateApiPro } from '../../../models/gridApiPro';

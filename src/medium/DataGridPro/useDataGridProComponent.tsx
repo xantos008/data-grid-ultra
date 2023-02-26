@@ -40,7 +40,7 @@ import {
   rowSelectionStateInitializer,
   useGridColumnGrouping,
   columnGroupsStateInitializer,
-} from '../../minimal/internals';
+} from '@mui/x-data-grid/internals';
 import { GridApiPro, GridPrivateApiPro } from '../models/gridApiPro';
 import { DataGridProProcessedProps } from '../models/dataGridProProps';
 // Pro-only features

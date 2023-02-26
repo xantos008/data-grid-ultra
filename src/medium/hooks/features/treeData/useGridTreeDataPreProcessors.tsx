@@ -7,13 +7,13 @@ import {
   GridGroupNode,
   GridRowId,
   GRID_CHECKBOX_SELECTION_FIELD,
-} from '../../../../minimal';
+} from '@mui/x-data-grid';
 import {
   GridPipeProcessor,
   GridStrategyProcessor,
   useGridRegisterPipeProcessor,
   useGridRegisterStrategyProcessor,
-} from '../../../../minimal/internals';
+} from '@mui/x-data-grid/internals';
 import {
   GRID_TREE_DATA_GROUPING_COL_DEF,
   GRID_TREE_DATA_GROUPING_COL_DEF_FORCED_PROPERTIES,

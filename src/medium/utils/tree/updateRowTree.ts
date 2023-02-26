@@ -1,10 +1,10 @@
-import { GRID_ROOT_GROUP_ID, GridGroupNode, GridRowId, GridRowTreeConfig } from '../../../minimal';
+import { GRID_ROOT_GROUP_ID, GridGroupNode, GridRowId, GridRowTreeConfig } from '@mui/x-data-grid';
 import {
   GridRowTreeCreationValue,
   GridTreeDepths,
   isDeepEqual,
   getTreeNodeDescendants,
-} from '../../../minimal/internals';
+} from '@mui/x-data-grid/internals';
 import { GridTreePathDuplicateHandler, RowTreeBuilderNode } from './models';
 import { insertDataRowInTree } from './insertDataRowInTree';
 import { removeDataRowFromTree } from './removeDataRowFromTree';

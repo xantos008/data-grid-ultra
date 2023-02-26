@@ -1,4 +1,4 @@
-import { GridColDef } from '../../minimal';
+import { GridColDef } from '@mui/x-data-grid';
 
 /**
  * Object passed as parameter in the onRowsScrollEnd callback.

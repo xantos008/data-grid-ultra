@@ -3,8 +3,8 @@ import {
   GridColumnReorderApi,
   GridRowMultiSelectionApi,
   GridRowProApi,
-} from '../../minimal';
-import { GridPrivateOnlyApiCommon } from '../../minimal/internals';
+} from '@mui/x-data-grid';
+import { GridPrivateOnlyApiCommon } from '@mui/x-data-grid/internals';
 import { GridInitialStatePro, GridStatePro } from './gridStatePro';
 import type {
   GridColumnPinningApi,

@@ -4,14 +4,14 @@ import {
   useGridLogger,
   GridExportDisplayOptions,
   useGridApiOptionHandler,
-} from '../../../minimal';
+} from '@mui/x-data-grid';
 import {
   useGridRegisterPipeProcessor,
   exportAs,
   getColumnsToExport,
   defaultGetRowsToExport,
   GridPipeProcessor,
-} from '../../../minimal/internals';
+} from '@mui/x-data-grid/internals';
 import { GridPrivateApiPremium } from '../../../models/gridApiPremium';
 import { DataGridPremiumProps } from '../../../models/dataGridPremiumProps';
 import {

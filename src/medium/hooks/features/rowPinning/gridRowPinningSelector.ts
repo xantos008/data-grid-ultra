@@ -1,4 +1,4 @@
 export {
   gridAdditionalRowGroupsSelector,
   gridPinnedRowsSelector,
-} from '../../../../minimal/internals';
+} from '@mui/x-data-grid/internals';

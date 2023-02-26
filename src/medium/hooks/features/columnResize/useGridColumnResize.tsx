@@ -13,13 +13,13 @@ import {
   useGridApiOptionHandler,
   useGridNativeEventListener,
   useGridLogger,
-} from '../../../../minimal';
+} from '@mui/x-data-grid';
 import {
   clamp,
   findParentElementFromClassName,
   GridStateInitializer,
   GridStateColDef,
-} from '../../../../minimal/internals';
+} from '@mui/x-data-grid/internals';
 import { useTheme, Direction } from '@mui/material/styles';
 import {
   findGridCellElementsFromCol,

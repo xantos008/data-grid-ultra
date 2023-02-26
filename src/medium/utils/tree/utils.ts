@@ -6,12 +6,12 @@ import {
   GridRowId,
   GridRowTreeConfig,
   GridTreeNode,
-} from '../../../minimal';
+} from '@mui/x-data-grid';
 import {
   GridTreeDepths,
   GridRowTreeUpdateGroupAction,
   GridRowTreeUpdatedGroupsManager,
-} from '../../../minimal/internals';
+} from '@mui/x-data-grid/internals';
 import { RowTreeBuilderGroupingCriterion } from './models';
 import { DataGridProProps } from '../../models/dataGridProProps';
 

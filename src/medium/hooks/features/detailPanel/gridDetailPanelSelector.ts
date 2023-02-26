@@ -1,5 +1,5 @@
-import { GridRowId } from '../../../../minimal';
-import { createSelector } from '../../../../minimal/internals';
+import { GridRowId } from '@mui/x-data-grid';
+import { createSelector } from '@mui/x-data-grid/internals';
 import { GridStatePro } from '../../../models/gridStatePro';
 
 export const gridDetailPanelExpandedRowIdsSelector = (state: GridStatePro) =>

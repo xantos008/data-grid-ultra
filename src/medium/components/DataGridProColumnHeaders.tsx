@@ -11,12 +11,12 @@ import {
   useGridApiEventHandler,
   gridVisibleColumnFieldsSelector,
   GridColumnHeaderSeparatorSides,
-} from '../../minimal';
+} from '@mui/x-data-grid';
 import {
   GridColumnHeaders,
   GridColumnHeadersInner,
   useGridColumnHeaders,
-} from '../../minimal/internals';
+} from '@mui/x-data-grid/internals';
 import { useGridRootProps } from '../hooks/utils/useGridRootProps';
 import { useGridApiContext } from '../hooks/utils/useGridApiContext';
 import { DataGridProProcessedProps } from '../models/dataGridProProps';

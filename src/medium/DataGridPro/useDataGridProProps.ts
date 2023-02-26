@@ -4,8 +4,8 @@ import {
   GRID_DEFAULT_LOCALE_TEXT,
   DATA_GRID_PROPS_DEFAULT_VALUES,
   GridValidRowModel,
-} from '../../minimal';
-import { computeSlots, uncapitalizeObjectKeys } from '../../minimal/internals';
+} from '@mui/x-data-grid';
+import { computeSlots, uncapitalizeObjectKeys } from '@mui/x-data-grid/internals';
 import {
   DataGridProProps,
   DataGridProProcessedProps,

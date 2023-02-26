@@ -7,14 +7,14 @@ import {
   GridValidRowModel,
   GridGroupNode,
   GridFeatureMode,
-} from '../../minimal';
+} from '@mui/x-data-grid';
 import {
   GridExperimentalFeatures,
   DataGridPropsWithoutDefaultValue,
   DataGridPropsWithDefaultValues,
   DataGridPropsWithComplexDefaultValueAfterProcessing,
   DataGridPropsWithComplexDefaultValueBeforeProcessing,
-} from '../../minimal/internals';
+} from '@mui/x-data-grid/internals';
 import type { GridPinnedColumns } from '../hooks/features/columnPinning';
 import type { GridPinnedRowsProp } from '../hooks/features/rowPinning';
 import { GridApiPro } from './gridApiPro';

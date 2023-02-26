@@ -1,16 +1,16 @@
 import './typeOverloads';
 
-export * from './minimal/components';
+export * from '@mui/x-data-grid/components';
 export * from './medium/components';
-export * from './minimal/constants';
-export * from './minimal/hooks';
+export * from '@mui/x-data-grid/constants';
+export * from '@mui/x-data-grid/hooks';
 export * from './medium/hooks';
-export * from './minimal/locales';
-export * from './minimal/models';
+export * from '@mui/x-data-grid/locales';
+export * from '@mui/x-data-grid/models';
 export * from './medium/models';
-export * from './minimal/context';
-export * from './minimal/colDef';
-export * from './minimal/utils';
+export * from '@mui/x-data-grid/context';
+export * from '@mui/x-data-grid/colDef';
+export * from '@mui/x-data-grid/utils';
 export * from './medium/utils';
 
 export * from './DataGridPremium';

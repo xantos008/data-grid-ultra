@@ -1,4 +1,4 @@
-import { GridColDef, GridValidRowModel } from '../../minimal';
+import { GridColDef, GridValidRowModel } from '@mui/x-data-grid';
 
 export interface GridGroupingColDefOverride<R extends GridValidRowModel = any>
   extends Omit<

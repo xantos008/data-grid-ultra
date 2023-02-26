@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useGridApiMethod } from '../../../../minimal';
-import { getRowIdFromRowModel, GridStateInitializer } from '../../../../minimal/internals';
+import { useGridApiMethod } from '@mui/x-data-grid';
+import { getRowIdFromRowModel, GridStateInitializer } from '@mui/x-data-grid/internals';
 
 import { GridPrivateApiPro } from '../../../models/gridApiPro';
 import { DataGridProProcessedProps, DataGridProProps } from '../../../models/dataGridProProps';

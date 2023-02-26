@@ -1,5 +1,5 @@
-import { GRID_ROOT_GROUP_ID, GridGroupNode, GridRowId, GridRowTreeConfig } from '../../../minimal';
-import { GridSortingModelApplier } from '../../../minimal/internals';
+import { GRID_ROOT_GROUP_ID, GridGroupNode, GridRowId, GridRowTreeConfig } from '@mui/x-data-grid';
+import { GridSortingModelApplier } from '@mui/x-data-grid/internals';
 
 interface SortRowTreeParams {
   rowTree: GridRowTreeConfig;

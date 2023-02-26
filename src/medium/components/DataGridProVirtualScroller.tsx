@@ -10,14 +10,14 @@ import {
   useGridApiEventHandler,
   GridRowId,
   GridOverlays,
-} from '../../minimal';
+} from '@mui/x-data-grid';
 import {
   GridVirtualScroller,
   GridVirtualScrollerContent,
   GridVirtualScrollerRenderZone,
   useGridVirtualScroller,
   calculatePinnedRowsHeight,
-} from '../../minimal/internals';
+} from '@mui/x-data-grid/internals';
 import { useGridPrivateApiContext } from '../hooks/utils/useGridPrivateApiContext';
 import { useGridRootProps } from '../hooks/utils/useGridRootProps';
 import { DataGridProProcessedProps } from '../models/dataGridProProps';

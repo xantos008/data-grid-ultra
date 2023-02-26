@@ -7,12 +7,12 @@ import {
   useGridApiMethod,
   GridCellParams,
   gridDataRowIdsSelector,
-} from '../../../../minimal';
+} from '@mui/x-data-grid';
 import {
   useGridRegisterPipeProcessor,
   GridPipeProcessor,
   GridStateInitializer,
-} from '../../../../minimal/internals';
+} from '@mui/x-data-grid/internals';
 import { GridApiPro, GridPrivateApiPro } from '../../../models/gridApiPro';
 import { GRID_DETAIL_PANEL_TOGGLE_FIELD } from './gridDetailPanelToggleColDef';
 import {

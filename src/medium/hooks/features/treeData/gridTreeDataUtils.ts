@@ -4,12 +4,12 @@ import {
   GridTreeNode,
   GridFilterState,
   GridFilterModel,
-} from '../../../../minimal';
+} from '@mui/x-data-grid';
 import {
   GridAggregatedFilterItemApplier,
   GridApiCommunity,
   passFilterLogic,
-} from '../../../../minimal/internals';
+} from '@mui/x-data-grid/internals';
 
 interface FilterRowTreeFromTreeDataParams {
   rowTree: GridRowTreeConfig;

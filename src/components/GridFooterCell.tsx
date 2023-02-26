@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getDataGridUtilityClass, GridRenderCellParams } from '../minimal';
+import { getDataGridUtilityClass, GridRenderCellParams } from '@mui/x-data-grid';
 import { styled, Theme } from '@mui/material/styles';
 import { SxProps } from '@mui/system';
 import Box from '@mui/material/Box';

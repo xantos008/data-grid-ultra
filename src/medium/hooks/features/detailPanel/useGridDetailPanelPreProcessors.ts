@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useGridRegisterPipeProcessor, GridPipeProcessor } from '../../../../minimal/internals';
+import { useGridRegisterPipeProcessor, GridPipeProcessor } from '@mui/x-data-grid/internals';
 import { DataGridProProcessedProps } from '../../../models/dataGridProProps';
 import {
   GRID_DETAIL_PANEL_TOGGLE_FIELD,

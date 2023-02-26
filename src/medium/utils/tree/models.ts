@@ -1,4 +1,4 @@
-import { GridKeyValue, GridRowId } from '../../../minimal';
+import { GridKeyValue, GridRowId } from '@mui/x-data-grid';
 
 export interface RowTreeBuilderGroupingCriterion {
   field: string | null;

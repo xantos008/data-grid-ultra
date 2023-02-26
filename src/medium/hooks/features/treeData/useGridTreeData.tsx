@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useGridApiEventHandler, GridEventListener } from '../../../../minimal';
+import { useGridApiEventHandler, GridEventListener } from '@mui/x-data-grid';
 import { GridApiPro } from '../../../models/gridApiPro';
 
 export const useGridTreeData = (apiRef: React.MutableRefObject<GridApiPro>) => {

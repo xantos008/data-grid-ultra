@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { GridRowId } from '../../../../minimal';
+import { GridRowId } from '@mui/x-data-grid';
 
 type DetailPanelHeightCache = Record<GridRowId, { autoHeight: boolean; height: number }>;
 

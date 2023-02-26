@@ -8,7 +8,7 @@ import {
   GridColDef,
   GridColumnHeaderParams,
   GridColumnHeaderTitle,
-} from '../minimal';
+} from '@mui/x-data-grid';
 import { getAggregationFunctionLabel } from '../hooks/features/aggregation/gridAggregationUtils';
 import { useGridApiContext } from '../hooks/utils/useGridApiContext';
 import { useGridRootProps } from '../hooks/utils/useGridRootProps';

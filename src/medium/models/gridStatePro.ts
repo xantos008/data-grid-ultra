@@ -1,7 +1,7 @@
 import {
   GridInitialState as GridInitialStateCommunity,
   GridState as GridStateCommunity,
-} from '../../minimal';
+} from '@mui/x-data-grid';
 import type {
   GridDetailPanelState,
   GridDetailPanelInitialState,

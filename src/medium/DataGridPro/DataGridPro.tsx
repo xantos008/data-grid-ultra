@@ -8,7 +8,7 @@ import {
   GridRoot,
   GridContextProvider,
   GridValidRowModel,
-} from '../../minimal';
+} from '@mui/x-data-grid';
 import { useDataGridProComponent } from './useDataGridProComponent';
 import { DataGridProProps } from '../models/dataGridProProps';
 import { useDataGridProProps } from './useDataGridProProps';

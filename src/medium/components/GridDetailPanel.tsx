@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { styled, SxProps, Theme } from '@mui/material/styles';
-import { GridRowId, useGridRootProps } from '../../minimal';
+import { GridRowId, useGridRootProps } from '@mui/x-data-grid';
 import { useGridPrivateApiContext } from '../hooks/utils/useGridPrivateApiContext';
 import { DataGridProProcessedProps } from '../models/dataGridProProps';
 

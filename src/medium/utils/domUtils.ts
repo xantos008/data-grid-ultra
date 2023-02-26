@@ -1,5 +1,5 @@
-import { gridClasses } from '../../minimal';
-import { findParentElementFromClassName } from '../../minimal/internals';
+import { gridClasses } from '@mui/x-data-grid';
+import { findParentElementFromClassName } from '@mui/x-data-grid/internals';
 import { GridApiPro } from '../models/gridApiPro';
 
 export function getFieldFromHeaderElem(colCellEl: Element): string {

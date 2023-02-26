@@ -9,8 +9,8 @@ import {
   useGridLogger,
   useGridApiOptionHandler,
   GridColumnOrderChangeParams,
-} from '../../../../minimal';
-import { GridStateInitializer } from '../../../../minimal/internals';
+} from '@mui/x-data-grid';
+import { GridStateInitializer } from '@mui/x-data-grid/internals';
 import { GridPrivateApiPro } from '../../../models/gridApiPro';
 import { gridColumnReorderDragColSelector } from './columnReorderSelector';
 import { DataGridProProcessedProps } from '../../../models/dataGridProProps';

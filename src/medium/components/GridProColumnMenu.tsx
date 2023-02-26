@@ -5,7 +5,7 @@ import {
   GridColumnMenuProps,
   GRID_COLUMN_MENU_COMPONENTS,
   GRID_COLUMN_MENU_COMPONENTS_PROPS,
-} from '../../minimal';
+} from '@mui/x-data-grid';
 import { GridColumnMenuPinningItem } from './GridColumnMenuPinningItem';
 
 export const GRID_COLUMN_MENU_COMPONENTS_PRO = {

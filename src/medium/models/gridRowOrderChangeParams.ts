@@ -1,4 +1,4 @@
-import { GridRowModel } from '../../minimal';
+import { GridRowModel } from '@mui/x-data-grid';
 
 /**
  * Object passed as parameter of the row order change event.

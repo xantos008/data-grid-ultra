@@ -11,13 +11,13 @@ import {
   useGridApiEventHandler,
   GridEventListener,
   gridColumnFieldsSelector,
-} from '../../../../minimal';
+} from '@mui/x-data-grid';
 import {
   useGridRegisterPipeProcessor,
   GridPipeProcessor,
   GridRestoreStatePreProcessingContext,
   GridStateInitializer,
-} from '../../../../minimal/internals';
+} from '@mui/x-data-grid/internals';
 import { GridPrivateApiPro } from '../../../models/gridApiPro';
 import { GridInitialStatePro, GridStatePro } from '../../../models/gridStatePro';
 import { DataGridProProcessedProps } from '../../../models/dataGridProProps';

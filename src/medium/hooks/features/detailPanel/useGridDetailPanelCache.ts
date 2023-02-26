@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useGridApiEventHandler, gridDataRowIdsSelector, GridRowId } from '../../../../minimal';
+import { useGridApiEventHandler, gridDataRowIdsSelector, GridRowId } from '@mui/x-data-grid';
 import { GridApiPro } from '../../../models/gridApiPro';
 import { DataGridProProcessedProps } from '../../../models/dataGridProProps';
 import { GridDetailPanelState } from './gridDetailPanelInterface';

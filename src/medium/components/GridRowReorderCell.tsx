@@ -8,8 +8,8 @@ import {
   useGridApiContext,
   useGridSelector,
   getDataGridUtilityClass,
-} from '../../minimal';
-import { gridEditRowsStateSelector } from '../../minimal/internals';
+} from '@mui/x-data-grid';
+import { gridEditRowsStateSelector } from '@mui/x-data-grid/internals';
 import { DataGridProProcessedProps } from '../models/dataGridProProps';
 import { useGridRootProps } from '../hooks/utils/useGridRootProps';
 

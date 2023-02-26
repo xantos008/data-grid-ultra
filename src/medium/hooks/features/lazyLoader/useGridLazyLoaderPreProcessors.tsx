@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { GridPipeProcessor, useGridRegisterPipeProcessor } from '../../../../minimal/internals';
-import { GRID_ROOT_GROUP_ID, GridGroupNode, GridSkeletonRowNode } from '../../../../minimal';
+import { GridPipeProcessor, useGridRegisterPipeProcessor } from '@mui/x-data-grid/internals';
+import { GRID_ROOT_GROUP_ID, GridGroupNode, GridSkeletonRowNode } from '@mui/x-data-grid';
 import { GridPrivateApiPro } from '../../../models/gridApiPro';
 import {
   DataGridProProcessedProps,

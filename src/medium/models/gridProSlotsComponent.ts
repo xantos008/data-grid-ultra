@@ -1,5 +1,5 @@
-import { GridSlotsComponent, UncapitalizedGridSlotsComponent } from '../../minimal';
-import { UncapitalizeObjectKeys } from '../../minimal/internals';
+import { GridSlotsComponent, UncapitalizedGridSlotsComponent } from '@mui/x-data-grid';
+import { UncapitalizeObjectKeys } from '@mui/x-data-grid/internals';
 import { GridProIconSlotsComponent } from './gridProIconSlotsComponent';
 
 /**

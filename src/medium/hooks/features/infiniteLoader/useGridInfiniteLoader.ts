@@ -7,8 +7,8 @@ import {
   useGridApiOptionHandler,
   gridVisibleColumnDefinitionsSelector,
   gridRowsMetaSelector,
-} from '../../../../minimal';
-import { useGridVisibleRows } from '../../../../minimal/internals';
+} from '@mui/x-data-grid';
+import { useGridVisibleRows } from '@mui/x-data-grid/internals';
 import { GridRowScrollEndParams } from '../../../models';
 import { GridPrivateApiPro } from '../../../models/gridApiPro';
 import { DataGridProProcessedProps } from '../../../models/dataGridProProps';

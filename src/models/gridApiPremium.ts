@@ -1,4 +1,4 @@
-import { GridPrivateOnlyApiCommon } from '../minimal/internals';
+import { GridPrivateOnlyApiCommon } from '@mui/x-data-grid/internals';
 import {
   GridApiCommon,
   GridColumnPinningApi,

@@ -4,8 +4,8 @@ import {
   GridRowId,
   GridRowTreeConfig,
   GridTreeNode,
-} from '../../../minimal';
-import { GridTreeDepths, GridRowTreeUpdatedGroupsManager } from '../../../minimal/internals';
+} from '@mui/x-data-grid';
+import { GridTreeDepths, GridRowTreeUpdatedGroupsManager } from '@mui/x-data-grid/internals';
 import {
   getNodePathInTree,
   getGroupRowIdFromPath,

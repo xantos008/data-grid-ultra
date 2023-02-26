@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { GRID_STRING_COL_DEF, GridColDef } from '../../../../minimal';
+import { GRID_STRING_COL_DEF, GridColDef } from '@mui/x-data-grid';
 import { GridApiPro } from '../../../models/gridApiPro';
 import { GridDetailPanelToggleCell } from '../../../components/GridDetailPanelToggleCell';
 import { gridDetailPanelExpandedRowIdsSelector } from './gridDetailPanelSelector';

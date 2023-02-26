@@ -3,7 +3,7 @@ import {
   GridHydrateRowsValue,
   GridPipeProcessor,
   useGridRegisterPipeProcessor,
-} from '../../../../minimal/internals';
+} from '@mui/x-data-grid/internals';
 import {
   GRID_ROOT_GROUP_ID,
   GridGroupNode,
@@ -11,7 +11,7 @@ import {
   GridRowEntry,
   GridRowId,
   GridRowModel,
-} from '../../../../minimal';
+} from '@mui/x-data-grid';
 import { GridPrivateApiPro } from '../../../models/gridApiPro';
 import { GridPinnedRowsProp } from './gridRowPinningInterface';
 import { insertNodeInTree } from '../../../utils/tree/utils';

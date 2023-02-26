@@ -1,4 +1,4 @@
-import { GridRowId } from '../../minimal';
+import { GridRowId } from '@mui/x-data-grid';
 import type {
   GridRowScrollEndParams,
   GridRowOrderChangeParams,
@@ -51,7 +51,7 @@ export interface GridApiCachesPro {
   pinnedRows: GridRowPinningInternalCache;
 }
 
-declare module '../../minimal' {
+declare module '@mui/x-data-grid' {
   interface GridEventLookup extends GridEventLookupPro {}
 
   interface GridControlledStateEventLookup extends GridControlledStateEventLookupPro {}
@@ -59,6 +59,6 @@ declare module '../../minimal' {
   interface GridPipeProcessingLookup extends GridPipeProcessingLookupPro {}
 }
 
-declare module '../../minimal/internals' {
+declare module '@mui/x-data-grid/internals' {
   interface GridApiCaches extends GridApiCachesPro {}
 }
