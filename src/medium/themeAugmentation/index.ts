@@ -1,4 +1,4 @@
 export * from './overrides';
-export * from './props';
+// export * from './props';
 // TODO v5
 // export * from './components';
