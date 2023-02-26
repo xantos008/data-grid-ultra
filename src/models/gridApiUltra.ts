@@ -27,7 +27,7 @@ export interface GridApiUltra
     GridAggregationApi,
     GridRowPinningApi,
     GridCellSelectionApi,
-    // APIs that are private in Community plan, but public in Pro and Premium plans
+    // APIs that are private in Community plan, but public in Extra and Ultra packages
     GridRowMultiSelectionApi,
     GridColumnReorderApi,
     GridRowProApi {}

@@ -23,13 +23,13 @@ export function GridColumnMenuGroupingItem(props: GridColumnMenuItemProps) {
   return null;
 }
 
-export const GRID_COLUMN_MENU_COMPONENTS_PREMIUM = {
+export const GRID_COLUMN_MENU_COMPONENTS_ULTRA = {
   ...GRID_COLUMN_MENU_COMPONENTS,
   ColumnMenuAggregationItem: GridColumnMenuAggregationItem,
   ColumnMenuGroupingItem: GridColumnMenuGroupingItem,
 };
 
-export const GRID_COLUMN_MENU_COMPONENTS_PROPS_PREMIUM = {
+export const GRID_COLUMN_MENU_COMPONENTS_PROPS_ULTRA = {
   ...GRID_COLUMN_MENU_COMPONENTS_PROPS,
   columnMenuAggregationItem: { displayOrder: 23 },
   columnMenuGroupingItem: { displayOrder: 27 },
@@ -41,8 +41,8 @@ const GridUltraColumnMenu = React.forwardRef<HTMLUListElement, GridColumnMenuPro
       <GridGenericColumnMenu
         ref={ref}
         {...props}
-        defaultComponents={GRID_COLUMN_MENU_COMPONENTS_PREMIUM}
-        defaultComponentsProps={GRID_COLUMN_MENU_COMPONENTS_PROPS_PREMIUM}
+        defaultComponents={GRID_COLUMN_MENU_COMPONENTS_ULTRA}
+        defaultComponentsProps={GRID_COLUMN_MENU_COMPONENTS_PROPS_ULTRA}
       />
     );
   },

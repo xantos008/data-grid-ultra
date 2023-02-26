@@ -20,7 +20,7 @@ export * from './components';
 
 export type {
   DataGridUltraProps,
-  GridExperimentalPremiumFeatures,
+  GridExperimentalUltraFeatures,
 } from './models/dataGridUltraProps';
 
 export { useGridApiContext, useGridApiRef, useGridRootProps } from './typeOverloads/reexports';

@@ -63,7 +63,7 @@ import {
 } from 'data-grid-extra/internals';
 import { GridApiUltra, GridPrivateApiUltra } from '../models/gridApiUltra';
 import { DataGridUltraProcessedProps } from '../models/dataGridUltraProps';
-// Premium-only features
+// Ultra-only features
 import {
   useGridAggregation,
   aggregationStateInitializer,

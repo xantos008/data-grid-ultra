@@ -9,12 +9,12 @@ import {
 } from '../models/dataGridUltraProps';
 import { GridUltraSlotsComponent, UncapitalizedGridUltraSlotsComponent } from '../models';
 import { GRID_AGGREGATION_FUNCTIONS } from '../hooks/features/aggregation';
-import { DATA_GRID_PREMIUM_DEFAULT_SLOTS_COMPONENTS } from '../constants/dataGridUltraDefaultSlotsComponents';
+import { DATA_GRID_ULTRA_DEFAULT_SLOTS_COMPONENTS } from '../constants/dataGridUltraDefaultSlotsComponents';
 
 /**
  * The default values of `DataGridUltraPropsWithDefaultValue` to inject in the props of DataGridUltra.
  */
-export const DATA_GRID_PREMIUM_PROPS_DEFAULT_VALUES: DataGridUltraPropsWithDefaultValue = {
+export const DATA_GRID_ULTRA_PROPS_DEFAULT_VALUES: DataGridUltraPropsWithDefaultValue = {
   ...DATA_GRID_EXTRA_PROPS_DEFAULT_VALUES,
   unstable_cellSelection: false,
   disableAggregation: false,
@@ -25,7 +25,7 @@ export const DATA_GRID_PREMIUM_PROPS_DEFAULT_VALUES: DataGridUltraPropsWithDefau
   getAggregationPosition: (groupNode) => (groupNode.depth === -1 ? 'footer' : 'inline'),
 };
 
-const defaultSlots = uncapitalizeObjectKeys(DATA_GRID_PREMIUM_DEFAULT_SLOTS_COMPONENTS)!;
+const defaultSlots = uncapitalizeObjectKeys(DATA_GRID_ULTRA_DEFAULT_SLOTS_COMPONENTS)!;
 
 export const useDataGridUltraProps = (inProps: DataGridUltraProps) => {
   const { components, componentsProps, ...themedProps } = useThemeProps({
@@ -50,7 +50,7 @@ export const useDataGridUltraProps = (inProps: DataGridUltraProps) => {
 
   return React.useMemo<DataGridUltraProcessedProps>(
     () => ({
-      ...DATA_GRID_PREMIUM_PROPS_DEFAULT_VALUES,
+      ...DATA_GRID_ULTRA_PROPS_DEFAULT_VALUES,
       ...themedProps,
       slotProps: themedProps.slotProps ?? componentsProps,
       localeText,

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { GridCallbackDetails, GridValidRowModel, GridGroupNode } from 'data-grid-extra';
 import {
-  GridExperimentalProFeatures,
+  GridExperimentalExtraFeatures,
   DataGridExtraPropsWithDefaultValue,
   DataGridExtraPropsWithoutDefaultValue,
   DataGridPropsWithComplexDefaultValueAfterProcessing,
@@ -21,7 +21,7 @@ import { GridInitialStateUltra } from './gridStateUltra';
 import { GridApiUltra } from './gridApiUltra';
 import { GridCellSelectionModel } from '../hooks/features/cellSelection';
 
-export interface GridExperimentalPremiumFeatures extends GridExperimentalProFeatures {}
+export interface GridExperimentalUltraFeatures extends GridExperimentalExtraFeatures {}
 
 export interface DataGridUltraPropsWithComplexDefaultValueBeforeProcessing
   extends Pick<DataGridPropsWithComplexDefaultValueBeforeProcessing, 'localeText'> {
@@ -50,7 +50,7 @@ export interface DataGridUltraProps<R extends GridValidRowModel = any>
    * Unstable features, breaking changes might be introduced.
    * For each feature, if the flag is not explicitly set to `true`, then the feature is fully disabled, and neither property nor method calls will have any effect.
    */
-  experimentalFeatures?: Partial<GridExperimentalPremiumFeatures>;
+  experimentalFeatures?: Partial<GridExperimentalUltraFeatures>;
 }
 
 export interface DataGridUltraPropsWithComplexDefaultValueAfterProcessing

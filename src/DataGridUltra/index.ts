@@ -1,3 +1,3 @@
 export * from './DataGrid';
 export * from './DataGridUltra';
-export { DATA_GRID_PREMIUM_PROPS_DEFAULT_VALUES } from './useDataGridUltraProps';
+export { DATA_GRID_ULTRA_PROPS_DEFAULT_VALUES } from './useDataGridUltraProps';

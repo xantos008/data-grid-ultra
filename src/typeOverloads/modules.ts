@@ -14,7 +14,7 @@ import type {
 import { GridRowGroupingInternalCache } from '../hooks/features/rowGrouping/gridRowGroupingInterfaces';
 import { GridAggregationInternalCache } from '../hooks/features/aggregation/gridAggregationInterfaces';
 
-export interface GridControlledStateEventLookupPremium {
+export interface GridControlledStateEventLookupUltra {
   /**
    * Fired when the aggregation model changes.
    */
@@ -34,7 +34,7 @@ export interface GridControlledStateEventLookupPremium {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export interface GridColDefPremium<R extends GridValidRowModel = any, V = any, F = V> {
+export interface GridColDefUltra<R extends GridValidRowModel = any, V = any, F = V> {
   /**
    * If `true`, the cells of the column can be aggregated based.
    * @default true
@@ -56,16 +56,16 @@ export interface GridColDefPremium<R extends GridValidRowModel = any, V = any, F
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export interface GridRenderCellParamsPremium<R extends GridValidRowModel = any, V = any, F = V> {
+export interface GridRenderCellParamsUltra<R extends GridValidRowModel = any, V = any, F = V> {
   aggregation?: GridAggregationCellMeta;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export interface GridColumnHeaderParamsPremium<R extends GridValidRowModel = any, V = any, F = V> {
+export interface GridColumnHeaderParamsUltra<R extends GridValidRowModel = any, V = any, F = V> {
   aggregation?: GridAggregationHeaderMeta;
 }
 
-export interface GridApiCachesPremium extends GridApiCachesPro {
+export interface GridApiCachesUltra extends GridApiCachesPro {
   rowGrouping: GridRowGroupingInternalCache;
   aggregation: GridAggregationInternalCache;
 }
@@ -73,17 +73,17 @@ export interface GridApiCachesPremium extends GridApiCachesPro {
 declare module 'data-grid-extra' {
   interface GridControlledStateEventLookup
     extends GridControlledStateEventLookupPro,
-      GridControlledStateEventLookupPremium {}
+      GridControlledStateEventLookupUltra {}
 
-  interface GridRenderCellParams<R, V, F> extends GridRenderCellParamsPremium<R, V, F> {}
+  interface GridRenderCellParams<R, V, F> extends GridRenderCellParamsUltra<R, V, F> {}
 
-  interface GridColumnHeaderParams<R, V, F> extends GridColumnHeaderParamsPremium<R, V, F> {}
+  interface GridColumnHeaderParams<R, V, F> extends GridColumnHeaderParamsUltra<R, V, F> {}
 
-  interface GridApiCaches extends GridApiCachesPremium {}
+  interface GridApiCaches extends GridApiCachesUltra {}
 }
 
 declare module 'data-grid-extra/internals' {
-  interface GridApiCaches extends GridApiCachesPremium {}
+  interface GridApiCaches extends GridApiCachesUltra {}
 
-  interface GridBaseColDef<R, V, F> extends GridColDefPremium<R, V, F> {}
+  interface GridBaseColDef<R, V, F> extends GridColDefUltra<R, V, F> {}
 }
