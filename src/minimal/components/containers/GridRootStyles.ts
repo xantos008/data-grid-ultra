@@ -6,8 +6,8 @@ import { DataGridProcessedProps } from '../../models/props/DataGridProps';
 export type OwnerState = DataGridProcessedProps;
 
 function getBorderColor(theme: Theme) {
-  if (theme.vars) {
-    return theme.vars.palette.TableCell.border;
+  if ((theme as any).vars) {
+    return (theme as any).vars.palette.TableCell.border;
   }
   if (theme.palette.mode === 'light') {
     return lighten(alpha(theme.palette.divider, 1), 0.88);
@@ -104,7 +104,7 @@ export const GridRootStyles = styled('div', {
     borderStyle: 'solid',
     borderColor,
     borderRadius: theme.shape.borderRadius,
-    color: (theme.vars || theme).palette.text.primary,
+    color: ((theme as any).vars || theme).palette.text.primary,
     ...theme.typography.body2,
     outline: 'none',
     height: '100%',
@@ -129,8 +129,8 @@ export const GridRootStyles = styled('div', {
     },
     [`& .${gridClasses.columnHeader}:focus-within, & .${gridClasses.cell}:focus-within`]: {
       outline: `solid ${
-        theme.vars
-          ? `rgba(${theme.vars.palette.primary.mainChannel} / 0.5)`
+        (theme as any).vars
+          ? `rgba(${(theme as any).vars.palette.primary.mainChannel} / 0.5)`
           : alpha(theme.palette.primary.main, 0.5)
       } 1px`,
       outlineWidth: 1,
@@ -217,7 +217,7 @@ export const GridRootStyles = styled('div', {
         marginLeft: -10,
       },
     [`& .${gridClasses['columnHeader--moving']}`]: {
-      backgroundColor: (theme.vars || theme).palette.action.hover,
+      backgroundColor: ((theme as any).vars || theme).palette.action.hover,
     },
     [`& .${gridClasses.columnSeparator}`]: {
       visibility: 'hidden',
@@ -243,14 +243,14 @@ export const GridRootStyles = styled('div', {
       cursor: 'col-resize',
       touchAction: 'none',
       '&:hover': {
-        color: (theme.vars || theme).palette.text.primary,
+        color: ((theme as any).vars || theme).palette.text.primary,
         // Reset on touch devices, it doesn't add specificity
         '@media (hover: none)': {
           color: borderColor,
         },
       },
       [`&.${gridClasses['columnSeparator--resizing']}`]: {
-        color: (theme.vars || theme).palette.text.primary,
+        color: ((theme as any).vars || theme).palette.text.primary,
       },
       '& svg': {
         pointerEvents: 'none',
@@ -286,20 +286,20 @@ export const GridRootStyles = styled('div', {
       width: 'fit-content',
       breakInside: 'avoid', // Avoid the row to be broken in two different print pages.
       '&:hover, &.Mui-hovered': {
-        backgroundColor: (theme.vars || theme).palette.action.hover,
+        backgroundColor: ((theme as any).vars || theme).palette.action.hover,
         // Reset on touch devices, it doesn't add specificity
         '@media (hover: none)': {
           backgroundColor: 'transparent',
         },
       },
       '&.Mui-selected': {
-        backgroundColor: theme.vars
-          ? `rgba(${theme.vars.palette.primary.mainChannel} / ${theme.vars.palette.action.selectedOpacity})`
+        backgroundColor: (theme as any).vars
+          ? `rgba(${(theme as any).vars.palette.primary.mainChannel} / ${(theme as any).vars.palette.action.selectedOpacity})`
           : alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
         '&:hover, &.Mui-hovered': {
-          backgroundColor: theme.vars
-            ? `rgba(${theme.vars.palette.primary.mainChannel} / ${
-                theme.vars.palette.action.selectedOpacity + theme.palette.action.hoverOpacity
+          backgroundColor: (theme as any).vars
+            ? `rgba(${(theme as any).vars.palette.primary.mainChannel} / ${
+                (theme as any).vars.palette.action.selectedOpacity + theme.palette.action.hoverOpacity
               })`
             : alpha(
                 theme.palette.primary.main,
@@ -307,8 +307,8 @@ export const GridRootStyles = styled('div', {
               ),
           // Reset on touch devices, it doesn't add specificity
           '@media (hover: none)': {
-            backgroundColor: theme.vars
-              ? `rgba(${theme.vars.palette.primary.mainChannel} / ${theme.vars.palette.action.selectedOpacity})`
+            backgroundColor: (theme as any).vars
+              ? `rgba(${(theme as any).vars.palette.primary.mainChannel} / ${(theme as any).vars.palette.action.selectedOpacity})`
               : alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
           },
         },
@@ -319,13 +319,13 @@ export const GridRootStyles = styled('div', {
       alignItems: 'center',
       borderBottom: '1px solid',
       '&.Mui-selected': {
-        backgroundColor: theme.vars
-          ? `rgba(${theme.vars.palette.primary.mainChannel} / ${theme.vars.palette.action.selectedOpacity})`
+        backgroundColor: (theme as any).vars
+          ? `rgba(${(theme as any).vars.palette.primary.mainChannel} / ${(theme as any).vars.palette.action.selectedOpacity})`
           : alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
         '&:hover, &.Mui-hovered': {
-          backgroundColor: theme.vars
-            ? `rgba(${theme.vars.palette.primary.mainChannel} / ${
-                theme.vars.palette.action.selectedOpacity + theme.palette.action.hoverOpacity
+          backgroundColor: (theme as any).vars
+            ? `rgba(${(theme as any).vars.palette.primary.mainChannel} / ${
+                (theme as any).vars.palette.action.selectedOpacity + theme.palette.action.hoverOpacity
               })`
             : alpha(
                 theme.palette.primary.main,
@@ -333,8 +333,8 @@ export const GridRootStyles = styled('div', {
               ),
           // Reset on touch devices, it doesn't add specificity
           '@media (hover: none)': {
-            backgroundColor: theme.vars
-              ? `rgba(${theme.vars.palette.primary.mainChannel} / ${theme.vars.palette.action.selectedOpacity})`
+            backgroundColor: (theme as any).vars
+              ? `rgba(${(theme as any).vars.palette.primary.mainChannel} / ${(theme as any).vars.palette.action.selectedOpacity})`
               : alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
           },
         },
@@ -355,9 +355,9 @@ export const GridRootStyles = styled('div', {
       padding: 1,
       display: 'flex',
       boxShadow: theme.shadows[2],
-      backgroundColor: (theme.vars || theme).palette.background.paper,
+      backgroundColor: ((theme as any).vars || theme).palette.background.paper,
       '&:focus-within': {
-        outline: `solid ${(theme.vars || theme).palette.primary.main} 1px`,
+        outline: `solid ${((theme as any).vars || theme).palette.primary.main} 1px`,
         outlineOffset: '-1px',
       },
     },
@@ -366,7 +366,7 @@ export const GridRootStyles = styled('div', {
     },
     [`& .${gridClasses['row--editing']} .${gridClasses.cell}`]: {
       boxShadow: theme.shadows[0],
-      backgroundColor: (theme.vars || theme).palette.background.paper,
+      backgroundColor: ((theme as any).vars || theme).palette.background.paper,
     },
     [`& .${gridClasses.editBooleanCell}`]: {
       display: 'flex',
@@ -376,10 +376,10 @@ export const GridRootStyles = styled('div', {
       justifyContent: 'center',
     },
     [`& .${gridClasses.booleanCell}[data-value="true"]`]: {
-      color: (theme.vars || theme).palette.text.secondary,
+      color: ((theme as any).vars || theme).palette.text.secondary,
     },
     [`& .${gridClasses.booleanCell}[data-value="false"]`]: {
-      color: (theme.vars || theme).palette.text.disabled,
+      color: ((theme as any).vars || theme).palette.text.disabled,
     },
     [`& .${gridClasses.actionsCell}`]: {
       display: 'inline-flex',
@@ -391,7 +391,7 @@ export const GridRootStyles = styled('div', {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      opacity: (theme.vars || theme).palette.action.disabledOpacity,
+      opacity: ((theme as any).vars || theme).palette.action.disabledOpacity,
     },
     [`& .${gridClasses['rowReorderCell--draggable']}`]: {
       cursor: 'move',
@@ -430,16 +430,16 @@ export const GridRootStyles = styled('div', {
       display: 'none',
     },
     [`& .${gridClasses['columnHeader--dragging']}, & .${gridClasses['row--dragging']}`]: {
-      background: (theme.vars || theme).palette.background.paper,
+      background: ((theme as any).vars || theme).palette.background.paper,
       padding: '0 12px',
       borderRadius: theme.shape.borderRadius,
-      opacity: (theme.vars || theme).palette.action.disabledOpacity,
+      opacity: ((theme as any).vars || theme).palette.action.disabledOpacity,
     },
     [`& .${gridClasses['row--dragging']}`]: {
-      background: (theme.vars || theme).palette.background.paper,
+      background: ((theme as any).vars || theme).palette.background.paper,
       padding: '0 12px',
       borderRadius: theme.shape.borderRadius,
-      opacity: (theme.vars || theme).palette.action.disabledOpacity,
+      opacity: ((theme as any).vars || theme).palette.action.disabledOpacity,
 
       [`& .${gridClasses.rowReorderCellPlaceholder}`]: {
         display: 'flex',
