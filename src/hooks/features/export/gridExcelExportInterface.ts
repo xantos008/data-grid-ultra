@@ -5,7 +5,7 @@ import {
   GridExportExtension as GridExportExtensionCommunity,
   GridToolbarExportProps as GridToolbarExportPropsCommunity,
   GridExportDisplayOptions,
-} from '../../../medium';
+} from 'data-grid-extra';
 
 export type GridExportFormat = GridExportFormatCommunity | 'excel';
 export type GridExportExtension = GridExportExtensionCommunity | 'xlsx';

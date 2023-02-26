@@ -1,11 +1,8 @@
 {
   "name": "data-grid-ultra",
-  "version": "2.1.1",
+  "version": "2.1.4",
   "description": "A react data table implementation using @mui.",
   "author": "xantos008",
-  "files": [
-    "dist"
-  ],
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
@@ -40,7 +37,7 @@
     "build:simple": "npm run clean && rollup -c --bundleConfigAsCjs",
     "build": "npm run clean && rollup -c --bundleConfigAsCjs && npm run postbuild",
     "postbuild": "cp package.json dist && cp README.md dist && cp LICENSE dist",
-    "publish": "npm run build && npm run pack && npm publish data-grid-ultra-1.0.3.tgz",
+    "publish": "npm run build && npm run pack && npm publish data-grid-ultra-2.1.4.tgz",
     "pack": "npm pack ./dist/"
   },
   "repository": {
@@ -53,8 +50,8 @@
     "@mui/utils": "^5.11.2",
     "@mui/x-data-grid": "6.0.0-beta.5",
     "@types/format-util": "^1.0.2",
-    "@types/node": "^18.11.18",
     "clsx": "^1.2.1",
+    "data-grid-extra": "^1.0.0",
     "exceljs": "^4.3.0",
     "prop-types": "^15.8.1",
     "reselect": "^4.1.7"
@@ -71,6 +68,7 @@
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-url": "^8.0.1",
+    "@types/node": "^18.14.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-typescript2": "^0.34.1",
     "tslib": "^2.4.1",

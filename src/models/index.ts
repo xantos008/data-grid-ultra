@@ -1,3 +1,3 @@
 export * from './gridGroupingValueGetterParams';
-export * from './gridPremiumIconSlotsComponent';
-export * from './gridPremiumSlotsComponent';
+export * from './gridUltraIconSlotsComponent';
+export * from './gridUltraSlotsComponent';

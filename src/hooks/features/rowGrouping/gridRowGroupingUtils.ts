@@ -9,23 +9,23 @@ import {
   GridRowModel,
   GridColDef,
   GridKeyValue,
-} from '../../../medium';
+} from 'data-grid-extra';
 import {
   passFilterLogic,
   GridAggregatedFilterItemApplier,
   GridColumnRawLookup,
   GridApiCommunity,
-} from '../../../medium/internals';
-import { DataGridPremiumProcessedProps } from '../../../models/dataGridPremiumProps';
+} from 'data-grid-extra/internals';
+import { DataGridUltraProcessedProps } from '../../../models/dataGridUltraProps';
 import { GridGroupingValueGetterParams } from '../../../models/gridGroupingValueGetterParams';
 import {
   GridGroupingRule,
   GridGroupingRules,
   GridRowGroupingModel,
 } from './gridRowGroupingInterfaces';
-import { GridStatePremium } from '../../../models/gridStatePremium';
+import { GridStateUltra } from '../../../models/gridStateUltra';
 import { gridRowGroupingSanitizedModelSelector } from './gridRowGroupingSelector';
-import { GridPrivateApiPremium } from '../../../models/gridApiPremium';
+import { GridPrivateApiUltra } from '../../../models/gridApiUltra';
 
 export const GRID_ROW_GROUPING_SINGLE_GROUPING_FIELD = '__row_group_by_columns_group__';
 
@@ -176,7 +176,7 @@ export const filterRowTreeFromGroupingColumns = (
 };
 
 export const getColDefOverrides = (
-  groupingColDefProp: DataGridPremiumProcessedProps['groupingColDef'],
+  groupingColDefProp: DataGridUltraProcessedProps['groupingColDef'],
   fields: string[],
 ) => {
   if (typeof groupingColDefProp === 'function') {
@@ -191,13 +191,13 @@ export const getColDefOverrides = (
 
 export const mergeStateWithRowGroupingModel =
   (rowGroupingModel: GridRowGroupingModel) =>
-  (state: GridStatePremium): GridStatePremium => ({
+  (state: GridStateUltra): GridStateUltra => ({
     ...state,
     rowGrouping: { ...state.rowGrouping, model: rowGroupingModel },
   });
 
 export const setStrategyAvailability = (
-  privateApiRef: React.MutableRefObject<GridPrivateApiPremium>,
+  privateApiRef: React.MutableRefObject<GridPrivateApiUltra>,
   disableRowGrouping: boolean,
 ) => {
   let isAvailable: () => boolean;

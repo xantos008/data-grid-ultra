@@ -1,4 +1,4 @@
-import { GridCellCoordinates, GridColDef, GridRowId } from '../../../medium';
+import { GridCellCoordinates, GridColDef, GridRowId } from 'data-grid-extra';
 
 export type GridCellSelectionModel = Record<GridRowId, Record<GridColDef['field'], boolean>>;
 

@@ -12,8 +12,8 @@ import {
   defaultGetRowsToExport,
   GridPipeProcessor,
 } from '@mui/x-data-grid/internals';
-import { GridPrivateApiPremium } from '../../../models/gridApiPremium';
-import { DataGridPremiumProps } from '../../../models/dataGridPremiumProps';
+import { GridPrivateApiUltra } from '../../../models/gridApiUltra';
+import { DataGridUltraProps } from '../../../models/dataGridUltraProps';
 import {
   GridExcelExportApi,
   GridExportExtension,
@@ -36,8 +36,8 @@ import { GridExcelExportMenuItem } from '../../../components';
  * @requires useGridParamsApi (method)
  */
 export const useGridExcelExport = (
-  apiRef: React.MutableRefObject<GridPrivateApiPremium>,
-  props: DataGridPremiumProps,
+  apiRef: React.MutableRefObject<GridPrivateApiUltra>,
+  props: DataGridUltraProps,
 ): void => {
   const logger = useGridLogger(apiRef, 'useGridExcelExport');
 

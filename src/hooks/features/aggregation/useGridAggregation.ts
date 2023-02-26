@@ -3,10 +3,10 @@ import {
   gridColumnLookupSelector,
   useGridApiEventHandler,
   useGridApiMethod,
-} from '../../../medium';
-import { GridStateInitializer } from '../../../medium/internals';
-import { DataGridPremiumProcessedProps } from '../../../models/dataGridPremiumProps';
-import { GridPrivateApiPremium } from '../../../models/gridApiPremium';
+} from 'data-grid-extra';
+import { GridStateInitializer } from 'data-grid-extra/internals';
+import { DataGridUltraProcessedProps } from '../../../models/dataGridUltraProps';
+import { GridPrivateApiUltra } from '../../../models/gridApiUltra';
 import { gridAggregationModelSelector } from './gridAggregationSelectors';
 import { GridAggregationApi } from './gridAggregationInterfaces';
 import {
@@ -17,8 +17,8 @@ import {
 import { createAggregationLookup } from './createAggregationLookup';
 
 export const aggregationStateInitializer: GridStateInitializer<
-  Pick<DataGridPremiumProcessedProps, 'aggregationModel' | 'initialState'>,
-  GridPrivateApiPremium
+  Pick<DataGridUltraProcessedProps, 'aggregationModel' | 'initialState'>,
+  GridPrivateApiUltra
 > = (state, props, apiRef) => {
   apiRef.current.caches.aggregation = {
     rulesOnLastColumnHydration: {},
@@ -34,9 +34,9 @@ export const aggregationStateInitializer: GridStateInitializer<
 };
 
 export const useGridAggregation = (
-  apiRef: React.MutableRefObject<GridPrivateApiPremium>,
+  apiRef: React.MutableRefObject<GridPrivateApiUltra>,
   props: Pick<
-    DataGridPremiumProcessedProps,
+    DataGridUltraProcessedProps,
     | 'onAggregationModelChange'
     | 'initialState'
     | 'aggregationModel'

@@ -3,7 +3,7 @@ import {
   GridRowId,
   GridRowModel,
   GridColDef,
-} from '../../../medium';
+} from 'data-grid-extra';
 
 export interface GridAggregationState {
   model: GridAggregationModel;

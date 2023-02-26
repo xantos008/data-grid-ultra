@@ -4,19 +4,19 @@ import {
   useGridApiEventHandler,
   useGridApiMethod,
   gridColumnLookupSelector,
-} from '../../../medium';
+} from 'data-grid-extra';
 import {
   useGridRegisterPipeProcessor,
   GridPipeProcessor,
   GridRestoreStatePreProcessingContext,
   GridStateInitializer,
-} from '../../../medium/internals';
-import { GridPrivateApiPremium } from '../../../models/gridApiPremium';
+} from 'data-grid-extra/internals';
+import { GridPrivateApiUltra } from '../../../models/gridApiUltra';
 import {
   gridRowGroupingModelSelector,
   gridRowGroupingSanitizedModelSelector,
 } from './gridRowGroupingSelector';
-import { DataGridPremiumProcessedProps } from '../../../models/dataGridPremiumProps';
+import { DataGridUltraProcessedProps } from '../../../models/dataGridUltraProps';
 import {
   getRowGroupingFieldFromGroupingCriteria,
   ROW_GROUPING_STRATEGY,
@@ -27,10 +27,10 @@ import {
   areGroupingRulesEqual,
 } from './gridRowGroupingUtils';
 import { GridRowGroupingApi } from './gridRowGroupingInterfaces';
-import { GridInitialStatePremium } from '../../../models/gridStatePremium';
+import { GridInitialStateUltra } from '../../../models/gridStateUltra';
 
 export const rowGroupingStateInitializer: GridStateInitializer<
-  Pick<DataGridPremiumProcessedProps, 'rowGroupingModel' | 'initialState'>
+  Pick<DataGridUltraProcessedProps, 'rowGroupingModel' | 'initialState'>
 > = (state, props, apiRef) => {
   apiRef.current.caches.rowGrouping = {
     rulesOnLastRowTreeCreation: [],
@@ -50,9 +50,9 @@ export const rowGroupingStateInitializer: GridStateInitializer<
  * @requires useGridParamsApi (method) - can be after, async only
  */
 export const useGridRowGrouping = (
-  apiRef: React.MutableRefObject<GridPrivateApiPremium>,
+  apiRef: React.MutableRefObject<GridPrivateApiUltra>,
   props: Pick<
-    DataGridPremiumProcessedProps,
+    DataGridUltraProcessedProps,
     | 'initialState'
     | 'rowGroupingModel'
     | 'onRowGroupingModelChange'
@@ -194,7 +194,7 @@ export const useGridRowGrouping = (
   );
 
   const stateRestorePreProcessing = React.useCallback<GridPipeProcessor<'restoreState'>>(
-    (params, context: GridRestoreStatePreProcessingContext<GridInitialStatePremium>) => {
+    (params, context: GridRestoreStatePreProcessingContext<GridInitialStateUltra>) => {
       if (props.disableRowGrouping) {
         return params;
       }

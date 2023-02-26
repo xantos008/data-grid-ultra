@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { GridRenderCellParams } from '../medium';
+import { GridRenderCellParams } from 'data-grid-extra';
 import { useGridRootProps } from '../hooks/utils/useGridRootProps';
 import { GridFooterCell } from './GridFooterCell';
 

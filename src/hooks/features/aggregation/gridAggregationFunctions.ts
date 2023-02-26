@@ -1,5 +1,5 @@
-import { GridValueFormatterParams } from '../../../medium';
-import { isNumber } from '../../../medium/internals';
+import { GridValueFormatterParams } from 'data-grid-extra';
+import { isNumber } from 'data-grid-extra/internals';
 import { GridAggregationFunction } from './gridAggregationInterfaces';
 
 const sumAgg: GridAggregationFunction<number> = {

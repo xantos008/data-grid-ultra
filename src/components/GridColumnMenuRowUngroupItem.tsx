@@ -7,7 +7,7 @@ import {
   gridColumnLookupSelector,
   useGridSelector,
   GridColumnMenuItemProps,
-} from '../medium';
+} from 'data-grid-extra';
 import { useGridApiContext } from '../hooks/utils/useGridApiContext';
 import { gridRowGroupingSanitizedModelSelector } from '../hooks/features/rowGrouping/gridRowGroupingSelector';
 import { useGridRootProps } from '../hooks/utils/useGridRootProps';

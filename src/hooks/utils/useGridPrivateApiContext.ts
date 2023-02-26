@@ -1,4 +1,4 @@
 import { useGridPrivateApiContext as useCommunityGridPrivateApiContext } from '@mui/x-data-grid/internals';
-import { GridPrivateApiPremium } from '../../models/gridApiPremium';
+import { GridPrivateApiUltra } from '../../models/gridApiUltra';
 
-export const useGridPrivateApiContext = useCommunityGridPrivateApiContext<GridPrivateApiPremium>;
+export const useGridPrivateApiContext = useCommunityGridPrivateApiContext<GridPrivateApiUltra>;

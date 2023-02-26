@@ -1,8 +1,8 @@
-import { GridKeyValue, GridValidRowModel } from '../medium';
+import { GridKeyValue, GridValidRowModel } from 'data-grid-extra';
 import type {
   GridControlledStateEventLookupPro,
   GridApiCachesPro,
-} from '../medium/typeOverloads';
+} from 'data-grid-extra/typeOverloads';
 import type { GridGroupingValueGetterParams } from '../models';
 import type {
   GridRowGroupingModel,
@@ -70,7 +70,7 @@ export interface GridApiCachesPremium extends GridApiCachesPro {
   aggregation: GridAggregationInternalCache;
 }
 
-declare module '../medium' {
+declare module 'data-grid-extra' {
   interface GridControlledStateEventLookup
     extends GridControlledStateEventLookupPro,
       GridControlledStateEventLookupPremium {}
@@ -82,7 +82,7 @@ declare module '../medium' {
   interface GridApiCaches extends GridApiCachesPremium {}
 }
 
-declare module '../medium/internals' {
+declare module 'data-grid-extra/internals' {
   interface GridApiCaches extends GridApiCachesPremium {}
 
   interface GridBaseColDef<R, V, F> extends GridColDefPremium<R, V, F> {}

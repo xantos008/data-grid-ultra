@@ -6,7 +6,7 @@ import {
   GridRowId,
   GRID_ROOT_GROUP_ID,
   GridGroupNode,
-} from '../../../medium';
+} from 'data-grid-extra';
 import {
   addPinnedRow,
   GridColumnRawLookup,
@@ -14,16 +14,16 @@ import {
   isDeepEqual,
   insertNodeInTree,
   removeNodeFromTree,
-} from '../../../medium/internals';
+} from 'data-grid-extra/internals';
 import {
   GridAggregationFunction,
   GridAggregationModel,
   GridAggregationRule,
   GridAggregationRules,
 } from './gridAggregationInterfaces';
-import { GridStatePremium } from '../../../models/gridStatePremium';
-import { DataGridPremiumProcessedProps } from '../../../models/dataGridPremiumProps';
-import { GridApiPremium, GridPrivateApiPremium } from '../../../models/gridApiPremium';
+import { GridStateUltra } from '../../../models/gridStateUltra';
+import { DataGridUltraProcessedProps } from '../../../models/dataGridUltraProps';
+import { GridApiUltra, GridPrivateApiUltra } from '../../../models/gridApiUltra';
 
 export const GRID_AGGREGATION_ROOT_FOOTER_ROW_ID = 'auto-generated-group-footer-root';
 
@@ -80,7 +80,7 @@ export const getAvailableAggregationFunctions = ({
 
 export const mergeStateWithAggregationModel =
   (aggregationModel: GridAggregationModel) =>
-  (state: GridStatePremium): GridStatePremium => ({
+  (state: GridStateUltra): GridStateUltra => ({
     ...state,
     aggregation: { ...state.aggregation, model: aggregationModel },
   });
@@ -117,12 +117,12 @@ export const getAggregationRules = ({
 
 interface AddFooterRowsParams {
   groupingParams: GridHydrateRowsValue;
-  getAggregationPosition: DataGridPremiumProcessedProps['getAggregationPosition'];
+  getAggregationPosition: DataGridUltraProcessedProps['getAggregationPosition'];
   /**
    * If `true`, there are some aggregation rules to apply
    */
   hasAggregationRule: boolean;
-  apiRef: React.MutableRefObject<GridPrivateApiPremium>;
+  apiRef: React.MutableRefObject<GridPrivateApiUltra>;
 }
 
 /**
@@ -250,7 +250,7 @@ export const getAggregationFunctionLabel = ({
   apiRef,
   aggregationRule,
 }: {
-  apiRef: React.MutableRefObject<GridApiPremium>;
+  apiRef: React.MutableRefObject<GridApiUltra>;
   aggregationRule: GridAggregationRule;
 }): string => {
   if (aggregationRule.aggregationFunction.label != null) {

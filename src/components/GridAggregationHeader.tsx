@@ -12,10 +12,10 @@ import {
 import { getAggregationFunctionLabel } from '../hooks/features/aggregation/gridAggregationUtils';
 import { useGridApiContext } from '../hooks/utils/useGridApiContext';
 import { useGridRootProps } from '../hooks/utils/useGridRootProps';
-import { DataGridPremiumProcessedProps } from '../models/dataGridPremiumProps';
+import { DataGridUltraProcessedProps } from '../models/dataGridUltraProps';
 
-interface OwnerState extends DataGridPremiumProcessedProps {
-  classes: DataGridPremiumProcessedProps['classes'];
+interface OwnerState extends DataGridUltraProcessedProps {
+  classes: DataGridUltraProcessedProps['classes'];
   colDef: GridColDef;
 }
 

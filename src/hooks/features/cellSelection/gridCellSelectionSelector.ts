@@ -1,3 +1,3 @@
-import { GridStatePremium } from '../../../models/gridStatePremium';
+import { GridStateUltra } from '../../../models/gridStateUltra';
 
-export const gridCellSelectionStateSelector = (state: GridStatePremium) => state.cellSelection;
+export const gridCellSelectionStateSelector = (state: GridStateUltra) => state.cellSelection;

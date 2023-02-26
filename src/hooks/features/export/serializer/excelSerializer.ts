@@ -7,7 +7,7 @@ import {
   ValueOptions,
   GRID_DATE_COL_DEF,
   GRID_DATETIME_COL_DEF,
-} from '../../../../medium';
+} from 'data-grid-extra';
 import {
   buildWarning,
   GridStateColDef,
@@ -15,13 +15,13 @@ import {
   isObject,
   GridColumnGroupLookup,
   isSingleSelectColDef,
-} from '../../../../medium/internals';
+} from '@mui/x-data-grid/internals';
 import {
   GridExceljsProcessInput,
   ColumnsStylesInterface,
   GridExcelExportOptions,
 } from '../gridExcelExportInterface';
-import { GridPrivateApiPremium } from '../../../../models/gridApiPremium';
+import { GridPrivateApiUltra } from '../../../../models/gridApiUltra';
 
 const getExcelJs = async () => {
   const excelJsModule = await import('exceljs');
@@ -68,7 +68,7 @@ interface SerializedRow {
 export const serializeRow = (
   id: GridRowId,
   columns: GridStateColDef[],
-  api: GridPrivateApiPremium,
+  api: GridPrivateApiUltra,
   defaultValueOptionsFormulae: { [field: string]: { address: string } },
 ): SerializedRow => {
   const row: SerializedRow['row'] = {};
@@ -286,7 +286,7 @@ type ValueOptionsData = Record<string, { values: (string | number)[]; address: s
 export async function getDataForValueOptionsSheet(
   columns: GridStateColDef[],
   valueOptionsSheetName: string,
-  api: GridPrivateApiPremium,
+  api: GridPrivateApiUltra,
 ): Promise<ValueOptionsData> {
   const candidateColumns = columns.filter(
     (column) => isSingleSelectColDef(column) && Array.isArray(column.valueOptions),
@@ -374,7 +374,7 @@ interface BuildExcelOptions {
 
 export async function buildExcel(
   options: BuildExcelOptions,
-  api: GridPrivateApiPremium,
+  api: GridPrivateApiUltra,
 ): Promise<Excel.Workbook> {
   const {
     columns,

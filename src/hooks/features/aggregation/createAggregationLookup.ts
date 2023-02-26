@@ -7,9 +7,9 @@ import {
   GridLeafNode,
   gridRowTreeSelector,
   GRID_ROOT_GROUP_ID,
-} from '../../../medium';
-import { GridApiPremium } from '../../../models/gridApiPremium';
-import { DataGridPremiumProcessedProps } from '../../../models/dataGridPremiumProps';
+} from 'data-grid-extra';
+import { GridApiUltra } from '../../../models/gridApiUltra';
+import { DataGridUltraProcessedProps } from '../../../models/dataGridUltraProps';
 import {
   GridAggregationFunction,
   GridAggregationLookup,
@@ -26,11 +26,11 @@ const getAggregationCellValue = ({
   aggregationFunction,
   aggregationRowsScope,
 }: {
-  apiRef: React.MutableRefObject<GridApiPremium>;
+  apiRef: React.MutableRefObject<GridApiUltra>;
   groupId: GridRowId;
   field: string;
   aggregationFunction: GridAggregationFunction;
-  aggregationRowsScope: DataGridPremiumProcessedProps['aggregationRowsScope'];
+  aggregationRowsScope: DataGridUltraProcessedProps['aggregationRowsScope'];
 }) => {
   const filteredRowsLookup = gridFilteredRowsLookupSelector(apiRef);
   const rowIds: GridRowId[] = apiRef.current.getRowGroupChildren({ groupId });
@@ -77,8 +77,8 @@ const getGroupAggregatedValue = ({
   position,
 }: {
   groupId: GridRowId;
-  apiRef: React.MutableRefObject<GridApiPremium>;
-  aggregationRowsScope: DataGridPremiumProcessedProps['aggregationRowsScope'];
+  apiRef: React.MutableRefObject<GridApiUltra>;
+  aggregationRowsScope: DataGridUltraProcessedProps['aggregationRowsScope'];
   aggregatedFields: string[];
   aggregationRules: GridAggregationRules;
   position: GridAggregationPosition;
@@ -110,10 +110,10 @@ export const createAggregationLookup = ({
   aggregationRowsScope,
   getAggregationPosition,
 }: {
-  apiRef: React.MutableRefObject<GridApiPremium>;
+  apiRef: React.MutableRefObject<GridApiUltra>;
   aggregationFunctions: Record<string, GridAggregationFunction>;
-  aggregationRowsScope: DataGridPremiumProcessedProps['aggregationRowsScope'];
-  getAggregationPosition: DataGridPremiumProcessedProps['getAggregationPosition'];
+  aggregationRowsScope: DataGridUltraProcessedProps['aggregationRowsScope'];
+  getAggregationPosition: DataGridUltraProcessedProps['getAggregationPosition'];
 }): GridAggregationLookup => {
   const aggregationRules = getAggregationRules({
     columnsLookup: gridColumnLookupSelector(apiRef),

@@ -5,7 +5,7 @@ import {
   gridRowTreeSelector,
   useFirstRender,
   GRID_CHECKBOX_SELECTION_FIELD,
-} from '../../../medium';
+} from 'data-grid-extra';
 import {
   useGridRegisterPipeProcessor,
   GridColumnRawLookup,
@@ -17,8 +17,8 @@ import {
   createRowTree,
   updateRowTree,
   RowTreeBuilderGroupingCriterion,
-} from '../../../medium/internals';
-import { DataGridPremiumProcessedProps } from '../../../models/dataGridPremiumProps';
+} from 'data-grid-extra/internals';
+import { DataGridUltraProcessedProps } from '../../../models/dataGridUltraProps';
 import {
   gridRowGroupingModelSelector,
   gridRowGroupingSanitizedModelSelector,
@@ -36,12 +36,12 @@ import {
   getCellGroupingCriteria,
   getGroupingRules,
 } from './gridRowGroupingUtils';
-import { GridPrivateApiPremium } from '../../../models/gridApiPremium';
+import { GridPrivateApiUltra } from '../../../models/gridApiUltra';
 
 export const useGridRowGroupingPreProcessors = (
-  apiRef: React.MutableRefObject<GridPrivateApiPremium>,
+  apiRef: React.MutableRefObject<GridPrivateApiUltra>,
   props: Pick<
-    DataGridPremiumProcessedProps,
+    DataGridUltraProcessedProps,
     | 'disableRowGrouping'
     | 'groupingColDef'
     | 'rowGroupingColumnMode'

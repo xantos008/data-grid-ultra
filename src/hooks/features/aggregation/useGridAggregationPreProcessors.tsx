@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { gridColumnLookupSelector } from '../../../medium';
+import { gridColumnLookupSelector } from 'data-grid-extra';
 import {
   GridPipeProcessor,
   GridRestoreStatePreProcessingContext,
   useGridRegisterPipeProcessor,
-} from '../../../medium/internals';
-import { GridPrivateApiPremium } from '../../../models/gridApiPremium';
+} from 'data-grid-extra/internals';
+import { GridPrivateApiUltra } from '../../../models/gridApiUltra';
 import {
   getAvailableAggregationFunctions,
   addFooterRows,
@@ -16,15 +16,15 @@ import {
   wrapColumnWithAggregationValue,
   unwrapColumnFromAggregation,
 } from './wrapColumnWithAggregation';
-import { DataGridPremiumProcessedProps } from '../../../models/dataGridPremiumProps';
+import { DataGridUltraProcessedProps } from '../../../models/dataGridUltraProps';
 import { gridAggregationModelSelector } from './gridAggregationSelectors';
-import { GridInitialStatePremium } from '../../../models/gridStatePremium';
+import { GridInitialStateUltra } from '../../../models/gridStateUltra';
 import { GridAggregationRules } from './gridAggregationInterfaces';
 
 export const useGridAggregationPreProcessors = (
-  apiRef: React.MutableRefObject<GridPrivateApiPremium>,
+  apiRef: React.MutableRefObject<GridPrivateApiUltra>,
   props: Pick<
-    DataGridPremiumProcessedProps,
+    DataGridUltraProcessedProps,
     'aggregationFunctions' | 'disableAggregation' | 'getAggregationPosition' | 'slotProps' | 'slots'
   >,
 ) => {
@@ -148,7 +148,7 @@ export const useGridAggregationPreProcessors = (
   );
 
   const stateRestorePreProcessing = React.useCallback<GridPipeProcessor<'restoreState'>>(
-    (params, context: GridRestoreStatePreProcessingContext<GridInitialStatePremium>) => {
+    (params, context: GridRestoreStatePreProcessingContext<GridInitialStateUltra>) => {
       if (props.disableAggregation) {
         return params;
       }

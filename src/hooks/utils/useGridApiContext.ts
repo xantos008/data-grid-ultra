@@ -1,4 +1,4 @@
 import { useGridApiContext as useCommunityGridApiContext } from '@mui/x-data-grid';
-import { GridApiPremium } from '../../models/gridApiPremium';
+import { GridApiUltra } from '../../models/gridApiUltra';
 
-export const useGridApiContext = useCommunityGridApiContext<GridApiPremium>;
+export const useGridApiContext = useCommunityGridApiContext<GridApiUltra>;

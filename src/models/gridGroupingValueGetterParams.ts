@@ -4,7 +4,7 @@ import {
   GridValidRowModel,
   GridGroupNode,
   GridColDef,
-} from '../medium';
+} from 'data-grid-extra';
 
 /**
  * Parameters passed to `colDef.groupingValueGetter`.

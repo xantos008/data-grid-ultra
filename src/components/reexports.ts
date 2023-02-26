@@ -1,5 +1,5 @@
 export {
-  GridPremiumColumnMenu as GridColumnMenu,
+  GridUltraColumnMenu as GridColumnMenu,
   GRID_COLUMN_MENU_COMPONENTS_PREMIUM as GRID_COLUMN_MENU_COMPONENTS,
   GRID_COLUMN_MENU_COMPONENTS_PROPS_PREMIUM as GRID_COLUMN_MENU_COMPONENTS_PROPS,
-} from './GridPremiumColumnMenu';
+} from './GridUltraColumnMenu';

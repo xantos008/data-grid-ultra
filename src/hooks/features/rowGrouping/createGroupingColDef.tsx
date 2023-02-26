@@ -6,9 +6,9 @@ import {
   GridRenderCellParams,
   GridGroupingColDefOverride,
   GridGroupNode,
-} from '../../../medium';
-import { GridColumnRawLookup, isSingleSelectColDef } from '../../../medium/internals';
-import { GridApiPremium } from '../../../models/gridApiPremium';
+} from 'data-grid-extra';
+import { GridColumnRawLookup, isSingleSelectColDef } from 'data-grid-extra/internals';
+import { GridApiUltra } from '../../../models/gridApiUltra';
 import { GridGroupingColumnFooterCell } from '../../../components/GridGroupingColumnFooterCell';
 import { GridGroupingCriteriaCell } from '../../../components/GridGroupingCriteriaCell';
 import { GridGroupingColumnLeafCell } from '../../../components/GridGroupingColumnLeafCell';
@@ -260,7 +260,7 @@ export const createGroupingColDefForOneGroupingCriteria = ({
 };
 
 interface CreateGroupingColDefSeveralCriteriaParams {
-  apiRef: React.MutableRefObject<GridApiPremium>;
+  apiRef: React.MutableRefObject<GridApiUltra>;
   columnsLookup: GridColumnRawLookup;
 
   /**

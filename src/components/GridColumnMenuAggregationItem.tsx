@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { GridColumnMenuItemProps, useGridSelector } from '../medium';
+import { GridColumnMenuItemProps, useGridSelector } from 'data-grid-extra';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';

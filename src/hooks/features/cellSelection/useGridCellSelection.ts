@@ -6,7 +6,7 @@ import {
   isNavigationKey,
   useGridRegisterPipeProcessor,
   useGridVisibleRows,
-} from '../../../medium/internals';
+} from 'data-grid-extra/internals';
 import {
   useGridApiEventHandler,
   useGridApiMethod,
@@ -21,14 +21,14 @@ import {
   gridClasses,
   gridFocusCellSelector,
   GridCellParams,
-} from '../../../medium';
+} from 'data-grid-extra';
 import { gridCellSelectionStateSelector } from './gridCellSelectionSelector';
 import { GridCellSelectionApi } from './gridCellSelectionInterfaces';
-import { DataGridPremiumProcessedProps } from '../../../models/dataGridPremiumProps';
-import { GridPrivateApiPremium } from '../../../models/gridApiPremium';
+import { DataGridUltraProcessedProps } from '../../../models/dataGridUltraProps';
+import { GridPrivateApiUltra } from '../../../models/gridApiUltra';
 
 export const cellSelectionStateInitializer: GridStateInitializer<
-  Pick<DataGridPremiumProcessedProps, 'unstable_cellSelectionModel' | 'initialState'>
+  Pick<DataGridUltraProcessedProps, 'unstable_cellSelectionModel' | 'initialState'>
 > = (state, props) => ({
   ...state,
   cellSelection: { ...(props.unstable_cellSelectionModel ?? props.initialState?.cellSelection) },
@@ -39,9 +39,9 @@ function isKeyboardEvent(event: any): event is React.KeyboardEvent {
 }
 
 export const useGridCellSelection = (
-  apiRef: React.MutableRefObject<GridPrivateApiPremium>,
+  apiRef: React.MutableRefObject<GridPrivateApiUltra>,
   props: Pick<
-    DataGridPremiumProcessedProps,
+    DataGridUltraProcessedProps,
     | 'unstable_cellSelection'
     | 'unstable_cellSelectionModel'
     | 'unstable_onCellSelectionModelChange'

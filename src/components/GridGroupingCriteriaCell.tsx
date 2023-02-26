@@ -7,12 +7,12 @@ import {
   getDataGridUtilityClass,
   GridRenderCellParams,
   GridGroupNode,
-} from '../medium';
+} from 'data-grid-extra';
 import { useGridApiContext } from '../hooks/utils/useGridApiContext';
 import { useGridRootProps } from '../hooks/utils/useGridRootProps';
-import { DataGridPremiumProcessedProps } from '../models/dataGridPremiumProps';
+import { DataGridUltraProcessedProps } from '../models/dataGridUltraProps';
 
-type OwnerState = { classes: DataGridPremiumProcessedProps['classes'] };
+type OwnerState = { classes: DataGridUltraProcessedProps['classes'] };
 
 const useUtilityClasses = (ownerState: OwnerState) => {
   const { classes } = ownerState;
