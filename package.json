@@ -1,6 +1,6 @@
 {
   "name": "data-grid-ultra",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "A react data table implementation using @mui.",
   "author": "xantos008",
   "files": [
