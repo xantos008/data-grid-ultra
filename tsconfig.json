@@ -23,5 +23,5 @@
     "./src",
     "./node_modules/@mui/material/themeCssVarsAugmentation"
   ],
-  "exclude": ["node_modules", "build", "dist", "example", "rollup.config.js"]
+  "exclude": ["node_modules", "build", "dist", "example", "rollup.config.js", "scripts"]
 }

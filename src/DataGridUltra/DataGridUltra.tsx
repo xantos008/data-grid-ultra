@@ -8,11 +8,10 @@ import {
   GridRoot,
   GridContextProvider,
   GridValidRowModel,
+  useGridSelector,
+  gridPinnedColumnsSelector,
 } from 'data-grid-extra';
-import {
-  DataGridExtraVirtualScroller,
-  DataGridExtraColumnHeaders,
-} from 'data-grid-extra/internals';
+import { DataGridExtraVirtualScroller } from 'data-grid-extra/internals';
 import { useDataGridUltraComponent } from './useDataGridUltraComponent';
 import { DataGridUltraProps } from '../models/dataGridUltraProps';
 import { useDataGridUltraProps } from './useDataGridUltraProps';
@@ -24,13 +23,15 @@ const DataGridUltraRaw = React.forwardRef(function DataGridUltra<R extends GridV
   const props = useDataGridUltraProps(inProps);
   const privateApiRef = useDataGridUltraComponent(props.apiRef, props);
 
+  const pinnedColumns = useGridSelector(privateApiRef, gridPinnedColumnsSelector);
+
   return (
     <GridContextProvider privateApiRef={privateApiRef} props={props}>
       <GridRoot className={props.className} style={props.style} sx={props.sx} ref={ref}>
         <GridHeader />
         <GridBody
-          ColumnHeadersComponent={DataGridExtraColumnHeaders}
           VirtualScrollerComponent={DataGridExtraVirtualScroller}
+          ColumnHeadersProps={{ pinnedColumns }}
         />
         <GridFooterPlaceholder />
       </GridRoot>
@@ -144,12 +145,12 @@ DataGridUltraRaw.propTypes = {
    */
   columnVisibilityModel: PropTypes.object,
   /**
-   * Overrideable components.
+   * Overridable components.
    * @deprecated Use the `slots` prop instead.
    */
   components: PropTypes.object,
   /**
-   * Overrideable components props dynamically passed to the component at rendering.
+   * Overridable components props dynamically passed to the component at rendering.
    * @deprecated Use the `slotProps` prop instead.
    */
   componentsProps: PropTypes.object,
@@ -262,7 +263,6 @@ DataGridUltraRaw.propTypes = {
   experimentalFeatures: PropTypes.shape({
     columnGrouping: PropTypes.bool,
     lazyLoading: PropTypes.bool,
-    rowPinning: PropTypes.bool,
     warnIfFocusStateIsNotSynced: PropTypes.bool,
   }),
   /**
@@ -498,7 +498,7 @@ DataGridUltraRaw.propTypes = {
   onCellKeyDown: PropTypes.func,
   /**
    * Callback fired when the `cellModesModel` prop changes.
-   * @param {GridCellModesModel} cellModesModel Object containig which cells are in "edit" mode.
+   * @param {GridCellModesModel} cellModesModel Object containing which cells are in "edit" mode.
    * @param {GridCallbackDetails} details Additional details for this callback.
    */
   onCellModesModelChange: PropTypes.func,
@@ -688,7 +688,7 @@ DataGridUltraRaw.propTypes = {
   onRowGroupingModelChange: PropTypes.func,
   /**
    * Callback fired when the `rowModesModel` prop changes.
-   * @param {GridRowModesModel} rowModesModel Object containig which rows are in "edit" mode.
+   * @param {GridRowModesModel} rowModesModel Object containing which rows are in "edit" mode.
    * @param {GridCallbackDetails} details Additional details for this callback.
    */
   onRowModesModelChange: PropTypes.func,
@@ -860,11 +860,11 @@ DataGridUltraRaw.propTypes = {
    */
   showColumnVerticalBorder: PropTypes.bool,
   /**
-   * Overrideable components props dynamically passed to the component at rendering.
+   * Overridable components props dynamically passed to the component at rendering.
    */
   slotProps: PropTypes.object,
   /**
-   * Overrideable components.
+   * Overridable components.
    */
   slots: PropTypes.object,
   /**
@@ -918,7 +918,7 @@ DataGridUltraRaw.propTypes = {
   unstable_cellSelectionModel: PropTypes.object,
   /**
    * Callback fired when the selection state of one or multiple cells changes.
-   * @param {GridCellSelectionModel} cellSelectionModel Object in the shape of [[GridCellSelectionModel]] containg the selected cells.
+   * @param {GridCellSelectionModel} cellSelectionModel Object in the shape of [[GridCellSelectionModel]] containing the selected cells.
    * @param {GridCallbackDetails} details Additional details for this callback.
    */
   unstable_onCellSelectionModelChange: PropTypes.func,

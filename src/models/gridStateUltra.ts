@@ -1,6 +1,6 @@
 import {
-  GridInitialState as GridInitialStatePro,
-  GridState as GridStatePro,
+  GridInitialState as GridInitialStateExtra,
+  GridState as GridStateExtra,
 } from 'data-grid-extra';
 import type {
   GridRowGroupingState,
@@ -13,7 +13,7 @@ import type {
 /**
  * The state of `DataGridUltra`.
  */
-export interface GridStateUltra extends GridStatePro {
+export interface GridStateUltra extends GridStateExtra {
   rowGrouping: GridRowGroupingState;
   aggregation: GridAggregationState;
   cellSelection: GridCellSelectionModel;
@@ -22,7 +22,7 @@ export interface GridStateUltra extends GridStatePro {
 /**
  * The initial state of `DataGridUltra`.
  */
-export interface GridInitialStateUltra extends GridInitialStatePro {
+export interface GridInitialStateUltra extends GridInitialStateExtra {
   rowGrouping?: GridRowGroupingInitialState;
   aggregation?: GridAggregationInitialState;
   cellSelection?: GridCellSelectionModel;

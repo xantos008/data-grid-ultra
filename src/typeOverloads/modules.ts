@@ -1,7 +1,7 @@
 import { GridKeyValue, GridValidRowModel } from 'data-grid-extra';
 import type {
-  GridControlledStateEventLookupPro,
-  GridApiCachesPro,
+  GridControlledStateEventLookupExtra,
+  GridApiCachesExtra,
 } from 'data-grid-extra/typeOverloads';
 import type { GridGroupingValueGetterParams } from '../models';
 import type {
@@ -65,14 +65,14 @@ export interface GridColumnHeaderParamsUltra<R extends GridValidRowModel = any, 
   aggregation?: GridAggregationHeaderMeta;
 }
 
-export interface GridApiCachesUltra extends GridApiCachesPro {
+export interface GridApiCachesUltra extends GridApiCachesExtra {
   rowGrouping: GridRowGroupingInternalCache;
   aggregation: GridAggregationInternalCache;
 }
 
 declare module 'data-grid-extra' {
   interface GridControlledStateEventLookup
-    extends GridControlledStateEventLookupPro,
+    extends GridControlledStateEventLookupExtra,
       GridControlledStateEventLookupUltra {}
 
   interface GridRenderCellParams<R, V, F> extends GridRenderCellParamsUltra<R, V, F> {}

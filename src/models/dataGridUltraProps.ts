@@ -26,12 +26,12 @@ export interface GridExperimentalUltraFeatures extends GridExperimentalExtraFeat
 export interface DataGridUltraPropsWithComplexDefaultValueBeforeProcessing
   extends Pick<DataGridPropsWithComplexDefaultValueBeforeProcessing, 'localeText'> {
   /**
-   * Overrideable components.
+   * Overridable components.
    * @deprecated Use the `slots` prop instead.
    */
   components?: Partial<GridUltraSlotsComponent>;
   /**
-   * Overrideable components.
+   * Overridable components.
    */
   slots?: Partial<UncapitalizedGridUltraSlotsComponent>;
 }
@@ -154,7 +154,7 @@ export interface DataGridUltraPropsWithoutDefaultValue<R extends GridValidRowMod
   unstable_cellSelectionModel?: GridCellSelectionModel;
   /**
    * Callback fired when the selection state of one or multiple cells changes.
-   * @param {GridCellSelectionModel} cellSelectionModel Object in the shape of [[GridCellSelectionModel]] containg the selected cells.
+   * @param {GridCellSelectionModel} cellSelectionModel Object in the shape of [[GridCellSelectionModel]] containing the selected cells.
    * @param {GridCallbackDetails} details Additional details for this callback.
    */
   unstable_onCellSelectionModelChange?: (

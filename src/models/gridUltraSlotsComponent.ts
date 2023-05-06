@@ -1,4 +1,4 @@
-import { GridExtraSlotsComponent, UncapitalizedGridExtraSlotsComponent } from 'data-grid-extra';
+import { GridExtraSlotsComponent, UncapitalizedGridProSlotsComponent } from 'data-grid-extra';
 import { UncapitalizeObjectKeys } from 'data-grid-extra/internals';
 import { GridUltraIconSlotsComponent } from './gridUltraIconSlotsComponent';
 
@@ -12,5 +12,5 @@ export interface GridUltraSlotsComponent
 
 // TODO: remove in v7
 export interface UncapitalizedGridUltraSlotsComponent
-  extends UncapitalizedGridExtraSlotsComponent,
+  extends UncapitalizedGridProSlotsComponent,
     UncapitalizeObjectKeys<GridUltraIconSlotsComponent> {}

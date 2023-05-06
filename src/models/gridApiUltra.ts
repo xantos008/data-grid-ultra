@@ -15,7 +15,7 @@ import { GridCellSelectionApi } from '../hooks/features/cellSelection/gridCellSe
 
 /**
  * The api of `DataGridUltra`.
- * TODO: Do not redefine manually the pro features
+ * TODO: Do not redefine manually the extra features
  */
 export interface GridApiUltra
   extends GridApiCommon<GridStateUltra, GridInitialStateUltra>,
@@ -27,7 +27,7 @@ export interface GridApiUltra
     GridAggregationApi,
     GridRowPinningApi,
     GridCellSelectionApi,
-    // APIs that are private in Community plan, but public in Extra and Ultra packages
+    // APIs that are private
     GridRowMultiSelectionApi,
     GridColumnReorderApi,
     GridRowProApi {}

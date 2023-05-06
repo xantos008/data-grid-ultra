@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import {
   GridGenericColumnMenu,
   GridColumnMenuProps,
-  GRID_COLUMN_MENU_COMPONENTS,
-  GRID_COLUMN_MENU_COMPONENTS_PROPS,
+  GRID_COLUMN_MENU_SLOTS,
+  GRID_COLUMN_MENU_SLOT_PROPS,
   GridColumnMenuItemProps,
 } from 'data-grid-extra';
 import { GridColumnMenuAggregationItem } from './GridColumnMenuAggregationItem';
@@ -23,14 +23,14 @@ export function GridColumnMenuGroupingItem(props: GridColumnMenuItemProps) {
   return null;
 }
 
-export const GRID_COLUMN_MENU_COMPONENTS_ULTRA = {
-  ...GRID_COLUMN_MENU_COMPONENTS,
-  ColumnMenuAggregationItem: GridColumnMenuAggregationItem,
-  ColumnMenuGroupingItem: GridColumnMenuGroupingItem,
+export const GRID_COLUMN_MENU_SLOTS_ULTRA = {
+  ...GRID_COLUMN_MENU_SLOTS,
+  columnMenuAggregationItem: GridColumnMenuAggregationItem,
+  columnMenuGroupingItem: GridColumnMenuGroupingItem,
 };
 
-export const GRID_COLUMN_MENU_COMPONENTS_PROPS_ULTRA = {
-  ...GRID_COLUMN_MENU_COMPONENTS_PROPS,
+export const GRID_COLUMN_MENU_SLOT_PROPS_ULTRA = {
+  ...GRID_COLUMN_MENU_SLOT_PROPS,
   columnMenuAggregationItem: { displayOrder: 23 },
   columnMenuGroupingItem: { displayOrder: 27 },
 };
@@ -41,8 +41,8 @@ const GridUltraColumnMenu = React.forwardRef<HTMLUListElement, GridColumnMenuPro
       <GridGenericColumnMenu
         ref={ref}
         {...props}
-        defaultComponents={GRID_COLUMN_MENU_COMPONENTS_ULTRA}
-        defaultComponentsProps={GRID_COLUMN_MENU_COMPONENTS_PROPS_ULTRA}
+        defaultSlots={GRID_COLUMN_MENU_SLOTS_ULTRA}
+        defaultSlotProps={GRID_COLUMN_MENU_SLOT_PROPS_ULTRA}
       />
     );
   },

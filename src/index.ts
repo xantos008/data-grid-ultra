@@ -18,6 +18,8 @@ export * from './hooks';
 export * from './models';
 export * from './components';
 
+export { GridColumnHeaders } from 'data-grid-extra';
+
 export type {
   DataGridUltraProps,
   GridExperimentalUltraFeatures,
@@ -28,6 +30,6 @@ export type { GridApi, GridInitialState, GridState } from './typeOverloads/reexp
 
 export {
   GridColumnMenu,
-  GRID_COLUMN_MENU_COMPONENTS,
-  GRID_COLUMN_MENU_COMPONENTS_PROPS,
+  GRID_COLUMN_MENU_SLOTS,
+  GRID_COLUMN_MENU_SLOT_PROPS,
 } from './components/reexports';
