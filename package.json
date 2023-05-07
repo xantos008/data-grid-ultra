@@ -1,6 +1,6 @@
 {
   "name": "data-grid-ultra",
-  "version": "3.1.2",
+  "version": "3.2.1",
   "description": "A react data table implementation using @mui.",
   "author": "xantos008",
   "main": "dist/index.js",
@@ -37,7 +37,7 @@
     "build:simple": "npm run clean && rollup -c --bundleConfigAsCjs",
     "build": "npm run clean && rollup -c --bundleConfigAsCjs && npm run postbuild",
     "postbuild": "cp package.json dist && cp README.md dist && cp LICENSE dist && node ./scripts/runUpdatePackageJson.js",
-    "publish": "npm run compile && npm run build && npm run pack && npm publish data-grid-ultra-3.1.2.tgz",
+    "publish": "npm run compile && npm run build && npm run pack && npm publish data-grid-ultra-3.2.1.tgz",
     "pack": "npm pack ./build/"
   },
   "repository": {
@@ -51,7 +51,7 @@
     "@mui/x-data-grid": "6.3.1",
     "@types/format-util": "^1.0.2",
     "clsx": "^1.2.1",
-    "data-grid-extra": "^3.1.9",
+    "data-grid-extra": "^3.2.1",
     "exceljs": "^4.3.0",
     "prop-types": "^15.8.1",
     "reselect": "^4.1.8"
