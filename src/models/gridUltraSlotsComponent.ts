@@ -1,10 +1,10 @@
-import { GridExtraSlotsComponent, UncapitalizedGridProSlotsComponent } from 'data-grid-extra';
+import { GridExtraSlotsComponent, UncapitalizedGridExtraSlotsComponent } from 'data-grid-extra';
 import { UncapitalizeObjectKeys } from 'data-grid-extra/internals';
 import { GridUltraIconSlotsComponent } from './gridUltraIconSlotsComponent';
 
 /**
  * Grid components React prop interface containing all the overridable components
- * for Ultra package
+ * for ultra package
  */
 export interface GridUltraSlotsComponent
   extends GridExtraSlotsComponent,
@@ -12,5 +12,5 @@ export interface GridUltraSlotsComponent
 
 // TODO: remove in v7
 export interface UncapitalizedGridUltraSlotsComponent
-  extends UncapitalizedGridProSlotsComponent,
+  extends UncapitalizedGridExtraSlotsComponent,
     UncapitalizeObjectKeys<GridUltraIconSlotsComponent> {}

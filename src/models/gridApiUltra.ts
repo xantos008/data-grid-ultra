@@ -27,7 +27,6 @@ export interface GridApiUltra
     GridAggregationApi,
     GridRowPinningApi,
     GridCellSelectionApi,
-    // APIs that are private
     GridRowMultiSelectionApi,
     GridColumnReorderApi,
     GridRowProApi {}

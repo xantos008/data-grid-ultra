@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { GridCallbackDetails, GridValidRowModel, GridGroupNode } from 'data-grid-extra';
+import {
+  GridCallbackDetails,
+  GridValidRowModel,
+  GridGroupNode,
+  GridEventListener,
+} from 'data-grid-extra';
 import {
   GridExperimentalExtraFeatures,
   DataGridExtraPropsWithDefaultValue,
@@ -21,7 +26,12 @@ import { GridInitialStateUltra } from './gridStateUltra';
 import { GridApiUltra } from './gridApiUltra';
 import { GridCellSelectionModel } from '../hooks/features/cellSelection';
 
-export interface GridExperimentalUltraFeatures extends GridExperimentalExtraFeatures {}
+export interface GridExperimentalUltraFeatures extends GridExperimentalExtraFeatures {
+  /**
+   * If `true`, the grid will allow to paste data from clipboard.
+   */
+  clipboardPaste?: boolean;
+}
 
 export interface DataGridUltraPropsWithComplexDefaultValueBeforeProcessing
   extends Pick<DataGridPropsWithComplexDefaultValueBeforeProcessing, 'localeText'> {
@@ -45,13 +55,7 @@ export interface DataGridUltraProps<R extends GridValidRowModel = any>
       DataGridUltraPropsWithComplexDefaultValueBeforeProcessing &
       DataGridUltraPropsWithoutDefaultValue<R>,
     DataGridUltraForcedPropsKey
-  > {
-  /**
-   * Unstable features, breaking changes might be introduced.
-   * For each feature, if the flag is not explicitly set to `true`, then the feature is fully disabled, and neither property nor method calls will have any effect.
-   */
-  experimentalFeatures?: Partial<GridExperimentalUltraFeatures>;
-}
+  > {}
 
 export interface DataGridUltraPropsWithComplexDefaultValueAfterProcessing
   extends Pick<DataGridPropsWithComplexDefaultValueAfterProcessing, 'localeText'> {
@@ -114,6 +118,18 @@ export interface DataGridUltraPropsWithDefaultValue extends DataGridExtraPropsWi
    * @default `(groupNode) => groupNode == null ? 'footer' : 'inline'`
    */
   getAggregationPosition: (groupNode: GridGroupNode) => GridAggregationPosition | null;
+  /**
+   * If `true`, the clipboard paste is disabled.
+   * @default false
+   */
+  disableClipboardPaste: boolean;
+  /**
+   * The function is used to split the pasted text into rows and cells.
+   * @param {string} text The text pasted from the clipboard.
+   * @returns {string[][] | null} A 2D array of strings. The first dimension is the rows, the second dimension is the columns.
+   * @default `(pastedText) => { const text = pastedText.replace(/\r?\n$/, ''); return text.split(/\r\n|\n|\r/).map((row) => row.split('\t')); }`
+   */
+  unstable_splitClipboardPastedText: (text: string) => string[][] | null;
 }
 
 export interface DataGridUltraPropsWithoutDefaultValue<R extends GridValidRowModel = any>
@@ -166,4 +182,17 @@ export interface DataGridUltraPropsWithoutDefaultValue<R extends GridValidRowMod
    * @param {string} inProgress Indicates if the task is in progress.
    */
   onExcelExportStateChange?: (inProgress: 'pending' | 'finished') => void;
+  /**
+   * Callback fired when the clipboard paste operation starts.
+   */
+  onClipboardPasteStart?: GridEventListener<'clipboardPasteStart'>;
+  /**
+   * Callback fired when the clipboard paste operation ends.
+   */
+  onClipboardPasteEnd?: GridEventListener<'clipboardPasteEnd'>;
+  /**
+   * Unstable features, breaking changes might be introduced.
+   * For each feature, if the flag is not explicitly set to `true`, then the feature is fully disabled, and neither property nor method calls will have any effect.
+   */
+  experimentalFeatures?: Partial<GridExperimentalUltraFeatures>;
 }

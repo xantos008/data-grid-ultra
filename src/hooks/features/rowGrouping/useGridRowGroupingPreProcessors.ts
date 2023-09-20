@@ -17,6 +17,7 @@ import {
   createRowTree,
   updateRowTree,
   RowTreeBuilderGroupingCriterion,
+  getVisibleRowsLookup,
 } from 'data-grid-extra/internals';
 import { DataGridUltraProcessedProps } from '../../../models/dataGridUltraProps';
 import {
@@ -172,6 +173,7 @@ export const useGridRowGroupingPreProcessors = (
 
       if (params.updates.type === 'full') {
         return createRowTree({
+          previousTree: params.previousTree,
           nodes: params.updates.rows.map(getRowTreeBuilderNode),
           defaultGroupingExpansionDepth: props.defaultGroupingExpansionDepth,
           isGroupExpandedByDefault: props.isGroupExpandedByDefault,
@@ -232,6 +234,12 @@ export const useGridRowGroupingPreProcessors = (
   );
   useGridRegisterStrategyProcessor(apiRef, ROW_GROUPING_STRATEGY, 'filtering', filterRows);
   useGridRegisterStrategyProcessor(apiRef, ROW_GROUPING_STRATEGY, 'sorting', sortRows);
+  useGridRegisterStrategyProcessor(
+    apiRef,
+    ROW_GROUPING_STRATEGY,
+    'visibleRowsLookupCreation',
+    getVisibleRowsLookup,
+  );
 
   /**
    * 1ST RENDER
