@@ -17,13 +17,13 @@ export default {
         {
             file: pkg.main,
             format: 'cjs',
-            sourcemap: true,
+            sourcemap: false,
             inlineDynamicImports: true,
         },
         {
             file: pkg.module,
             format: 'es',
-            sourcemap: true,
+            sourcemap: false,
             inlineDynamicImports: true,
         },
     ],
