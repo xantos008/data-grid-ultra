@@ -216,8 +216,6 @@ export const useGridCellSelection = (
 
   const handleCellMouseDown = React.useCallback<GridEventListener<'cellMouseDown'>>(
     (params, event) => {
-      // Skip if the click comes from the right-button or, only on macOS, Ctrl is pressed
-      // Fix for https://github.com/mui/mui-x/pull/6567#issuecomment-1329155578
       const isMacOs = window.navigator.platform.toUpperCase().indexOf('MAC') >= 0;
       if (event.button !== 0 || (event.ctrlKey && isMacOs)) {
         return;
@@ -486,7 +484,7 @@ export const useGridCellSelection = (
         newClasses.push(gridClasses['cell--rangeTop']);
       }
 
-      if (rowIndex < visibleRows.range.lastRowIndex) {
+      if (rowIndex + visibleRows.range.firstRowIndex < visibleRows.range.lastRowIndex) {
         const { id: nextRowId } = visibleRows.rows[rowIndex + 1];
         if (!apiRef.current.unstable_isCellSelected(nextRowId, field)) {
           newClasses.push(gridClasses['cell--rangeBottom']);

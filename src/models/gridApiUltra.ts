@@ -13,10 +13,10 @@ import {
 import { GridInitialStateUltra, GridStateUltra } from './gridStateUltra';
 import type { GridRowGroupingApi, GridExcelExportApi, GridAggregationApi } from '../hooks';
 import { GridCellSelectionApi } from '../hooks/features/cellSelection/gridCellSelectionInterfaces';
+import type { DataGridUltraProcessedProps } from './dataGridUltraProps';
 
 /**
  * The api of `DataGridUltra`.
- * TODO: Do not redefine manually the extra features
  */
 export interface GridApiUltra
   extends GridApiCommon<GridStateUltra, GridInitialStateUltra>,
@@ -34,5 +34,5 @@ export interface GridApiUltra
 
 export interface GridPrivateApiUltra
   extends GridApiUltra,
-    GridPrivateOnlyApiCommon<GridApiUltra, GridPrivateApiUltra>,
+    GridPrivateOnlyApiCommon<GridApiUltra, GridPrivateApiUltra, DataGridUltraProcessedProps>,
     GridDetailPanelPrivateApi {}

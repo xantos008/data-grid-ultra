@@ -67,7 +67,6 @@ import {
 } from 'data-grid-extra/internals';
 import { GridApiUltra, GridPrivateApiUltra } from '../models/gridApiUltra';
 import { DataGridUltraProcessedProps } from '../models/dataGridUltraProps';
-// Ultra-only features
 import {
   useGridAggregation,
   aggregationStateInitializer,
@@ -86,8 +85,8 @@ import {
 import { useGridClipboardImport } from '../hooks/features/clipboard/useGridClipboardImport';
 
 export const useDataGridUltraComponent = (
-    inputApiRef: React.MutableRefObject<GridApiUltra> | undefined,
-    props: DataGridUltraProcessedProps,
+  inputApiRef: React.MutableRefObject<GridApiUltra> | undefined,
+  props: DataGridUltraProcessedProps,
 ) => {
   const apiRef = useGridInitialization<GridPrivateApiUltra, GridApiUltra>(inputApiRef, props);
 

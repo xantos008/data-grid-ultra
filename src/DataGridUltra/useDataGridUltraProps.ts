@@ -26,7 +26,6 @@ export const DATA_GRID_ULTRA_PROPS_DEFAULT_VALUES: DataGridUltraPropsWithDefault
   disableClipboardPaste: false,
   unstable_splitClipboardPastedText: (pastedText) => {
     // Excel on Windows adds an empty line break at the end of the copied text.
-    // See https://github.com/mui/mui-x/issues/9103
     const text = pastedText.replace(/\r?\n$/, '');
     return text.split(/\r\n|\n|\r/).map((row) => row.split('\t'));
   },

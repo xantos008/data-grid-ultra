@@ -64,7 +64,7 @@ const getAggregationCellValue = ({
   return aggregationFunction.apply({
     values,
     groupId,
-    field, // Added per user request in https://github.com/mui/mui-x/issues/6995#issuecomment-1327423455
+    field,
   });
 };
 
