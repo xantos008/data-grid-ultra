@@ -6,5 +6,5 @@ import materialSlots from '../material';
 export const DATA_GRID_ULTRA_DEFAULT_SLOTS_COMPONENTS: GridUltraSlotsComponent = {
   ...DATA_GRID_EXTRA_DEFAULT_SLOTS_COMPONENTS,
   ...materialSlots,
-  ColumnMenu: GridUltraColumnMenu,
+  columnMenu: GridUltraColumnMenu,
 };

@@ -1,10 +1,10 @@
-import { GridCellParams, GridKeyValue, GridValidRowModel } from 'data-grid-extra';
+import { GridValidRowModel } from 'data-grid-extra';
 import type {
   GridControlledStateEventLookupExtra,
   GridApiCachesExtra,
   GridEventLookupExtra,
 } from 'data-grid-extra/typeOverloads';
-import type { GridGroupingValueGetterParams } from '../models';
+import type { GridGroupingValueGetter, GridPastedValueParser } from '../models';
 import type {
   GridRowGroupingModel,
   GridAggregationModel,
@@ -58,19 +58,14 @@ export interface GridColDefUltra<R extends GridValidRowModel = any, V = any, F =
   availableAggregationFunctions?: string[];
   /**
    * Function that transforms a complex cell value into a key that be used for grouping the rows.
-   * @param {GridGroupingValueGetterParams} params Object containing parameters for the getter.
    * @returns {GridKeyValue | null | undefined} The cell key.
    */
-  groupingValueGetter?: (
-    params: GridGroupingValueGetterParams<R, V>,
-  ) => GridKeyValue | null | undefined;
+  groupingValueGetter?: GridGroupingValueGetter<R>;
   /**
    * Function that takes the clipboard-pasted value and converts it to a value used internally.
-   * @param {string} value The pasted value.
-   * @param {GridCellParams<R, V, F>} params The cell params.
    * @returns {V} The converted value.
    */
-  pastedValueParser?: (value: string, params: GridCellParams<R, V, F>) => V | undefined;
+  pastedValueParser?: GridPastedValueParser<R, V, F>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

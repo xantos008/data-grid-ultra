@@ -2,7 +2,6 @@ import { GridPrivateOnlyApiCommon } from '@mui/x-data-grid/internals';
 import {
   GridApiCommon,
   GridColumnPinningApi,
-  GridColumnResizeApi,
   GridDetailPanelApi,
   GridDetailPanelPrivateApi,
   GridRowPinningApi,
@@ -22,7 +21,6 @@ export interface GridApiUltra
   extends GridApiCommon<GridStateUltra, GridInitialStateUltra>,
     GridRowProApi,
     GridColumnPinningApi,
-    GridColumnResizeApi,
     GridDetailPanelApi,
     GridRowGroupingApi,
     GridExcelExportApi,

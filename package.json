@@ -1,6 +1,6 @@
 {
   "name": "data-grid-ultra",
-  "version": "3.7.0",
+  "version": "4.1.1",
   "description": "A react data table implementation using @mui.",
   "author": "xantos008",
   "files": [
@@ -35,13 +35,12 @@
     "data-grid"
   ],
   "scripts": {
-    "ts:check": "tsc",
     "compile": "rm -rf build && tsc && cp package.json build && cp README.md build && cp LICENSE build",
     "clean": "rm -rf dist",
     "build:simple": "npm run clean && rollup -c --bundleConfigAsCjs",
     "build": "npm run clean && rollup -c --bundleConfigAsCjs && npm run postbuild",
     "postbuild": "cp package.json dist && cp README.md dist && cp LICENSE dist && node ./scripts/runUpdatePackageJson.js",
-    "publish": "npm run compile && npm run build && npm run pack && npm publish data-grid-ultra-3.4.3.tgz",
+    "publish": "npm run compile && npm run build && npm run pack && npm publish data-grid-ultra-4.1.1.tgz",
     "pack": "npm pack ./build/"
   },
   "repository": {
@@ -49,27 +48,27 @@
     "url": "https://github.com/xantos008/data-grid-ultra.git"
   },
   "dependencies": {
-    "@babel/runtime": "^7.23.6",
-    "@emotion/styled": "^11.11.0",
-    "@mui/utils": "^5.14.16",
-    "@mui/x-data-grid": "6.18.4",
-    "@types/format-util": "^1.0.3",
-    "clsx": "^2.0.0",
-    "data-grid-extra": "^3.7.0",
-    "exceljs": "^4.3.0",
+    "@babel/runtime": "^7.24.0",
+    "@emotion/styled": "^11.11.5",
+    "@mui/utils": "^5.15.14",
+    "@mui/x-data-grid": "7.1.1",
+    "@types/format-util": "^1.0.4",
+    "clsx": "^2.1.0",
+    "data-grid-extra": "4.1.1",
+    "exceljs": "^4.4.0",
     "prop-types": "^15.8.1",
     "reselect": "^4.1.8",
     "semver": "^7.5.4"
   },
   "peerDependencies": {
-    "@mui/material": "^5.14.10",
-    "@mui/system": "^5.14.10",
+    "@mui/material": "^5.15.14",
+    "@mui/system": "^5.15.14",
     "react": "^17.0.2 || ^18.0.0",
     "react-dom": "^17.0.2 || ^18.0.0"
   },
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.23.6",
-    "@babel/traverse": "^7.23.6",
+    "@babel/plugin-transform-runtime": "^7.24.0",
+    "@babel/traverse": "^7.24.0",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",

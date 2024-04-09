@@ -11,6 +11,7 @@ import {
   DataGridExtraPropsWithoutDefaultValue,
   DataGridPropsWithComplexDefaultValueAfterProcessing,
   DataGridPropsWithComplexDefaultValueBeforeProcessing,
+  DataGridPremiumSharedPropsWithDefaultValue,
 } from 'data-grid-extra/internals';
 import type { GridRowGroupingModel } from '../hooks/features/rowGrouping';
 import type {
@@ -18,32 +19,19 @@ import type {
   GridAggregationFunction,
   GridAggregationPosition,
 } from '../hooks/features/aggregation';
-import {
-  GridUltraSlotsComponent,
-  UncapitalizedGridUltraSlotsComponent,
-} from './gridUltraSlotsComponent';
+import { GridUltraSlotsComponent } from './gridUltraSlotsComponent';
 import { GridInitialStateUltra } from './gridStateUltra';
 import { GridApiUltra } from './gridApiUltra';
 import { GridCellSelectionModel } from '../hooks/features/cellSelection';
 
-export interface GridExperimentalUltraFeatures extends GridExperimentalExtraFeatures {
-  /**
-   * If `true`, the grid will allow to paste data from clipboard.
-   */
-  clipboardPaste?: boolean;
-}
+export interface GridExperimentalUltraFeatures extends GridExperimentalExtraFeatures {}
 
 export interface DataGridUltraPropsWithComplexDefaultValueBeforeProcessing
   extends Pick<DataGridPropsWithComplexDefaultValueBeforeProcessing, 'localeText'> {
   /**
    * Overridable components.
-   * @deprecated Use the `slots` prop instead.
    */
-  components?: Partial<GridUltraSlotsComponent>;
-  /**
-   * Overridable components.
-   */
-  slots?: Partial<UncapitalizedGridUltraSlotsComponent>;
+  slots?: Partial<GridUltraSlotsComponent>;
 }
 
 /**
@@ -51,7 +39,7 @@ export interface DataGridUltraPropsWithComplexDefaultValueBeforeProcessing
  */
 export interface DataGridUltraProps<R extends GridValidRowModel = any>
   extends Omit<
-    Partial<DataGridUltraPropsWithDefaultValue> &
+    Partial<DataGridUltraPropsWithDefaultValue<R>> &
       DataGridUltraPropsWithComplexDefaultValueBeforeProcessing &
       DataGridUltraPropsWithoutDefaultValue<R>,
     DataGridUltraForcedPropsKey
@@ -59,7 +47,7 @@ export interface DataGridUltraProps<R extends GridValidRowModel = any>
 
 export interface DataGridUltraPropsWithComplexDefaultValueAfterProcessing
   extends Pick<DataGridPropsWithComplexDefaultValueAfterProcessing, 'localeText'> {
-  slots: UncapitalizedGridUltraSlotsComponent;
+  slots: GridUltraSlotsComponent;
 }
 
 /**
@@ -68,7 +56,7 @@ export interface DataGridUltraPropsWithComplexDefaultValueAfterProcessing
 export interface DataGridUltraProcessedProps
   extends DataGridUltraPropsWithDefaultValue,
     DataGridUltraPropsWithComplexDefaultValueAfterProcessing,
-    Omit<DataGridUltraPropsWithoutDefaultValue, 'componentsProps'> {}
+    DataGridUltraPropsWithoutDefaultValue {}
 
 export type DataGridUltraForcedPropsKey = 'signature';
 
@@ -77,12 +65,9 @@ export type DataGridUltraForcedPropsKey = 'signature';
  * None of the entry of this interface should be optional, they all have default values and `DataGridProps` already applies a `Partial<DataGridSimpleOptions>` for the public interface.
  * The controlled model do not have a default value at the prop processing level, so they must be defined in `DataGridOtherProps`.
  */
-export interface DataGridUltraPropsWithDefaultValue extends DataGridExtraPropsWithDefaultValue {
-  /**
-   * If `true`, the cell selection mode is enabled.
-   * @default false
-   */
-  unstable_cellSelection: boolean;
+export interface DataGridUltraPropsWithDefaultValue<R extends GridValidRowModel = any>
+  extends DataGridExtraPropsWithDefaultValue<R>,
+    DataGridPremiumSharedPropsWithDefaultValue {
   /**
    * If `true`, aggregation is disabled.
    * @default false
@@ -115,7 +100,7 @@ export interface DataGridUltraPropsWithDefaultValue extends DataGridExtraPropsWi
    * Determines the position of an aggregated value.
    * @param {GridGroupNode} groupNode The current group.
    * @returns {GridAggregationPosition | null} Position of the aggregated value (if `null`, the group isn't aggregated).
-   * @default `(groupNode) => groupNode == null ? 'footer' : 'inline'`
+   * @default (groupNode) => groupNode == null ? 'footer' : 'inline'
    */
   getAggregationPosition: (groupNode: GridGroupNode) => GridAggregationPosition | null;
   /**
@@ -127,9 +112,9 @@ export interface DataGridUltraPropsWithDefaultValue extends DataGridExtraPropsWi
    * The function is used to split the pasted text into rows and cells.
    * @param {string} text The text pasted from the clipboard.
    * @returns {string[][] | null} A 2D array of strings. The first dimension is the rows, the second dimension is the columns.
-   * @default `(pastedText) => { const text = pastedText.replace(/\r?\n$/, ''); return text.split(/\r\n|\n|\r/).map((row) => row.split('\t')); }`
+   * @default (pastedText) => { const text = pastedText.replace(/\r?\n$/, ''); return text.split(/\r\n|\n|\r/).map((row) => row.split('\t')); }
    */
-  unstable_splitClipboardPastedText: (text: string) => string[][] | null;
+  splitClipboardPastedText: (text: string) => string[][] | null;
 }
 
 export interface DataGridUltraPropsWithoutDefaultValue<R extends GridValidRowModel = any>
@@ -167,13 +152,13 @@ export interface DataGridUltraPropsWithoutDefaultValue<R extends GridValidRowMod
   /**
    * Set the cell selection model of the grid.
    */
-  unstable_cellSelectionModel?: GridCellSelectionModel;
+  cellSelectionModel?: GridCellSelectionModel;
   /**
    * Callback fired when the selection state of one or multiple cells changes.
    * @param {GridCellSelectionModel} cellSelectionModel Object in the shape of [[GridCellSelectionModel]] containing the selected cells.
    * @param {GridCallbackDetails} details Additional details for this callback.
    */
-  unstable_onCellSelectionModelChange?: (
+  onCellSelectionModelChange?: (
     cellSelectionModel: GridCellSelectionModel,
     details: GridCallbackDetails,
   ) => void;
@@ -182,6 +167,14 @@ export interface DataGridUltraPropsWithoutDefaultValue<R extends GridValidRowMod
    * @param {string} inProgress Indicates if the task is in progress.
    */
   onExcelExportStateChange?: (inProgress: 'pending' | 'finished') => void;
+  /**
+   * Callback fired before the clipboard paste operation starts.
+   * Use it to confirm or cancel the paste operation.
+   * @param {object} params Params passed to the callback.
+   * @param {string[][]} params.data The raw pasted data split by rows and cells.
+   * @returns {Promise<any>} A promise that resolves to confirm the paste operation, and rejects to cancel it.
+   */
+  onBeforeClipboardPasteStart?: (params: { data: string[][] }) => Promise<any>;
   /**
    * Callback fired when the clipboard paste operation starts.
    */

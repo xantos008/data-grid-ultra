@@ -5,7 +5,6 @@ export * from 'data-grid-extra/components';
 export * from '@mui/x-data-grid/constants';
 export * from '@mui/x-data-grid/hooks';
 export * from 'data-grid-extra/hooks';
-export * from '@mui/x-data-grid/locales';
 export * from '@mui/x-data-grid/models';
 export * from 'data-grid-extra/models';
 export * from '@mui/x-data-grid/context';

@@ -1,6 +1,6 @@
+'use client';
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { chainPropTypes } from '@mui/utils';
 import {
   GridBody,
   GridFooterPlaceholder,
@@ -8,13 +8,26 @@ import {
   GridRoot,
   GridContextProvider,
   GridValidRowModel,
-  useGridSelector,
-  gridPinnedColumnsSelector,
 } from 'data-grid-extra';
-import { DataGridExtraVirtualScroller } from 'data-grid-extra/internals';
+import {
+  propValidatorsDataGrid,
+  propValidatorsDataGridExtra,
+  PropValidator,
+  validateProps,
+} from 'data-grid-extra/internals';
 import { useDataGridUltraComponent } from './useDataGridUltraComponent';
-import { DataGridUltraProps } from '../models/dataGridUltraProps';
+import {
+  DataGridUltraProcessedProps,
+  DataGridUltraProps,
+} from '../models/dataGridUltraProps';
 import { useDataGridUltraProps } from './useDataGridUltraProps';
+
+export type { GridUltraSlotsComponent as GridSlots } from '../models';
+
+const dataGridUltraPropValidators: PropValidator<DataGridUltraProcessedProps>[] = [
+  ...propValidatorsDataGrid,
+  ...propValidatorsDataGridExtra,
+];
 
 const DataGridUltraRaw = React.forwardRef(function DataGridUltra<R extends GridValidRowModel>(
   inProps: DataGridUltraProps<R>,
@@ -23,8 +36,7 @@ const DataGridUltraRaw = React.forwardRef(function DataGridUltra<R extends GridV
   const props = useDataGridUltraProps(inProps);
   const privateApiRef = useDataGridUltraComponent(props.apiRef, props);
 
-  const pinnedColumns = useGridSelector(privateApiRef, gridPinnedColumnsSelector);
-
+  validateProps(props, dataGridUltraPropValidators);
   return (
     <GridContextProvider privateApiRef={privateApiRef} props={props}>
       <GridRoot
@@ -35,16 +47,12 @@ const DataGridUltraRaw = React.forwardRef(function DataGridUltra<R extends GridV
         {...props.forwardedProps}
       >
         <GridHeader />
-        <GridBody
-          VirtualScrollerComponent={DataGridExtraVirtualScroller}
-          ColumnHeadersProps={{ pinnedColumns }}
-        />
+        <GridBody />
         <GridFooterPlaceholder />
       </GridRoot>
     </GridContextProvider>
   );
 });
-
 interface DataGridUltraComponent {
   <R extends GridValidRowModel = any>(
     props: DataGridUltraProps<R> & React.RefAttributes<HTMLDivElement>,
@@ -82,15 +90,15 @@ DataGridUltraRaw.propTypes = {
     current: PropTypes.object.isRequired,
   }),
   /**
-   * The label of the grid.
+   * The label of the Data Grid.
    */
   'aria-label': PropTypes.string,
   /**
-   * The id of the element containing a label for the grid.
+   * The id of the element containing a label for the Data Grid.
    */
   'aria-labelledby': PropTypes.string,
   /**
-   * If `true`, the grid height is dynamic and follow the number of rows in the grid.
+   * If `true`, the Data Grid height is dynamic and follow the number of rows in the Data Grid.
    * @default false
    */
   autoHeight: PropTypes.bool,
@@ -119,7 +127,16 @@ DataGridUltraRaw.propTypes = {
    */
   cellModesModel: PropTypes.object,
   /**
-   * If `true`, the grid get a first column with a checkbox that allows to select rows.
+   * If `true`, the cell selection mode is enabled.
+   * @default false
+   */
+  cellSelection: PropTypes.bool,
+  /**
+   * Set the cell selection model of the grid.
+   */
+  cellSelectionModel: PropTypes.object,
+  /**
+   * If `true`, the Data Grid will display an extra column with checkboxes for selecting rows.
    * @default false
    */
   checkboxSelection: PropTypes.bool,
@@ -128,14 +145,7 @@ DataGridUltraRaw.propTypes = {
    * It only works if the pagination is enabled.
    * @default false
    */
-  checkboxSelectionVisibleOnly: chainPropTypes(PropTypes.bool, (props: any) => {
-    if (!props.pagination && props.checkboxSelectionVisibleOnly) {
-      return new Error(
-        'MUI: The `checkboxSelectionVisibleOnly` prop has no effect when the pagination is not enabled.',
-      );
-    }
-    return null;
-  }),
+  checkboxSelectionVisibleOnly: PropTypes.bool,
   /**
    * Override or extend the styles applied to the component.
    */
@@ -146,40 +156,25 @@ DataGridUltraRaw.propTypes = {
    */
   clipboardCopyCellDelimiter: PropTypes.string,
   /**
-   * Number of extra columns to be rendered before/after the visible slice.
-   * @default 3
+   * Column region in pixels to render before/after the viewport
+   * @default 150
    */
-  columnBuffer: PropTypes.number,
+  columnBufferPx: PropTypes.number,
   columnGroupingModel: PropTypes.arrayOf(PropTypes.object),
   /**
-   * Sets the height in pixel of the column headers in the grid.
+   * Sets the height in pixel of the column headers in the Data Grid.
    * @default 56
    */
   columnHeaderHeight: PropTypes.number,
   /**
-   * Set of columns of type [[GridColDef[]]].
+   * Set of columns of type [[GridColDef]][].
    */
   columns: PropTypes.arrayOf(PropTypes.object).isRequired,
   /**
-   * Number of rows from the `columnBuffer` that can be visible before a new slice is rendered.
-   * @default 3
-   */
-  columnThreshold: PropTypes.number,
-  /**
-   * Set the column visibility model of the grid.
-   * If defined, the grid will ignore the `hide` property in [[GridColDef]].
+   * Set the column visibility model of the Data Grid.
+   * If defined, the Data Grid will ignore the `hide` property in [[GridColDef]].
    */
   columnVisibilityModel: PropTypes.object,
-  /**
-   * Overridable components.
-   * @deprecated Use the `slots` prop instead.
-   */
-  components: PropTypes.object,
-  /**
-   * Overridable components props dynamically passed to the component at rendering.
-   * @deprecated Use the `slotProps` prop instead.
-   */
-  componentsProps: PropTypes.object,
   /**
    * If above 0, the row children will be expanded up to this depth.
    * If equal to -1, all the row children will be expanded.
@@ -187,7 +182,7 @@ DataGridUltraRaw.propTypes = {
    */
   defaultGroupingExpansionDepth: PropTypes.number,
   /**
-   * Set the density of the grid.
+   * Set the density of the Data Grid.
    * @default "standard"
    */
   density: PropTypes.oneOf(['comfortable', 'compact', 'standard']),
@@ -253,6 +248,11 @@ DataGridUltraRaw.propTypes = {
    */
   disableColumnSelector: PropTypes.bool,
   /**
+   * If `true`, the column sorting feature will be disabled.
+   * @default false
+   */
+  disableColumnSorting: PropTypes.bool,
+  /**
    * If `true`, the density selector is disabled.
    * @default false
    */
@@ -260,7 +260,6 @@ DataGridUltraRaw.propTypes = {
   /**
    * If `true`, `eval()` is not used for performance optimization.
    * @default false
-   * @ignore - do not document
    */
   disableEval: PropTypes.bool,
   /**
@@ -269,13 +268,14 @@ DataGridUltraRaw.propTypes = {
    */
   disableMultipleColumnsFiltering: PropTypes.bool,
   /**
-   * If `true`, sorting with multiple columns is disabled.
+   * If `true`, the sorting with multiple columns is disabled.
    * @default false
    */
   disableMultipleColumnsSorting: PropTypes.bool,
   /**
-   * If `true`, multiple selection using the Ctrl or CMD key is disabled.
-   * @default false
+   * If `true`, multiple selection using the Ctrl/CMD or Shift key is disabled.
+   * The MIT DataGrid will ignore this prop, unless `checkboxSelection` is enabled.
+   * @default false (`!props.checkboxSelection` for MIT Data Grid)
    */
   disableMultipleRowSelection: PropTypes.bool,
   /**
@@ -303,10 +303,6 @@ DataGridUltraRaw.propTypes = {
    * For each feature, if the flag is not explicitly set to `true`, then the feature is fully disabled, and neither property nor method calls will have any effect.
    */
   experimentalFeatures: PropTypes.shape({
-    ariaV7: PropTypes.bool,
-    clipboardPaste: PropTypes.bool,
-    columnGrouping: PropTypes.bool,
-    lazyLoading: PropTypes.bool,
     warnIfFocusStateIsNotSynced: PropTypes.bool,
   }),
   /**
@@ -319,16 +315,9 @@ DataGridUltraRaw.propTypes = {
    * Set it to 'server' if you would like to handle filtering on the server-side.
    * @default "client"
    */
-  filterMode: chainPropTypes(PropTypes.oneOf(['client', 'server']), (props: any) => {
-    if (props.treeData && props.filterMode === 'server') {
-      return new Error(
-        'MUI: The `filterMode="server"` prop is not available when the `treeData` is enabled.',
-      );
-    }
-    return null;
-  }),
+  filterMode: PropTypes.oneOf(['client', 'server']),
   /**
-   * Set the filter model of the grid.
+   * Set the filter model of the Data Grid.
    */
   filterModel: PropTypes.shape({
     items: PropTypes.arrayOf(
@@ -345,7 +334,7 @@ DataGridUltraRaw.propTypes = {
     quickFilterValues: PropTypes.array,
   }),
   /**
-   * Forwarded props for the grid root element.
+   * Forwarded props for the Data Grid root element.
    * @ignore - do not document.
    */
   forwardedProps: PropTypes.object,
@@ -353,7 +342,7 @@ DataGridUltraRaw.propTypes = {
    * Determines the position of an aggregated value.
    * @param {GridGroupNode} groupNode The current group.
    * @returns {GridAggregationPosition | null} Position of the aggregated value (if `null`, the group isn't aggregated).
-   * @default `(groupNode) => groupNode == null ? 'footer' : 'inline'`
+   * @default (groupNode) => groupNode == null ? 'footer' : 'inline'
    */
   getAggregationPosition: PropTypes.func,
   /**
@@ -419,6 +408,11 @@ DataGridUltraRaw.propTypes = {
    */
   groupingColDef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   /**
+   * If `true`, enables the data grid filtering on header feature.
+   * @default false
+   */
+  headerFilters: PropTypes.bool,
+  /**
    * If `true`, the footer component is hidden.
    * @default false
    */
@@ -433,14 +427,7 @@ DataGridUltraRaw.propTypes = {
    * It has no effect if the pagination is enabled.
    * @default false
    */
-  hideFooterRowCount: chainPropTypes(PropTypes.bool, (props: any) => {
-    if (props.pagination && props.hideFooterRowCount) {
-      return new Error(
-        'MUI: The `hideFooterRowCount` prop has no effect when the pagination is enabled.',
-      );
-    }
-    return null;
-  }),
+  hideFooterRowCount: PropTypes.bool,
   /**
    * If `true`, the selected row count in the footer is hidden.
    * @default false
@@ -452,6 +439,18 @@ DataGridUltraRaw.propTypes = {
    * @default false
    */
   ignoreDiacritics: PropTypes.bool,
+  /**
+   * If `true`, the Data Grid will not use `valueFormatter` when exporting to CSV or copying to clipboard.
+   * If an object is provided, you can choose to ignore the `valueFormatter` for CSV export or clipboard export.
+   * @default false
+   */
+  ignoreValueFormatterDuringExport: PropTypes.oneOfType([
+    PropTypes.shape({
+      clipboardExport: PropTypes.bool,
+      csvExport: PropTypes.bool,
+    }),
+    PropTypes.bool,
+  ]),
   /**
    * The initial state of the DataGridUltra.
    * The data in it is set in the state on initialization but isn't controlled.
@@ -495,8 +494,8 @@ DataGridUltraRaw.propTypes = {
    */
   loading: PropTypes.bool,
   /**
-   * Set the locale text of the grid.
-   * You can find all the translation keys supported in [the source](https://github.com/mui/mui-x/blob/HEAD/packages/grid/x-data-grid/src/constants/localeTextConstants.ts) in the GitHub repository.
+   * Set the locale text of the Data Grid.
+   * You can find all the translation keys supported in [the source](https://github.com/mui/mui-x/blob/HEAD/packages/x-data-grid/src/constants/localeTextConstants.ts) in the GitHub repository.
    */
   localeText: PropTypes.object,
   /**
@@ -524,6 +523,14 @@ DataGridUltraRaw.propTypes = {
    * @param {GridCallbackDetails} details Additional details for this callback.
    */
   onAggregationModelChange: PropTypes.func,
+  /**
+   * Callback fired before the clipboard paste operation starts.
+   * Use it to confirm or cancel the paste operation.
+   * @param {object} params Params passed to the callback.
+   * @param {string[][]} params.data The raw pasted data split by rows and cells.
+   * @returns {Promise<any>} A promise that resolves to confirm the paste operation, and rejects to cancel it.
+   */
+  onBeforeClipboardPasteStart: PropTypes.func,
   /**
    * Callback fired when any cell is clicked.
    * @param {GridCellParams} params With all properties from [[GridCellParams]].
@@ -563,6 +570,12 @@ DataGridUltraRaw.propTypes = {
    * @param {GridCallbackDetails} details Additional details for this callback.
    */
   onCellModesModelChange: PropTypes.func,
+  /**
+   * Callback fired when the selection state of one or multiple cells changes.
+   * @param {GridCellSelectionModel} cellSelectionModel Object in the shape of [[GridCellSelectionModel]] containing the selected cells.
+   * @param {GridCallbackDetails} details Additional details for this callback.
+   */
+  onCellSelectionModelChange: PropTypes.func,
   /**
    * Callback called when the data is copied to the clipboard.
    * @param {string} data The data copied to the clipboard.
@@ -646,6 +659,11 @@ DataGridUltraRaw.propTypes = {
    */
   onColumnWidthChange: PropTypes.func,
   /**
+   * Callback fired when the density changes.
+   * @param {GridDensity} density New density value.
+   */
+  onDensityChange: PropTypes.func,
+  /**
    * Callback fired when the detail panel of a row is opened or closed.
    * @param {GridRowId[]} ids The ids of the rows which have the detail panel open.
    * @param {GridCallbackDetails} details Additional details for this callback.
@@ -691,7 +709,7 @@ DataGridUltraRaw.propTypes = {
   onPaginationModelChange: PropTypes.func,
   /**
    * Callback fired when the pinned columns have changed.
-   * @param {GridPinnedColumns} pinnedColumns The changed pinned columns.
+   * @param {GridPinnedColumnFields} pinnedColumns The changed pinned columns.
    * @param {GridCallbackDetails} details Additional details for this callback.
    */
   onPinnedColumnsChange: PropTypes.func,
@@ -715,7 +733,7 @@ DataGridUltraRaw.propTypes = {
    */
   onProcessRowUpdateError: PropTypes.func,
   /**
-   * Callback fired when the grid is resized.
+   * Callback fired when the Data Grid is resized.
    * @param {ElementSize} containerSize With all properties from [[ElementSize]].
    * @param {MuiEvent<{}>} event The event object.
    * @param {GridCallbackDetails} details Additional details for this callback.
@@ -730,18 +748,17 @@ DataGridUltraRaw.propTypes = {
    */
   onRowClick: PropTypes.func,
   /**
+   * Callback fired when the row count has changed.
+   * @param {number} count Updated row count.
+   */
+  onRowCountChange: PropTypes.func,
+  /**
    * Callback fired when a double click event comes from a row container element.
    * @param {GridRowParams} params With all properties from [[RowParams]].
    * @param {MuiEvent<React.MouseEvent>} event The event object.
    * @param {GridCallbackDetails} details Additional details for this callback.
    */
   onRowDoubleClick: PropTypes.func,
-  /**
-   * Callback fired when the row changes are committed.
-   * @param {GridRowId} id The row id.
-   * @param {MuiEvent<MuiBaseEvent>} event The event that caused this prop to be called.
-   */
-  onRowEditCommit: PropTypes.func,
   /**
    * Callback fired when the row turns to edit mode.
    * @param {GridRowParams} params With all properties from [[GridRowParams]].
@@ -793,7 +810,7 @@ DataGridUltraRaw.propTypes = {
    */
   onSortModelChange: PropTypes.func,
   /**
-   * Callback fired when the state of the grid is updated.
+   * Callback fired when the state of the Data Grid is updated.
    * @param {GridState} state The new state.
    * @param {MuiEvent<{}>} event The event object.
    * @param {GridCallbackDetails} details Additional details for this callback.
@@ -835,10 +852,7 @@ DataGridUltraRaw.propTypes = {
   /**
    * The column fields to display pinned to left or right.
    */
-  pinnedColumns: PropTypes.shape({
-    left: PropTypes.arrayOf(PropTypes.string),
-    right: PropTypes.arrayOf(PropTypes.string),
-  }),
+  pinnedColumns: PropTypes.object,
   /**
    * Rows data to pin on top or bottom.
    */
@@ -855,10 +869,15 @@ DataGridUltraRaw.propTypes = {
    */
   processRowUpdate: PropTypes.func,
   /**
-   * Number of extra rows to be rendered before/after the visible slice.
-   * @default 3
+   * The milliseconds throttle delay for resizing the grid.
+   * @default 60
    */
-  rowBuffer: PropTypes.number,
+  resizeThrottleMs: PropTypes.number,
+  /**
+   * Row region in pixels to render before/after the viewport
+   * @default 150
+   */
+  rowBufferPx: PropTypes.number,
   /**
    * Set the total number of rows, if it is different from the length of the value `rows` prop.
    * If some rows have children (for instance in the tree data), this number represents the amount of top level rows.
@@ -875,7 +894,7 @@ DataGridUltraRaw.propTypes = {
    */
   rowGroupingModel: PropTypes.arrayOf(PropTypes.string),
   /**
-   * Sets the height in pixel of a row in the grid.
+   * Sets the height in pixel of a row in the Data Grid.
    * @default 52
    */
   rowHeight: PropTypes.number,
@@ -897,15 +916,16 @@ DataGridUltraRaw.propTypes = {
   rowReordering: PropTypes.bool,
   /**
    * Set of rows of type [[GridRowsProp]].
+   * @default []
    */
-  rows: PropTypes.arrayOf(PropTypes.object).isRequired,
+  rows: PropTypes.arrayOf(PropTypes.object),
   /**
    * If `false`, the row selection mode is disabled.
    * @default true
    */
   rowSelection: PropTypes.bool,
   /**
-   * Sets the row selection model of the grid.
+   * Sets the row selection model of the Data Grid.
    */
   rowSelectionModel: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired),
@@ -925,12 +945,7 @@ DataGridUltraRaw.propTypes = {
    */
   rowSpacingType: PropTypes.oneOf(['border', 'margin']),
   /**
-   * Number of rows from the `rowBuffer` that can be visible before a new slice is rendered.
-   * @default 3
-   */
-  rowThreshold: PropTypes.number,
-  /**
-   * Override the height/width of the grid inner scrollbar.
+   * Override the height/width of the Data Grid inner scrollbar.
    */
   scrollbarSize: PropTypes.number,
   /**
@@ -969,7 +984,7 @@ DataGridUltraRaw.propTypes = {
    */
   sortingOrder: PropTypes.arrayOf(PropTypes.oneOf(['asc', 'desc'])),
   /**
-   * Set the sort model of the grid.
+   * Set the sort model of the Data Grid.
    */
   sortModel: PropTypes.arrayOf(
     PropTypes.shape({
@@ -977,6 +992,13 @@ DataGridUltraRaw.propTypes = {
       sort: PropTypes.oneOf(['asc', 'desc']),
     }),
   ),
+  /**
+   * The function is used to split the pasted text into rows and cells.
+   * @param {string} text The text pasted from the clipboard.
+   * @returns {string[][] | null} A 2D array of strings. The first dimension is the rows, the second dimension is the columns.
+   * @default (pastedText) => { const text = pastedText.replace(/\r?\n$/, ''); return text.split(/\r\n|\n|\r/).map((row) => row.split('\t')); }
+   */
+  splitClipboardPastedText: PropTypes.func,
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
@@ -986,7 +1008,7 @@ DataGridUltraRaw.propTypes = {
     PropTypes.object,
   ]),
   /**
-   * If positive, the Grid will throttle updates coming from `apiRef.current.updateRows` and `apiRef.current.setRows`.
+   * If positive, the Data Grid will throttle updates coming from `apiRef.current.updateRows` and `apiRef.current.setRows`.
    * It can be useful if you have a high update rate but do not want to do heavy work like filtering / sorting or rendering on each  individual update.
    * @default 0
    */
@@ -996,43 +1018,4 @@ DataGridUltraRaw.propTypes = {
    * @default false
    */
   treeData: PropTypes.bool,
-  /**
-   * If `true`, the cell selection mode is enabled.
-   * @default false
-   */
-  unstable_cellSelection: PropTypes.bool,
-  /**
-   * Set the cell selection model of the grid.
-   */
-  unstable_cellSelectionModel: PropTypes.object,
-  /**
-   * If `true`, enables the data grid filtering on header feature.
-   * @default false
-   */
-  unstable_headerFilters: PropTypes.bool,
-  /**
-   * If `true`, the grid will not use `valueFormatter` when exporting to CSV or copying to clipboard.
-   * If an object is provided, you can choose to ignore the `valueFormatter` for CSV export or clipboard export.
-   * @default false
-   */
-  unstable_ignoreValueFormatterDuringExport: PropTypes.oneOfType([
-    PropTypes.shape({
-      clipboardExport: PropTypes.bool,
-      csvExport: PropTypes.bool,
-    }),
-    PropTypes.bool,
-  ]),
-  /**
-   * Callback fired when the selection state of one or multiple cells changes.
-   * @param {GridCellSelectionModel} cellSelectionModel Object in the shape of [[GridCellSelectionModel]] containing the selected cells.
-   * @param {GridCallbackDetails} details Additional details for this callback.
-   */
-  unstable_onCellSelectionModelChange: PropTypes.func,
-  /**
-   * The function is used to split the pasted text into rows and cells.
-   * @param {string} text The text pasted from the clipboard.
-   * @returns {string[][] | null} A 2D array of strings. The first dimension is the rows, the second dimension is the columns.
-   * @default `(pastedText) => { const text = pastedText.replace(/\r?\n$/, ''); return text.split(/\r\n|\n|\r/).map((row) => row.split('\t')); }`
-   */
-  unstable_splitClipboardPastedText: PropTypes.func,
 } as any;

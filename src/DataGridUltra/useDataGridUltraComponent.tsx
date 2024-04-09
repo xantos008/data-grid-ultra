@@ -28,6 +28,7 @@ import {
   sortingStateInitializer,
   useGridScroll,
   useGridEvents,
+  dimensionsStateInitializer,
   useGridDimensions,
   useGridStatePersistence,
   useGridRowSelectionPreProcessors,
@@ -109,6 +110,7 @@ export const useDataGridUltraComponent = (
   /**
    * Register all state initializers here.
    */
+  useGridInitializeState(dimensionsStateInitializer, apiRef, props);
   useGridInitializeState(headerFilteringStateInitializer, apiRef, props);
   useGridInitializeState(rowGroupingStateInitializer, apiRef, props);
   useGridInitializeState(aggregationStateInitializer, apiRef, props);
@@ -144,7 +146,7 @@ export const useDataGridUltraComponent = (
   useGridRowPinning(apiRef, props);
   useGridColumns(apiRef, props);
   useGridRows(apiRef, props);
-  useGridParamsApi(apiRef, props);
+  useGridParamsApi(apiRef);
   useGridDetailPanel(apiRef, props);
   useGridColumnSpanning(apiRef);
   useGridColumnGrouping(apiRef, props);

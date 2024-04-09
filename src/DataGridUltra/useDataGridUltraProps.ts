@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { useThemeProps } from '@mui/material/styles';
 import { DATA_GRID_EXTRA_PROPS_DEFAULT_VALUES, GRID_DEFAULT_LOCALE_TEXT } from 'data-grid-extra';
-import { computeSlots, useProps, uncapitalizeObjectKeys } from 'data-grid-extra/internals';
+import { computeSlots, useProps } from 'data-grid-extra/internals';
 import {
   DataGridUltraProps,
   DataGridUltraProcessedProps,
   DataGridUltraPropsWithDefaultValue,
 } from '../models/dataGridUltraProps';
-import { GridUltraSlotsComponent, UncapitalizedGridUltraSlotsComponent } from '../models';
+import { GridUltraSlotsComponent } from '../models';
 import { GRID_AGGREGATION_FUNCTIONS } from '../hooks/features/aggregation';
 import { DATA_GRID_ULTRA_DEFAULT_SLOTS_COMPONENTS } from '../constants/dataGridUltraDefaultSlotsComponents';
 
@@ -16,7 +16,7 @@ import { DATA_GRID_ULTRA_DEFAULT_SLOTS_COMPONENTS } from '../constants/dataGridU
  */
 export const DATA_GRID_ULTRA_PROPS_DEFAULT_VALUES: DataGridUltraPropsWithDefaultValue = {
   ...DATA_GRID_EXTRA_PROPS_DEFAULT_VALUES,
-  unstable_cellSelection: false,
+  cellSelection: false,
   disableAggregation: false,
   disableRowGrouping: false,
   rowGroupingColumnMode: 'single',
@@ -24,17 +24,19 @@ export const DATA_GRID_ULTRA_PROPS_DEFAULT_VALUES: DataGridUltraPropsWithDefault
   aggregationRowsScope: 'filtered',
   getAggregationPosition: (groupNode) => (groupNode.depth === -1 ? 'footer' : 'inline'),
   disableClipboardPaste: false,
-  unstable_splitClipboardPastedText: (pastedText) => {
+  splitClipboardPastedText: (pastedText) => {
     // Excel on Windows adds an empty line break at the end of the copied text.
+    // See https://github.com/mui/mui-x/issues/9103
     const text = pastedText.replace(/\r?\n$/, '');
     return text.split(/\r\n|\n|\r/).map((row) => row.split('\t'));
   },
 };
 
-const defaultSlots = uncapitalizeObjectKeys(DATA_GRID_ULTRA_DEFAULT_SLOTS_COMPONENTS)!;
+const defaultSlots = DATA_GRID_ULTRA_DEFAULT_SLOTS_COMPONENTS;
 
 export const useDataGridUltraProps = (inProps: DataGridUltraProps) => {
-  const [components, componentsProps, themedProps] = useProps(
+  const themedProps = useProps(
+    // eslint-disable-next-line material-ui/mui-name-matches-component-name
     useThemeProps({
       props: inProps,
       name: 'MuiDataGrid',
@@ -46,25 +48,23 @@ export const useDataGridUltraProps = (inProps: DataGridUltraProps) => {
     [themedProps.localeText],
   );
 
-  const slots = React.useMemo<UncapitalizedGridUltraSlotsComponent>(
+  const slots = React.useMemo<GridUltraSlotsComponent>(
     () =>
       computeSlots<GridUltraSlotsComponent>({
         defaultSlots,
-        components,
         slots: themedProps.slots,
       }),
-    [components, themedProps.slots],
+    [themedProps.slots],
   );
 
   return React.useMemo<DataGridUltraProcessedProps>(
     () => ({
       ...DATA_GRID_ULTRA_PROPS_DEFAULT_VALUES,
       ...themedProps,
-      slotProps: themedProps.slotProps ?? componentsProps,
       localeText,
       slots,
       signature: 'DataGridUltra',
     }),
-    [themedProps, componentsProps, localeText, slots],
+    [themedProps, localeText, slots],
   );
 };

@@ -2,11 +2,11 @@ import type * as Excel from 'exceljs';
 import {
   GridRowId,
   GridColDef,
-  GridValueFormatterParams,
   GridApi,
   ValueOptions,
   GRID_DATE_COL_DEF,
   GRID_DATETIME_COL_DEF,
+  GridValidRowModel,
 } from 'data-grid-extra';
 import {
   buildWarning,
@@ -29,12 +29,13 @@ const getExcelJs = async () => {
 };
 
 const warnInvalidFormattedValue = buildWarning([
-  'MUI: When the value of a field is an object or a `renderCell` is provided, the Excel export might not display the value correctly.',
+  'MUI X: When the value of a field is an object or a `renderCell` is provided, the Excel export might not display the value correctly.',
   'You can provide a `valueFormatter` with a string representation to be used.',
 ]);
 
 const getFormattedValueOptions = (
   colDef: GridSingleSelectColDef,
+  row: GridValidRowModel,
   valueOptions: ValueOptions[],
   api: GridApi,
 ) => {
@@ -49,8 +50,7 @@ const getFormattedValueOptions = (
         return option;
       }
 
-      const params: GridValueFormatterParams = { field: colDef.field, api, value: option };
-      return String(colDef.valueFormatter!(params));
+      return String(colDef.valueFormatter!(option as never, row, colDef, { current: api }));
     });
   }
   return valueOptionsFormatted.map((option) =>
@@ -111,7 +111,12 @@ export const serializeRow = (
             row,
             field: cellParams.field,
           });
-          const formattedValueOptions = getFormattedValueOptions(castColumn, valueOptions, api);
+          const formattedValueOptions = getFormattedValueOptions(
+            castColumn,
+            row,
+            valueOptions,
+            api,
+          );
           dataValidation[castColumn.field] = {
             type: 'list',
             allowBlank: true,
@@ -304,6 +309,7 @@ export async function getDataForValueOptionsSheet(
       const singleSelectColumn = column as GridSingleSelectColDef;
       const formattedValueOptions = getFormattedValueOptions(
         singleSelectColumn,
+        {},
         singleSelectColumn.valueOptions as Array<ValueOptions>,
         api,
       );
@@ -403,7 +409,7 @@ export async function buildExcel(
 
   if (includeColumnGroupsHeaders) {
     const columnGroupPaths = columns.reduce<Record<string, string[]>>((acc, column) => {
-      acc[column.field] = api.unstable_getColumnGroupPath(column.field);
+      acc[column.field] = api.getColumnGroupPath(column.field);
       return acc;
     }, {});
 
@@ -411,7 +417,7 @@ export async function buildExcel(
       worksheet,
       serializedColumns,
       columnGroupPaths,
-      api.unstable_getAllGroupDetails(),
+      api.getAllGroupDetails(),
     );
   }
 

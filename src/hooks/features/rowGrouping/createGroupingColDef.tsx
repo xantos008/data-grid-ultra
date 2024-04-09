@@ -6,6 +6,7 @@ import {
   GridRenderCellParams,
   GridGroupingColDefOverride,
   GridGroupNode,
+  GridTreeNodeWithRender,
 } from 'data-grid-extra';
 import { GridColumnRawLookup, isSingleSelectColDef } from 'data-grid-extra/internals';
 import { GridApiUltra } from '../../../models/gridApiUltra';
@@ -20,11 +21,11 @@ import { gridRowGroupingSanitizedModelSelector } from './gridRowGroupingSelector
 
 const GROUPING_COL_DEF_DEFAULT_PROPERTIES: Omit<GridColDef, 'field'> = {
   ...GRID_STRING_COL_DEF,
+  type: 'custom',
   disableReorder: true,
 };
 
 const GROUPING_COL_DEF_FORCED_PROPERTIES: Pick<GridColDef, 'type' | 'editable' | 'groupable'> = {
-  type: 'rowGroupByColumnsGroup',
   editable: false,
   groupable: false,
 };
@@ -87,11 +88,11 @@ const getGroupingCriteriaProperties = (groupedByColDef: GridColDef, applyHeaderN
       // We only want to sort the groups of the current grouping criteria
       if (
         cellParams1.rowNode.type === 'group' &&
-        cellParams1.rowNode.groupingField === groupedByColDef.field &&
         cellParams2.rowNode.type === 'group' &&
-        cellParams2.rowNode.groupingField === groupedByColDef.field
+        cellParams1.rowNode.groupingField === cellParams2.rowNode.groupingField
       ) {
-        return groupedByColDef.sortComparator!(v1, v2, cellParams1, cellParams2);
+        const colDef = cellParams1.api.getColumn(cellParams1.rowNode.groupingField);
+        return colDef.sortComparator(v1, v2, cellParams1, cellParams2);
       }
 
       return groupingFieldIndexComparator(v1, v2, cellParams1, cellParams2);
@@ -178,25 +179,23 @@ export const createGroupingColDefForOneGroupingCriteria = ({
 
       return '';
     },
-    valueGetter: (params) => {
-      if (
-        !params.rowNode ||
-        params.rowNode.type === 'footer' ||
-        params.rowNode.type === 'pinnedRow'
-      ) {
+    valueGetter: (value, row, column, apiRef) => {
+      const rowId = apiRef.current.getRowId(row);
+      const rowNode = apiRef.current.getRowNode<GridTreeNodeWithRender>(rowId);
+      if (!rowNode || rowNode.type === 'footer' || rowNode.type === 'pinnedRow') {
         return undefined;
       }
 
-      if (params.rowNode.type === 'leaf') {
+      if (rowNode.type === 'leaf') {
         if (leafColDef) {
-          return params.api.getCellValue(params.id, leafField!);
+          return apiRef.current.getCellValue(rowId, leafField!);
         }
 
         return undefined;
       }
 
-      if (params.rowNode.groupingField === groupingCriteria) {
-        return params.rowNode.groupingKey;
+      if (rowNode.groupingField === groupingCriteria) {
+        return rowNode.groupingKey;
       }
 
       return undefined;
@@ -305,24 +304,22 @@ export const createGroupingColDefForAllGroupingCriteria = ({
         />
       );
     },
-    valueGetter: (params) => {
-      if (
-        !params.rowNode ||
-        params.rowNode.type === 'footer' ||
-        params.rowNode.type === 'pinnedRow'
-      ) {
+    valueGetter: (value, row) => {
+      const rowId = apiRef.current.getRowId(row);
+      const rowNode = apiRef.current.getRowNode<GridTreeNodeWithRender>(rowId);
+      if (!rowNode || rowNode.type === 'footer' || rowNode.type === 'pinnedRow') {
         return undefined;
       }
 
-      if (params.rowNode.type === 'leaf') {
+      if (rowNode.type === 'leaf') {
         if (leafColDef) {
-          return params.api.getCellValue(params.id, leafField!);
+          return apiRef.current.getCellValue(rowId, leafField!);
         }
 
         return undefined;
       }
 
-      return params.rowNode.groupingKey;
+      return rowNode.groupingKey;
     },
   };
 
