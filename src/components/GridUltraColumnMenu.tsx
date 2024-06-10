@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import {
   GridGenericColumnMenu,
   GridColumnMenuProps,
@@ -33,7 +32,7 @@ export const GRID_COLUMN_MENU_SLOT_PROPS_ULTRA = {
   columnMenuGroupingItem: { displayOrder: 27 },
 };
 
-const GridUltraColumnMenu = React.forwardRef<HTMLUListElement, GridColumnMenuProps>(
+export const GridUltraColumnMenu = React.forwardRef<HTMLUListElement, GridColumnMenuProps>(
   function GridUltraColumnMenuSimple(props, ref) {
     return (
       <GridGenericColumnMenu
@@ -45,15 +44,3 @@ const GridUltraColumnMenu = React.forwardRef<HTMLUListElement, GridColumnMenuPro
     );
   },
 );
-
-GridUltraColumnMenu.propTypes = {
-  // ----------------------------- Warning --------------------------------
-  // | These PropTypes are generated from the TypeScript type definitions |
-  // | To update them edit the TypeScript types and run "yarn proptypes"  |
-  // ----------------------------------------------------------------------
-  colDef: PropTypes.object.isRequired,
-  hideMenu: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
-} as any;
-
-export { GridUltraColumnMenu };

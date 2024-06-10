@@ -8,9 +8,9 @@ export function DataGrid() {
 
   throw new Error(
     [
-      "You try to import `DataGrid` from data-grid-ultra but this module doesn't exist.",
+      "You try to import `DataGrid` from xantos008/data-grid-ultra but this module doesn't exist.",
       '',
-      "Instead, you can do `import { DataGridUltra } from 'data-grid-ultra'`.",
+      "Instead, you can do `import DataGridUltra from 'xantos008/data-grid-ultra'`.",
     ].join('\n'),
   );
 }
@@ -25,9 +25,9 @@ export function DataGridExtra() {
 
   throw new Error(
     [
-      "You try to import `DataGridExtra` from data-grid-ultra but this module doesn't exist.",
+      "You try to import `DataGridExtra` from xantos008/data-grid-ultra but this module doesn't exist.",
       '',
-      "Instead, you can do `import { DataGridUltra } from 'data-grid-ultra'`.",
+      "Instead, you can do `import DataGridUltra from 'xantos008/data-grid-ultra'`.",
     ].join('\n'),
   );
 }

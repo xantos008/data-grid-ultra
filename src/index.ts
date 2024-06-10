@@ -18,6 +18,7 @@ export * from './models';
 export * from './components';
 
 export { GridColumnHeaders } from 'data-grid-extra';
+export type { GridColumnHeadersProps } from 'data-grid-extra';
 
 export type {
   DataGridUltraProps,

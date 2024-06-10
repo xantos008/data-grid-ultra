@@ -14,9 +14,6 @@ import type { GridRowGroupingApi, GridExcelExportApi, GridAggregationApi } from 
 import { GridCellSelectionApi } from '../hooks/features/cellSelection/gridCellSelectionInterfaces';
 import type { DataGridUltraProcessedProps } from './dataGridUltraProps';
 
-/**
- * The api of `DataGridUltra`.
- */
 export interface GridApiUltra
   extends GridApiCommon<GridStateUltra, GridInitialStateUltra>,
     GridRowProApi,

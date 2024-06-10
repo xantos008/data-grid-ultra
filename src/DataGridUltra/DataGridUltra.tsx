@@ -24,10 +24,11 @@ import { useDataGridUltraProps } from './useDataGridUltraProps';
 
 export type { GridUltraSlotsComponent as GridSlots } from '../models';
 
-const dataGridUltraPropValidators: PropValidator<DataGridUltraProcessedProps>[] = [
-  ...propValidatorsDataGrid,
-  ...propValidatorsDataGridExtra,
-];
+let dataGridUltraPropValidators: PropValidator<DataGridUltraProcessedProps>[];
+
+if (process.env.NODE_ENV !== 'production') {
+  dataGridUltraPropValidators = [...propValidatorsDataGrid, ...propValidatorsDataGridExtra];
+}
 
 const DataGridUltraRaw = React.forwardRef(function DataGridUltra<R extends GridValidRowModel>(
   inProps: DataGridUltraProps<R>,
@@ -36,7 +37,9 @@ const DataGridUltraRaw = React.forwardRef(function DataGridUltra<R extends GridV
   const props = useDataGridUltraProps(inProps);
   const privateApiRef = useDataGridUltraComponent(props.apiRef, props);
 
-  validateProps(props, dataGridUltraPropValidators);
+  if (process.env.NODE_ENV !== 'production') {
+    validateProps(props, dataGridUltraPropValidators);
+  }
   return (
     <GridContextProvider privateApiRef={privateApiRef} props={props}>
       <GridRoot
@@ -65,7 +68,7 @@ export const DataGridUltra = React.memo(DataGridUltraRaw) as DataGridUltraCompon
 DataGridUltraRaw.propTypes = {
   // ----------------------------- Warning --------------------------------
   // | These PropTypes are generated from the TypeScript type definitions |
-  // | To update them edit the TypeScript types and run "yarn proptypes"  |
+  // | To update them edit the TypeScript types and run "pnpm proptypes"  |
   // ----------------------------------------------------------------------
   /**
    * Aggregation functions available on the grid.
@@ -98,7 +101,7 @@ DataGridUltraRaw.propTypes = {
    */
   'aria-labelledby': PropTypes.string,
   /**
-   * If `true`, the Data Grid height is dynamic and follow the number of rows in the Data Grid.
+   * If `true`, the Data Grid height is dynamic and follows the number of rows in the Data Grid.
    * @default false
    */
   autoHeight: PropTypes.bool,
@@ -299,6 +302,12 @@ DataGridUltraRaw.propTypes = {
    */
   editMode: PropTypes.oneOf(['cell', 'row']),
   /**
+   * Use if the actual rowCount is not known upfront, but an estimation is available.
+   * If some rows have children (for instance in the tree data), this number represents the amount of top level rows.
+   * Applicable only with `paginationMode="server"` and when `rowCount="-1"`
+   */
+  estimatedRowCount: PropTypes.number,
+  /**
    * Unstable features, breaking changes might be introduced.
    * For each feature, if the flag is not explicitly set to `true`, then the feature is fully disabled, and neither property nor method calls will have any effect.
    */
@@ -408,6 +417,10 @@ DataGridUltraRaw.propTypes = {
    */
   groupingColDef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   /**
+   * Override the height of the header filters.
+   */
+  headerFilterHeight: PropTypes.number,
+  /**
    * If `true`, enables the data grid filtering on header feature.
    * @default false
    */
@@ -490,7 +503,7 @@ DataGridUltraRaw.propTypes = {
    */
   keepNonExistentRowsSelected: PropTypes.bool,
   /**
-   * If `true`, a  loading overlay is displayed.
+   * If `true`, a loading overlay is displayed.
    */
   loading: PropTypes.bool,
   /**
@@ -702,6 +715,11 @@ DataGridUltraRaw.propTypes = {
    */
   onMenuOpen: PropTypes.func,
   /**
+   * Callback fired when the pagination meta has changed.
+   * @param {GridPaginationMeta} paginationMeta Updated pagination meta.
+   */
+  onPaginationMetaChange: PropTypes.func,
+  /**
    * Callback fired when the pagination model has changed.
    * @param {GridPaginationModel} model Updated pagination model.
    * @param {GridCallbackDetails} details Additional details for this callback.
@@ -836,6 +854,13 @@ DataGridUltraRaw.propTypes = {
    */
   pagination: PropTypes.bool,
   /**
+   * The extra information about the pagination state of the Data Grid.
+   * Only applicable with `paginationMode="server"`.
+   */
+  paginationMeta: PropTypes.shape({
+    hasNextPage: PropTypes.bool,
+  }),
+  /**
    * Pagination can be processed on the server or client-side.
    * Set it to 'client' if you would like to handle the pagination on the client-side.
    * Set it to 'server' if you would like to handle the pagination on the server-side.
@@ -881,6 +906,7 @@ DataGridUltraRaw.propTypes = {
   /**
    * Set the total number of rows, if it is different from the length of the value `rows` prop.
    * If some rows have children (for instance in the tree data), this number represents the amount of top level rows.
+   * Only works with `paginationMode="server"`, ignored when `paginationMode="client"`.
    */
   rowCount: PropTypes.number,
   /**

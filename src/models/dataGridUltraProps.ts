@@ -67,7 +67,7 @@ export type DataGridUltraForcedPropsKey = 'signature';
  */
 export interface DataGridUltraPropsWithDefaultValue<R extends GridValidRowModel = any>
   extends DataGridExtraPropsWithDefaultValue<R>,
-    DataGridPremiumSharedPropsWithDefaultValue {
+      DataGridPremiumSharedPropsWithDefaultValue {
   /**
    * If `true`, aggregation is disabled.
    * @default false
