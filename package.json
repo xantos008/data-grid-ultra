@@ -1,6 +1,6 @@
 {
   "name": "data-grid-ultra",
-  "version": "4.6.2",
+  "version": "4.6.3",
   "description": "A react data table implementation using @mui.",
   "author": "xantos008",
   "files": [
@@ -40,7 +40,7 @@
     "build:simple": "npm run clean && rollup -c --bundleConfigAsCjs",
     "build": "npm run clean && rollup -c --bundleConfigAsCjs && npm run postbuild",
     "postbuild": "cp package.json dist && cp README.md dist && cp LICENSE dist && node ./scripts/runUpdatePackageJson.js",
-    "publish": "npm run compile && npm run build && npm run pack && npm publish data-grid-ultra-4.6.2.tgz",
+    "publish": "npm run compile && npm run build && npm run pack && npm publish data-grid-ultra-4.6.3.tgz",
     "pack": "npm pack ./build/"
   },
   "repository": {
@@ -50,6 +50,7 @@
   "dependencies": {
     "@babel/runtime": "^7.24.6",
     "@emotion/styled": "^11.11.5",
+    "@mui/system": "^5.15.15",
     "@mui/utils": "^5.15.14",
     "@mui/x-data-grid": "7.6.2",
     "@types/format-util": "^1.0.4",
@@ -62,7 +63,6 @@
   },
   "peerDependencies": {
     "@mui/material": "^5.15.14",
-    "@mui/system": "^5.15.15",
     "react": "^17.0.2 || ^18.0.0",
     "react-dom": "^17.0.2 || ^18.0.0"
   },
