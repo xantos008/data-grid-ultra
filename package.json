@@ -1,6 +1,6 @@
 {
   "name": "data-grid-ultra",
-  "version": "4.7.0",
+  "version": "4.7.1",
   "description": "A react data table implementation using @mui.",
   "author": "xantos008",
   "files": [
@@ -40,7 +40,7 @@
     "build:simple": "npm run clean && rollup -c --bundleConfigAsCjs",
     "build": "npm run clean && rollup -c --bundleConfigAsCjs && npm run postbuild",
     "postbuild": "cp package.json dist && cp README.md dist && cp LICENSE dist && node ./scripts/runUpdatePackageJson.js",
-    "publish": "npm run compile && npm run build && npm run pack && npm publish data-grid-ultra-4.7.0.tgz",
+    "publish": "npm run compile && npm run build && npm run pack && npm publish data-grid-ultra-4.7.1.tgz",
     "pack": "npm pack ./build/"
   },
   "repository": {
@@ -50,12 +50,12 @@
   "dependencies": {
     "@babel/runtime": "^7.24.7",
     "@emotion/styled": "^11.11.5",
-    "@mui/system": "^5.15.15",
-    "@mui/utils": "^5.15.14",
-    "@mui/x-data-grid": "7.7.0",
+    "@mui/system": "^5.15.20",
+    "@mui/utils": "^5.15.20",
+    "@mui/x-data-grid": "7.7.1",
     "@types/format-util": "^1.0.4",
     "clsx": "^2.1.1",
-    "data-grid-extra": "4.7.0",
+    "data-grid-extra": "4.7.1",
     "exceljs": "^4.4.0",
     "prop-types": "^15.8.1",
     "reselect": "^4.1.8",
